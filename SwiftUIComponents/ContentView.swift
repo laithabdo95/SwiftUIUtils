@@ -8,17 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            FormField(placeholder: "Primary Email")
+            FormField(placeholder: "Mandetory Email")
+            Spacer()
+            Button(action: {
+                
+            }, label: {
+                Text("Hit Me")
+                    .frame(maxWidth: .infinity, minHeight: 50)
+                    .foregroundColor(.white)
+                    .background(.black)
+                    .cornerRadius(12)
+            })
         }
-        .padding()
+        .padding(.horizontal, 25)
     }
 }
 
 #Preview {
     ContentView()
+}
+
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }

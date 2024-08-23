@@ -11,6 +11,8 @@
 		84E29D4E2C78F8FB0003B3C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E29D4D2C78F8FB0003B3C1 /* ContentView.swift */; };
 		84E29D502C78F8FC0003B3C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E29D4F2C78F8FC0003B3C1 /* Assets.xcassets */; };
 		84E29D532C78F8FC0003B3C1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E29D522C78F8FC0003B3C1 /* Preview Assets.xcassets */; };
+		84E29D5B2C7902D10003B3C1 /* TextValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E29D592C7902D10003B3C1 /* TextValidator.swift */; };
+		84E29D5C2C7902D10003B3C1 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E29D5A2C7902D10003B3C1 /* FormField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		84E29D4D2C78F8FB0003B3C1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		84E29D4F2C78F8FC0003B3C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84E29D522C78F8FC0003B3C1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		84E29D592C7902D10003B3C1 /* TextValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextValidator.swift; sourceTree = "<group>"; };
+		84E29D5A2C7902D10003B3C1 /* FormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +55,8 @@
 		84E29D4A2C78F8FB0003B3C1 /* SwiftUIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				84E29D5A2C7902D10003B3C1 /* FormField.swift */,
+				84E29D592C7902D10003B3C1 /* TextValidator.swift */,
 				84E29D4B2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift */,
 				84E29D4D2C78F8FB0003B3C1 /* ContentView.swift */,
 				84E29D4F2C78F8FC0003B3C1 /* Assets.xcassets */,
@@ -137,7 +143,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E29D5B2C7902D10003B3C1 /* TextValidator.swift in Sources */,
 				84E29D4E2C78F8FB0003B3C1 /* ContentView.swift in Sources */,
+				84E29D5C2C7902D10003B3C1 /* FormField.swift in Sources */,
 				84E29D4C2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
