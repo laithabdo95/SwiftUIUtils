@@ -9,20 +9,34 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State private var showAlert = false
+    let primaryEmailValidator = FormViewModel(
+        placeHolder: "Primary Email",
+        isDisabled: true,
+        rules: [
+            .required,
+            .regex(
+                .email
+            )
+        ]
+    )
+    let secondaryEmailValidator = FormViewModel(
+        placeHolder: "Middle Name",
+        rules: []
+    )
+    
     var body: some View {
         VStack {
-            FormField(placeholder: "Primary Email")
-            FormField(placeholder: "Mandetory Email")
+            FormField(viewModel: primaryEmailValidator)
+            FormField(viewModel: secondaryEmailValidator)
             Spacer()
-            Button(action: {
-                
-            }, label: {
-                Text("Hit Me")
-                    .frame(maxWidth: .infinity, minHeight: 50)
-                    .foregroundColor(.white)
-                    .background(.black)
-                    .cornerRadius(12)
-            })
+            ButtonView(title: "Hit Me") {
+                showAlert = true
+            }
+            .alert(primaryEmailValidator.text, isPresented: $showAlert) {
+                Text("Close")
+            }
+            
         }
         .padding(.horizontal, 25)
     }
@@ -32,8 +46,19 @@ struct ContentView: View {
     ContentView()
 }
 
-extension UIApplication {
-    func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+struct ButtonView: View {
+    let title: String
+    var completion: (() -> Void)?
+    
+    var body: some View {
+        Button(action: {
+            completion?()
+        }, label: {
+            Text(title)
+                .frame(maxWidth: .infinity, minHeight: 50)
+                .foregroundColor(.white)
+                .background(.black)
+                .cornerRadius(12)
+        })
     }
 }

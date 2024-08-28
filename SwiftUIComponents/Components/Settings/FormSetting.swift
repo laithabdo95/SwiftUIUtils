@@ -1,0 +1,18 @@
+//
+//  FormSetting.swift
+//  SwiftUIComponents
+//
+//  Created by Laith Abdo on 29/08/2024.
+//
+
+import SwiftUI
+
+enum FormSetting {
+    enum FormField {
+        static var font: Font = .system(size: 16, weight: .regular)
+        static var cornerRadius = 12.0
+        static var borderColor: Color = .secondary
+        static var backgroundColor: Color = .clear
+        static var disabledColor: Color = .gray.opacity(0.2)
+    }
+}
