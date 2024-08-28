@@ -8,23 +8,33 @@
 
 /* Begin PBXBuildFile section */
 		8446BE292C7FCA7400E91A86 /* FormSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BE282C7FCA7400E91A86 /* FormSetting.swift */; };
+		8446BE2C2C7FD30600E91A86 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BE2B2C7FD30600E91A86 /* SelectionView.swift */; };
+		8446BE2F2C7FD53300E91A86 /* SelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BE2E2C7FD53300E91A86 /* SelectionViewModel.swift */; };
+		8446BE312C7FD72200E91A86 /* FormPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BE302C7FD72200E91A86 /* FormPickerView.swift */; };
+		8446BE332C7FD80F00E91A86 /* FormPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BE322C7FD80F00E91A86 /* FormPickerViewModel.swift */; };
+		8446BE362C7FE55F00E91A86 /* MaritalStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BE352C7FE55F00E91A86 /* MaritalStatus.swift */; };
 		84E29D4C2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E29D4B2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift */; };
 		84E29D4E2C78F8FB0003B3C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E29D4D2C78F8FB0003B3C1 /* ContentView.swift */; };
 		84E29D502C78F8FC0003B3C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E29D4F2C78F8FC0003B3C1 /* Assets.xcassets */; };
 		84E29D532C78F8FC0003B3C1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E29D522C78F8FC0003B3C1 /* Preview Assets.xcassets */; };
-		84E29D5B2C7902D10003B3C1 /* FormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E29D592C7902D10003B3C1 /* FormViewModel.swift */; };
-		84E29D5C2C7902D10003B3C1 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E29D5A2C7902D10003B3C1 /* FormField.swift */; };
+		84E29D5B2C7902D10003B3C1 /* FormFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E29D592C7902D10003B3C1 /* FormFieldViewModel.swift */; };
+		84E29D5C2C7902D10003B3C1 /* FormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E29D5A2C7902D10003B3C1 /* FormFieldView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8446BE282C7FCA7400E91A86 /* FormSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSetting.swift; sourceTree = "<group>"; };
+		8446BE2B2C7FD30600E91A86 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
+		8446BE2E2C7FD53300E91A86 /* SelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewModel.swift; sourceTree = "<group>"; };
+		8446BE302C7FD72200E91A86 /* FormPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormPickerView.swift; sourceTree = "<group>"; };
+		8446BE322C7FD80F00E91A86 /* FormPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormPickerViewModel.swift; sourceTree = "<group>"; };
+		8446BE352C7FE55F00E91A86 /* MaritalStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaritalStatus.swift; sourceTree = "<group>"; };
 		84E29D482C78F8FB0003B3C1 /* SwiftUIComponents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIComponents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E29D4B2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIComponentsApp.swift; sourceTree = "<group>"; };
 		84E29D4D2C78F8FB0003B3C1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		84E29D4F2C78F8FC0003B3C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84E29D522C78F8FC0003B3C1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		84E29D592C7902D10003B3C1 /* FormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormViewModel.swift; sourceTree = "<group>"; };
-		84E29D5A2C7902D10003B3C1 /* FormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
+		84E29D592C7902D10003B3C1 /* FormFieldViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormFieldViewModel.swift; sourceTree = "<group>"; };
+		84E29D5A2C7902D10003B3C1 /* FormFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormFieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +51,9 @@
 		8446BE232C7FCA2500E91A86 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8446BE342C7FE54F00E91A86 /* Mockups */,
+				8446BE2D2C7FD50500E91A86 /* SelectionView */,
+				8446BE2A2C7FD2F800E91A86 /* FormPicker */,
 				8446BE272C7FCA6500E91A86 /* Settings */,
 				8446BE242C7FCA2D00E91A86 /* FormField */,
 			);
@@ -50,26 +63,10 @@
 		8446BE242C7FCA2D00E91A86 /* FormField */ = {
 			isa = PBXGroup;
 			children = (
-				8446BE262C7FCA3C00E91A86 /* Setup */,
-				8446BE252C7FCA3400E91A86 /* UI */,
+				84E29D5A2C7902D10003B3C1 /* FormFieldView.swift */,
+				84E29D592C7902D10003B3C1 /* FormFieldViewModel.swift */,
 			);
 			path = FormField;
-			sourceTree = "<group>";
-		};
-		8446BE252C7FCA3400E91A86 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				84E29D5A2C7902D10003B3C1 /* FormField.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		8446BE262C7FCA3C00E91A86 /* Setup */ = {
-			isa = PBXGroup;
-			children = (
-				84E29D592C7902D10003B3C1 /* FormViewModel.swift */,
-			);
-			path = Setup;
 			sourceTree = "<group>";
 		};
 		8446BE272C7FCA6500E91A86 /* Settings */ = {
@@ -78,6 +75,32 @@
 				8446BE282C7FCA7400E91A86 /* FormSetting.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		8446BE2A2C7FD2F800E91A86 /* FormPicker */ = {
+			isa = PBXGroup;
+			children = (
+				8446BE302C7FD72200E91A86 /* FormPickerView.swift */,
+				8446BE322C7FD80F00E91A86 /* FormPickerViewModel.swift */,
+			);
+			path = FormPicker;
+			sourceTree = "<group>";
+		};
+		8446BE2D2C7FD50500E91A86 /* SelectionView */ = {
+			isa = PBXGroup;
+			children = (
+				8446BE2B2C7FD30600E91A86 /* SelectionView.swift */,
+				8446BE2E2C7FD53300E91A86 /* SelectionViewModel.swift */,
+			);
+			path = SelectionView;
+			sourceTree = "<group>";
+		};
+		8446BE342C7FE54F00E91A86 /* Mockups */ = {
+			isa = PBXGroup;
+			children = (
+				8446BE352C7FE55F00E91A86 /* MaritalStatus.swift */,
+			);
+			path = Mockups;
 			sourceTree = "<group>";
 		};
 		84E29D3F2C78F8FB0003B3C1 = {
@@ -186,11 +209,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E29D5B2C7902D10003B3C1 /* FormViewModel.swift in Sources */,
+				84E29D5B2C7902D10003B3C1 /* FormFieldViewModel.swift in Sources */,
+				8446BE2C2C7FD30600E91A86 /* SelectionView.swift in Sources */,
 				8446BE292C7FCA7400E91A86 /* FormSetting.swift in Sources */,
 				84E29D4E2C78F8FB0003B3C1 /* ContentView.swift in Sources */,
-				84E29D5C2C7902D10003B3C1 /* FormField.swift in Sources */,
+				8446BE362C7FE55F00E91A86 /* MaritalStatus.swift in Sources */,
+				84E29D5C2C7902D10003B3C1 /* FormFieldView.swift in Sources */,
+				8446BE312C7FD72200E91A86 /* FormPickerView.swift in Sources */,
+				8446BE332C7FD80F00E91A86 /* FormPickerViewModel.swift in Sources */,
 				84E29D4C2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift in Sources */,
+				8446BE2F2C7FD53300E91A86 /* SelectionViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

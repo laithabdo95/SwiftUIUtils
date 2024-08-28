@@ -1,5 +1,5 @@
 //
-//  FormViewModel.swift
+//  FormFieldViewModel.swift
 //  Example1
 //
 //  Created by Laith Abdo on 23/08/2024.
@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-class FormViewModel: ObservableObject {
+class FormFieldViewModel: ObservableObject {
     let placeholder: String
+    let rules: [ValidationRule]
     
     @Published var text: String = "" {
         didSet {
@@ -19,8 +20,6 @@ class FormViewModel: ObservableObject {
     @Published var isValid: Bool = true
     @Published var errorMessage: String = ""
     @Published var isDisabled: Bool = false
-    
-    let rules: [ValidationRule]
     
     private func validate() {
        let result = getValidationResult()
@@ -51,7 +50,7 @@ class FormViewModel: ObservableObject {
     }
 }
 
-extension FormViewModel {
+extension FormFieldViewModel {
     struct ValidationResult {
         let isValid: Bool
         let errorMessage: String

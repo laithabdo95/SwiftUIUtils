@@ -1,17 +1,22 @@
 //
-//  FormField.swift
-//  Example1
+//  FormPickerView.swift
+//  SwiftUIComponents
 //
-//  Created by Laith Abdo on 03/08/2024.
+//  Created by Laith Abdo on 29/08/2024.
 //
 
 import SwiftUI
 
-
-struct FormField: View {
+struct FormPickerView: View {
     
+    @State private var isSheetPresented: Bool = false
     @FocusState var focused: Bool
-    @StateObject var viewModel: FormViewModel = FormViewModel(placeHolder: "", rules: [])
+    @StateObject var viewModel: FormPickerViewModel = FormPickerViewModel(
+        placeholder: "Marital Status",
+        isRequired: true
+    )
+        
+    @StateObject var selectionViewModel: SelectionViewModel = SelectionViewModel(options: [])
     
     var isActive: Bool {
         focused || viewModel.text.count > 0
@@ -32,23 +37,30 @@ struct FormField: View {
             }
             FieldView()
                 .padding(.bottom, 15)
+                .sheet(isPresented: $isSheetPresented) {
+                    SelectionView(viewModel: selectionViewModel)
+                }
         }
     }
 }
 
-extension FormField {
+extension FormPickerView {
     @ViewBuilder
     func FieldView() -> some View {
         ZStack(alignment: isActive ? .topLeading : .center) {
-            TextField(
-                isActive ? "" : viewModel.placeholder,
-                text: $viewModel.text
-            )
-            .font(FormSetting.FormField.font)
-            .focused($focused)
+            HStack {
+                TextField(
+                    isActive ? "" : viewModel.placeholder,
+                    text: $viewModel.text
+                )
+                .font(FormSetting.FormField.font)
+                .focused($focused)
+                Image(systemName: "chevron.down")
+            }
         }
         .onTapGesture {
             focused = true
+            isSheetPresented = true
         }
         .disabled(viewModel.isDisabled)
         .animation(.linear(duration: 0.2), value: focused)
@@ -67,7 +79,6 @@ extension FormField {
     }
 }
 
-
 #Preview {
-    FormField()
+    FormPickerView()
 }

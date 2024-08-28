@@ -10,9 +10,10 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var showAlert = false
-    let primaryEmailValidator = FormViewModel(
+    
+    let primaryViewModel = FormFieldViewModel(
         placeHolder: "Primary Email",
-        isDisabled: true,
+        isDisabled: false,
         rules: [
             .required,
             .regex(
@@ -20,20 +21,32 @@ struct ContentView: View {
             )
         ]
     )
-    let secondaryEmailValidator = FormViewModel(
+    let secondaryViewModel = FormFieldViewModel(
         placeHolder: "Middle Name",
         rules: []
     )
     
+    let genderSelectorViewModel = FormPickerViewModel(
+        placeholder: "Select Your Gender"
+    )
+    
+    let genderSelectionViewModel = SelectionViewModel(
+        options: MaritalStatusEnum.allCases.map(
+            \.rawValue
+        ),
+        selectionType: .single
+    )
+    
     var body: some View {
         VStack {
-            FormField(viewModel: primaryEmailValidator)
-            FormField(viewModel: secondaryEmailValidator)
+            FormFieldView(viewModel: primaryViewModel)
+            FormFieldView(viewModel: secondaryViewModel)
+            FormPickerView(viewModel: genderSelectorViewModel, selectionViewModel: genderSelectionViewModel)
             Spacer()
             ButtonView(title: "Hit Me") {
                 showAlert = true
             }
-            .alert(primaryEmailValidator.text, isPresented: $showAlert) {
+            .alert(primaryViewModel.text, isPresented: $showAlert) {
                 Text("Close")
             }
             
