@@ -12,24 +12,20 @@ protocol ItemSelectable {
     var title: String { get }
 }
 
-protocol SelectionConfigurable: ObservableObject {    
-    var selectionType: SelectionViewModel.SelectionType { get }
-    var selectedItems: [ItemSelectable] { get }
+protocol SelectionConfigurable: ObservableObject {
     var searchText: String { get set }
     var selectedOptions: Set<String> { get }
     var filteredOptions: [String] { get }
     
-    func toggleSelection(for option: String)
-        
-    init(items: [ItemSelectable], selectionType: SelectionViewModel.SelectionType)
+    func toggleSelection(for option: String)        
 }
 
-class SelectionViewModel: SelectionConfigurable {
-    var selectedItems: [ItemSelectable] {
+class SelectionViewModel<Item: ItemSelectable>: SelectionConfigurable {
+    var selectedItems: [Item] {
         items.filter { options.contains($0.title) }
     }
     
-    var items: [ItemSelectable]
+    var items: [Item]
     
     private var options: [String] {
         items.map { $0.title }
@@ -60,7 +56,7 @@ class SelectionViewModel: SelectionConfigurable {
         }
     }
     
-    required init(items: [ItemSelectable], selectionType: SelectionType = .single) {
+    required init(items: [Item], selectionType: SelectionType = .single) {
         self.items = items
         self.selectionType = selectionType
     }

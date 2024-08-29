@@ -11,17 +11,19 @@ import SwiftUI
 typealias FormPickerAndFieldConfigurable = FormPickerConfigurable & FormFieldConfigurable
 
 protocol FormPickerConfigurable {
+    associatedtype SelectionItems: ItemSelectable
+    
     var isRequired: Bool { get }
     var cancellable: Set<AnyCancellable> { get set }
-    var selectionViewModel: SelectionViewModel { get }
+    var selectionViewModel: SelectionViewModel<SelectionItems> { get }
     
     func bindSelectionViewModel()
 }
 
-class FormPickerViewModel: FormFieldViewModel, FormPickerConfigurable {
+class FormPickerViewModel<SelectionItems: ItemSelectable>: FormFieldViewModel, FormPickerConfigurable {
     
     @Published var isRequired: Bool
-    var selectionViewModel: SelectionViewModel
+    var selectionViewModel: SelectionViewModel<SelectionItems>
     
     internal var cancellable = Set<AnyCancellable>()
     
@@ -29,7 +31,7 @@ class FormPickerViewModel: FormFieldViewModel, FormPickerConfigurable {
         placeholder: String,
         isDisabled: Bool = false,
         isRequired: Bool = true,
-        selectionViewModel: SelectionViewModel
+        selectionViewModel: SelectionViewModel<SelectionItems>
     ) {
         self.isRequired = isRequired
         self.selectionViewModel = selectionViewModel

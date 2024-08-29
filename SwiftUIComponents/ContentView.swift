@@ -26,15 +26,13 @@ struct ContentView: View {
         rules: []
     )
     
-    var genderSelectionViewModel =  SelectionViewModel(
-        items: MaritalStatusEnum.allCases,
-        selectionType: .single
-    )
-    
-    var genderSelectorViewModel: FormPickerViewModel{
+    var genderSelectorViewModel: FormPickerViewModel<MaritalStatusEnum> {
         FormPickerViewModel(
-            placeholder: "Select Your Gender",
-            selectionViewModel: genderSelectionViewModel
+            placeholder: "Please select your gender",
+            selectionViewModel: SelectionViewModel(
+                items: MaritalStatusEnum.allCases,
+                selectionType: .single
+            )
         )
     }
     
