@@ -38,18 +38,19 @@ struct ContentView: View {
     )
     
     var body: some View {
-        VStack {
-            FormFieldView(viewModel: primaryViewModel)
-            FormFieldView(viewModel: secondaryViewModel)
-            FormPickerView(viewModel: genderSelectorViewModel, selectionViewModel: genderSelectionViewModel)
-            Spacer()
-            ButtonView(title: "Hit Me") {
-                showAlert = true
+        ScrollView {
+            VStack {
+                FormFieldView(viewModel: primaryViewModel)
+                FormFieldView(viewModel: secondaryViewModel)
+                FormPickerView(viewModel: genderSelectorViewModel, selectionViewModel: genderSelectionViewModel)
+                Spacer()
+                ButtonView(title: "Hit Me") {
+                    showAlert = true
+                }
+                .alert(primaryViewModel.text, isPresented: $showAlert) {
+                    Text("Close")
+                }
             }
-            .alert(primaryViewModel.text, isPresented: $showAlert) {
-                Text("Close")
-            }
-            
         }
         .padding(.horizontal, 25)
     }
