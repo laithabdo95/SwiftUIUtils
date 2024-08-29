@@ -7,14 +7,10 @@
 
 import SwiftUI
 
-struct FormPickerView: View {
+struct FormPickerView<ViewModel: FormPickerAndFieldConfigurable>: View {
     
     @State private var isSheetPresented: Bool = false
-    @StateObject var viewModel: FormPickerViewModel = FormPickerViewModel(
-        placeholder: "Marital Status",
-        isRequired: true,
-        selectionViewModel: .init(options: ["Majd", "Laith"])
-    )
+    @StateObject var viewModel: ViewModel
     
     var body: some View {
         FormFieldView(
@@ -29,5 +25,15 @@ struct FormPickerView: View {
 }
 
 #Preview {
-    FormPickerView()
+    FormPickerView(
+        viewModel: FormPickerViewModel(
+            placeholder: "Marital Status",
+            selectionViewModel: .init(
+                options: [
+                    "Majd",
+                    "Laith"
+                ]
+            )
+        )
+    )
 }

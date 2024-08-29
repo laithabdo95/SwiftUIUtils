@@ -8,13 +8,10 @@
 import SwiftUI
 
 
-struct FormFieldView: View {
+struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
     
     @FocusState private var focused: Bool
-    @StateObject var viewModel: FormFieldViewModel = FormFieldViewModel(
-        placeHolder: "Any Text",
-        rules: []
-    )
+    @StateObject var viewModel: ViewModel
     
     var fieldType: FieldType = .field
     private var isActive: Bool {
@@ -89,5 +86,5 @@ extension FormFieldView {
 }
 
 #Preview {
-    FormFieldView()
+    FormFieldView(viewModel: FormFieldViewModel(placeHolder: "Test", rules: []))
 }

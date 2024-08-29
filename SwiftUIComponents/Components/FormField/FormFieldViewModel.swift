@@ -7,7 +7,19 @@
 
 import SwiftUI
 
-class FormFieldViewModel: ObservableObject {
+protocol FormFieldConfigurable: ObservableObject {
+    var placeholder: String { get }
+    var rules: [ValidationRule] { get }
+    var text: String { get set }
+    var isValid: Bool { get }
+    var errorMessage: String { get }
+    var isDisabled: Bool  { get }
+    
+    func validate()
+    func getValidationResult() -> [FormFieldViewModel.ValidationResult]
+}
+
+class FormFieldViewModel: FormFieldConfigurable {
     let placeholder: String
     let rules: [ValidationRule]
     
@@ -21,13 +33,13 @@ class FormFieldViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     @Published var isDisabled: Bool = false
     
-    private func validate() {
+    internal func validate() {
        let result = getValidationResult()
         isValid = result.filter { !$0.isValid }.isEmpty
         errorMessage = result.first(where: { !$0.isValid })?.errorMessage ?? ""
     }
     
-    private func getValidationResult() -> [ValidationResult] {
+    internal func getValidationResult() -> [ValidationResult] {
         var result: [ValidationResult] = []
         rules.forEach { rule in
             errorMessage = rule.errorMessage

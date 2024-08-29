@@ -7,15 +7,8 @@
 
 import SwiftUI
 
-struct SelectionView: View {
-    @StateObject var viewModel = SelectionViewModel(
-        options: [
-            "Potato",
-            "Tomato",
-            "Koseso"
-        ],
-        selectionType: .multiple
-    )
+struct SelectionView<ViewModel: SelectionConfigurable>: View {
+    @StateObject var viewModel: ViewModel
     
     var body: some View {
         NavigationView {
@@ -54,5 +47,7 @@ struct SelectionView: View {
 }
 
 #Preview {
-    SelectionView()
+    SelectionView(
+        viewModel: SelectionViewModel(options: ["Test"])
+    )
 }

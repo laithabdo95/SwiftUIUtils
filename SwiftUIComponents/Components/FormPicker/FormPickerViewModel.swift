@@ -8,17 +8,22 @@
 import Combine
 import SwiftUI
 
-class FormPickerViewModel: FormFieldViewModel {
+typealias FormPickerAndFieldConfigurable = FormPickerConfigurable & FormFieldConfigurable
+
+protocol FormPickerConfigurable {
+    var isRequired: Bool { get }
+    var cancellable: Set<AnyCancellable> { get set }
+    var selectionViewModel: SelectionViewModel { get }
+    
+    func bindSelectionViewModel()
+}
+
+class FormPickerViewModel: FormFieldViewModel, FormPickerConfigurable {
     
     @Published var isRequired: Bool
     var selectionViewModel: SelectionViewModel
     
-    private var cancellables = Set<AnyCancellable>()
-    
-    private func validate() {
-        isValid = isRequired ? !text.isEmpty : true
-        errorMessage = isValid ? "" : ValidationRule.required.errorMessage
-    }
+    internal var cancellable = Set<AnyCancellable>()
     
     init(
         placeholder: String,
@@ -36,13 +41,13 @@ class FormPickerViewModel: FormFieldViewModel {
         bindSelectionViewModel()
     }
     
-    private func bindSelectionViewModel() {
+    internal func bindSelectionViewModel() {
         selectionViewModel.$selectedOptions
             .map { $0.joined(separator: ", ")}
             .sink { [weak self] text in
                 guard let self else { return }
                 self.text = text
             }
-            .store(in: &cancellables)
+            .store(in: &cancellable)
     }
 }

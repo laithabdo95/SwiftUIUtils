@@ -8,8 +8,25 @@
 import SwiftUI
 import Combine
 
-class SelectionViewModel: ObservableObject {
-    private let options: [String]
+protocol ItemSelectable {
+    func title() -> String
+}
+
+protocol SelectionConfigurable: ObservableObject {
+    var options: [String] { get }
+    
+    var searchText: String { get set }
+    var selectionType: SelectionViewModel.SelectionType { get }
+    var selectedOptions: Set<String> { get }
+    var filteredOptions: [String] { get }
+    
+    func toggleSelection(for option: String)
+    
+    init(options: [String], selectionType: SelectionViewModel.SelectionType)
+}
+
+class SelectionViewModel: SelectionConfigurable {
+    internal let options: [String]
     @Published var searchText: String = ""
     @Published var selectionType: SelectionType
     @Published var selectedOptions: Set<String> = []
@@ -35,7 +52,7 @@ class SelectionViewModel: ObservableObject {
         }
     }
     
-    init(options: [String], selectionType: SelectionType = .single) {
+    required init(options: [String], selectionType: SelectionType = .single) {
         self.options = options
         self.selectionType = selectionType
     }
