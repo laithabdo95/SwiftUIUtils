@@ -12,3 +12,9 @@ enum MaritalStatusEnum: String, CaseIterable {
     case married
     case divorced
 }
+
+extension MaritalStatusEnum: ItemSelectable {
+    var title: String {
+        self.rawValue
+    }
+}

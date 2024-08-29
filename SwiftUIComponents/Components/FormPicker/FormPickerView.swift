@@ -28,11 +28,9 @@ struct FormPickerView<ViewModel: FormPickerAndFieldConfigurable>: View {
     FormPickerView(
         viewModel: FormPickerViewModel(
             placeholder: "Marital Status",
-            selectionViewModel: .init(
-                options: [
-                    "Majd",
-                    "Laith"
-                ]
+            selectionViewModel: SelectionViewModel(
+                items: MaritalStatusEnum.allCases,
+                selectionType: .single
             )
         )
     )

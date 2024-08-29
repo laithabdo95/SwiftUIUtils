@@ -48,6 +48,9 @@ struct SelectionView<ViewModel: SelectionConfigurable>: View {
 
 #Preview {
     SelectionView(
-        viewModel: SelectionViewModel(options: ["Test"])
+        viewModel: SelectionViewModel(
+            items: MaritalStatusEnum.allCases,
+            selectionType: .single
+        )
     )
 }
