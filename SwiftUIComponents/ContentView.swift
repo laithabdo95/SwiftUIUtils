@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+ 
 struct ContentView: View {
     
     @State private var showAlert = false
@@ -27,39 +27,33 @@ struct ContentView: View {
     )
     
     let genderSelectorViewModel = FormPickerViewModel(
-        placeholder: "Select Your Gender"
-    )
-    
-    let genderSelectionViewModel = SelectionViewModel(
-        options: MaritalStatusEnum.allCases.map(
-            \.rawValue
-        ),
-        selectionType: .single
+        placeholder: "Select Your Gender",
+        selectionViewModel: .init(
+            options: ["Majd","Laith"],
+            selectionType: .single
+        )
     )
     
     var body: some View {
-        ScrollView {
-            VStack {
-                FormFieldView(viewModel: primaryViewModel)
-                FormFieldView(viewModel: secondaryViewModel)
-                FormPickerView(viewModel: genderSelectorViewModel, selectionViewModel: genderSelectionViewModel)
-                Spacer()
-                ButtonView(title: "Hit Me") {
-                    showAlert = true
-                }
-                .alert(primaryViewModel.text, isPresented: $showAlert) {
-                    Text("Close")
-                }
+        VerticalListView {
+            FormFieldView(viewModel: primaryViewModel)
+            FormFieldView(viewModel: secondaryViewModel)
+            FormPickerView(viewModel: genderSelectorViewModel)
+            Spacer()
+            ButtonView(title: "Hit Me") {
+                showAlert = true
+            }
+            .alert(genderSelectorViewModel.text, isPresented: $showAlert) {
+                Text("Close")
             }
         }
-        .padding(.horizontal, 25)
     }
 }
-
+ 
 #Preview {
     ContentView()
 }
-
+ 
 struct ButtonView: View {
     let title: String
     var completion: (() -> Void)?

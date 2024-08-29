@@ -13,10 +13,9 @@ struct FormPickerView: View {
     @FocusState var focused: Bool
     @StateObject var viewModel: FormPickerViewModel = FormPickerViewModel(
         placeholder: "Marital Status",
-        isRequired: true
+        isRequired: true,
+        selectionViewModel: .init(options: ["Majd", "Laith"])
     )
-        
-    @StateObject var selectionViewModel: SelectionViewModel = SelectionViewModel(options: [])
     
     var isActive: Bool {
         focused || viewModel.text.count > 0
@@ -38,7 +37,7 @@ struct FormPickerView: View {
             FieldView()
                 .padding(.bottom, 15)
                 .sheet(isPresented: $isSheetPresented) {
-                    SelectionView(viewModel: selectionViewModel)
+                    SelectionView(viewModel: viewModel.selectionViewModel)
                 }
         }
     }

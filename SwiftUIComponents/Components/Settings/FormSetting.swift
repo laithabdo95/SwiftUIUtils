@@ -15,4 +15,8 @@ enum FormSetting {
         static var backgroundColor: Color = .clear
         static var disabledColor: Color = .gray.opacity(0.2)
     }
+    
+    enum VerticalList {
+        static var padding = 25.0
+    }
 }
