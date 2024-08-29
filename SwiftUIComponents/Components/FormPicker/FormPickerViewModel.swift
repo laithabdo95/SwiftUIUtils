@@ -8,14 +8,8 @@
 import Combine
 import SwiftUI
 
-class FormPickerViewModel: ObservableObject {
-    let placeholder: String
+class FormPickerViewModel: FormFieldViewModel {
     
-    @Published var text: String = ""
-    
-    @Published var isValid: Bool = true
-    @Published var errorMessage: String = ""
-    @Published var isDisabled: Bool = false
     @Published var isRequired: Bool
     var selectionViewModel: SelectionViewModel
     
@@ -32,10 +26,13 @@ class FormPickerViewModel: ObservableObject {
         isRequired: Bool = true,
         selectionViewModel: SelectionViewModel
     ) {
-        self.placeholder = placeholder
-        self.isDisabled = isDisabled
         self.isRequired = isRequired
         self.selectionViewModel = selectionViewModel
+        super.init(
+            placeHolder: placeholder,
+            isDisabled: isDisabled,
+            rules: isRequired ? [.required] : []
+        )
         bindSelectionViewModel()
     }
     
@@ -45,7 +42,6 @@ class FormPickerViewModel: ObservableObject {
             .sink { [weak self] text in
                 guard let self else { return }
                 self.text = text
-                validate() // Explicitly call validate after updating text
             }
             .store(in: &cancellables)
     }

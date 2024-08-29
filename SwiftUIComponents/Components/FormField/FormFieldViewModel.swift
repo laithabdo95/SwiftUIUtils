@@ -56,35 +56,3 @@ extension FormFieldViewModel {
         let errorMessage: String
     }
 }
-
-enum ValidationRule {
-    case required
-    case regex(Regex)
-    
-    var errorMessage: String {
-        switch self {
-        case .required:
-            "This Field is required"
-        case .regex(let regex):
-            regex.message
-        }
-    }
-}
-
-class Regex {
-    let rawValue: String
-    let message: String
-    
-    init(rawValue: String, message: String) {
-        self.rawValue = rawValue
-        self.message = message
-    }
-    
-    static var email: Regex {
-        Regex(rawValue: "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}$", message: "Invalid, Should be valid email")
-    }
-    
-    static var englishLettersAndNumber: Regex {
-        Regex(rawValue: "^([a-zA-Z0-9]{0,100})$", message: "Invalid, you should using english letters and numbers")
-    }
-}

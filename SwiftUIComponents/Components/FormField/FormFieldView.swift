@@ -10,15 +10,18 @@ import SwiftUI
 
 struct FormFieldView: View {
     
-    @FocusState var focused: Bool
+    @FocusState private var focused: Bool
     @StateObject var viewModel: FormFieldViewModel = FormFieldViewModel(
         placeHolder: "Any Text",
         rules: []
     )
     
-    var isActive: Bool {
+    var fieldType: FieldType = .field
+    private var isActive: Bool {
         focused || viewModel.text.count > 0
     }
+    
+    var onTapGesture: (() -> Void)?
     
     var body: some View {
         VStack {
@@ -43,15 +46,23 @@ extension FormFieldView {
     @ViewBuilder
     func FieldView() -> some View {
         ZStack(alignment: isActive ? .topLeading : .center) {
-            TextField(
-                isActive ? "" : viewModel.placeholder,
-                text: $viewModel.text
-            )
-            .font(FormSetting.FormField.font)
-            .focused($focused)
+            HStack {
+                TextField(
+                    isActive ? "" : viewModel.placeholder,
+                    text: $viewModel.text
+                )
+                .font(FormSetting.FormField.font)
+                .focused($focused)
+                if fieldType == .picker {
+                    Image(systemName: "chevron.down")
+                }
+            }
         }
         .onTapGesture {
             focused = true
+            if fieldType == .picker {
+                onTapGesture?()
+            }
         }
         .disabled(viewModel.isDisabled)
         .animation(.linear(duration: 0.2), value: focused)
@@ -70,6 +81,12 @@ extension FormFieldView {
     }
 }
 
+extension FormFieldView {
+    enum FieldType {
+        case field
+        case picker
+    }
+}
 
 #Preview {
     FormFieldView()
