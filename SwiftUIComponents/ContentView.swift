@@ -36,13 +36,24 @@ struct ContentView: View {
         )
     }
     
+    var birthDateViewModel = FormDatePickerViewModel(
+        placeHolder: "Select Your Birth Date",
+        rules: [.required]
+    )
+    
     var body: some View {
         VerticalListView {
             FormFieldView(viewModel: primaryViewModel)
             FormFieldView(viewModel: secondaryViewModel)
             FormPickerView(viewModel: genderSelectorViewModel)
+//            FormDatePickerView(viewModel: birthDateViewModel)
             Spacer()
-            ButtonView(title: "Hit Me") {
+            ButtonView(
+                title: "Confirm",
+                buttonColor: FormSetting.VerticalList.primaryButtonColor,
+                titleColor: FormSetting.VerticalList.primaryButtonTitleColor,
+                cornerRadius: FormSetting.VerticalList.cornerRadius
+            ) {
                 showAlert = true
             }
             .alert(genderSelectorViewModel.text, isPresented: $showAlert) {
@@ -54,21 +65,4 @@ struct ContentView: View {
  
 #Preview {
     ContentView()
-}
- 
-struct ButtonView: View {
-    let title: String
-    var completion: (() -> Void)?
-    
-    var body: some View {
-        Button(action: {
-            completion?()
-        }, label: {
-            Text(title)
-                .frame(maxWidth: .infinity, minHeight: 50)
-                .foregroundColor(.white)
-                .background(.black)
-                .cornerRadius(12)
-        })
-    }
 }

@@ -22,7 +22,7 @@ protocol SelectionConfigurable: ObservableObject {
 
 class SelectionViewModel<Item: ItemSelectable>: SelectionConfigurable {
     var selectedItems: [Item] {
-        items.filter { options.contains($0.title) }
+        items.filter { selectedOptions.contains($0.title) }
     }
     
     var items: [Item]
