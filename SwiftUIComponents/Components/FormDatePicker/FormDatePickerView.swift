@@ -24,9 +24,9 @@ struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View  {
                     DatePicker(
                         "Select Date",
                         selection: $viewModel.date,
-                        displayedComponents: .date
+                        displayedComponents: viewModel.dateType
                     )
-                    .datePickerStyle(.graphical)
+                    .datePickerStyle(viewModel.datePickerStyle)
                     .padding()
                     .background(Color.white)
                     

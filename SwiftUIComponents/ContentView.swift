@@ -37,6 +37,7 @@ struct ContentView: View {
     }
     
     var birthDateViewModel = FormDatePickerViewModel(
+        datePickerStyle: .graphical,
         placeHolder: "Select Your Birth Date",
         rules: [.required]
     )
@@ -46,7 +47,7 @@ struct ContentView: View {
             FormFieldView(viewModel: primaryViewModel)
             FormFieldView(viewModel: secondaryViewModel)
             FormPickerView(viewModel: genderSelectorViewModel)
-//            FormDatePickerView(viewModel: birthDateViewModel)
+            FormDatePickerView(viewModel: birthDateViewModel)
             Spacer()
             ButtonView(
                 title: "Confirm",

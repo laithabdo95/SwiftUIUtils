@@ -9,15 +9,35 @@ import SwiftUI
 
 typealias FormDateAndFieldConfigurable = FormDatePickerConfigurable & FormFieldConfigurable
 
-protocol FormDatePickerConfigurable {
+protocol FormDatePickerConfigurable: AnyObject {
+    associatedtype PickerStyle: DatePickerStyle
+    
     var date: Date { get set }
+    var dateType: DatePickerComponents { get }
+    var datePickerStyle: PickerStyle { get }
 }
 
-class FormDatePickerViewModel: FormFieldViewModel, FormDatePickerConfigurable {
-    @Published var date: Date = Date()
+class FormDatePickerViewModel<PickerStyle: DatePickerStyle>: FormFieldViewModel, FormDatePickerConfigurable {
+    var datePickerStyle:PickerStyle
+    var dateType: DatePickerComponents
     
-    init(date: Date = Date(), placeHolder: String, isDisabled: Bool = false, rules: [ValidationRule]) {
+    @Published var date: Date = Date() {
+        didSet {
+            text = date.formatted()
+        }
+    }
+    
+    init(
+        date: Date = Date(),
+        dateType: DatePickerComponents = .date,
+        datePickerStyle: PickerStyle = .graphical,
+        placeHolder: String,
+        isDisabled: Bool = false,
+        rules: [ValidationRule]
+    ) {
         self.date = date
+        self.dateType = dateType
+        self.datePickerStyle = datePickerStyle
         super.init(placeHolder: placeHolder, isDisabled: isDisabled, rules: rules)
     }
 }
