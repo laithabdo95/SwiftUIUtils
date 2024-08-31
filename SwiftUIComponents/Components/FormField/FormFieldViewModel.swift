@@ -14,6 +14,7 @@ protocol FormFieldConfigurable: ObservableObject {
     var isValid: Bool { get }
     var errorMessage: String { get }
     var isDisabled: Bool  { get }
+    var isEditingDisabled: Bool { get }
     
     func validate()
     func getValidationResult() -> [FormFieldViewModel.ValidationResult]
@@ -32,6 +33,7 @@ class FormFieldViewModel: FormFieldConfigurable {
     @Published var isValid: Bool = true
     @Published var errorMessage: String = ""
     @Published var isDisabled: Bool = false
+    @Published var isEditingDisabled: Bool = false
     
     internal func validate() {
        let result = getValidationResult()
@@ -55,9 +57,10 @@ class FormFieldViewModel: FormFieldConfigurable {
         return result
     }
     
-    init(placeHolder: String, isDisabled: Bool = false, rules: [ValidationRule]) {
+    init(placeHolder: String, isDisabled: Bool = false, isEditingDisabled: Bool = false, rules: [ValidationRule]) {
         self.placeholder = placeHolder
         self.isDisabled = isDisabled
+        self.isEditingDisabled = isEditingDisabled
         self.rules = rules
     }
 }

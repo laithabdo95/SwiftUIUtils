@@ -19,6 +19,7 @@
 		847FC33A2C8229FC0066FC9F /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC3392C8229FC0066FC9F /* ButtonView.swift */; };
 		847FC33F2C823D0B0066FC9F /* FormDatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC33E2C823D0B0066FC9F /* FormDatePickerViewModel.swift */; };
 		847FC3432C8242B50066FC9F /* FormDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC3422C8242B50066FC9F /* FormDatePickerView.swift */; };
+		84D8E00F2C83B91900C8F4F7 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 84D8E00E2C83B91900C8F4F7 /* IQKeyboardManagerSwift */; };
 		84E29D4C2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E29D4B2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift */; };
 		84E29D4E2C78F8FB0003B3C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E29D4D2C78F8FB0003B3C1 /* ContentView.swift */; };
 		84E29D502C78F8FC0003B3C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E29D4F2C78F8FC0003B3C1 /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D8E00F2C83B91900C8F4F7 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +199,9 @@
 			dependencies = (
 			);
 			name = SwiftUIComponents;
+			packageProductDependencies = (
+				84D8E00E2C83B91900C8F4F7 /* IQKeyboardManagerSwift */,
+			);
 			productName = SwiftUIComponents;
 			productReference = 84E29D482C78F8FB0003B3C1 /* SwiftUIComponents.app */;
 			productType = "com.apple.product-type.application";
@@ -225,6 +230,9 @@
 				Base,
 			);
 			mainGroup = 84E29D3F2C78F8FB0003B3C1;
+			packageReferences = (
+				84D8E00D2C83B91900C8F4F7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+			);
 			productRefGroup = 84E29D492C78F8FB0003B3C1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -470,6 +478,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		84D8E00D2C83B91900C8F4F7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		84D8E00E2C83B91900C8F4F7 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84D8E00D2C83B91900C8F4F7 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 84E29D402C78F8FB0003B3C1 /* Project object */;
 }

@@ -36,6 +36,12 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
             FieldView()
                 .padding(.bottom, 15)
         }
+        .onTapGesture {
+            focused = true
+            if fieldType == .picker {
+                onTapGesture?()
+            }
+        }
     }
 }
 
@@ -55,13 +61,7 @@ extension FormFieldView {
                 }
             }
         }
-        .onTapGesture {
-            focused = true
-            if fieldType == .picker {
-                onTapGesture?()
-            }
-        }
-        .disabled(viewModel.isDisabled)
+        .disabled(viewModel.isEditingDisabled)
         .animation(.linear(duration: 0.2), value: focused)
         .frame(height: 56)
         .padding(.horizontal, 16)

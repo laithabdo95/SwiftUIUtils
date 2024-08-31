@@ -6,12 +6,25 @@
 //
 
 import SwiftUI
+import IQKeyboardManagerSwift
 
 @main
-struct SwiftUIComponentsApp: App {    
+struct SwiftUIComponentsApp: App {
+    
+    init() {
+        IQKeyboardManager.shared.enable = true
+        applyForm()
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
+    }
+}
+
+private extension SwiftUIComponentsApp {
+    func applyForm() {
+        FormSetting.FormField.cornerRadius = 25.0
     }
 }

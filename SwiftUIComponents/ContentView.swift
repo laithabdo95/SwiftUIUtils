@@ -57,7 +57,7 @@ struct ContentView: View {
             ) {
                 showAlert = true
             }
-            .alert(genderSelectorViewModel.text, isPresented: $showAlert) {
+            .alert(birthDateViewModel.text, isPresented: $showAlert) {
                 Text("Close")
             }
         }

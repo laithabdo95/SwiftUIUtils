@@ -38,6 +38,7 @@ class FormPickerViewModel<SelectionItems: ItemSelectable>: FormFieldViewModel, F
         super.init(
             placeHolder: placeholder,
             isDisabled: isDisabled,
+            isEditingDisabled: true,
             rules: isRequired ? [.required] : []
         )
         bindSelectionViewModel()

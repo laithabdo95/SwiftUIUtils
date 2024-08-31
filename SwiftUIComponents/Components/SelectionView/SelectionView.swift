@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SelectionView<ViewModel: SelectionConfigurable>: View {
     @StateObject var viewModel: ViewModel
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         NavigationView {
@@ -42,6 +43,13 @@ struct SelectionView<ViewModel: SelectionConfigurable>: View {
                     .padding()
             }
             .navigationTitle("Select an Option")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 }

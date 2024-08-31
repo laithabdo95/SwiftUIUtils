@@ -38,6 +38,6 @@ class FormDatePickerViewModel<PickerStyle: DatePickerStyle>: FormFieldViewModel,
         self.date = date
         self.dateType = dateType
         self.datePickerStyle = datePickerStyle
-        super.init(placeHolder: placeHolder, isDisabled: isDisabled, rules: rules)
+        super.init(placeHolder: placeHolder, isDisabled: isDisabled, isEditingDisabled: true, rules: rules)
     }
 }
