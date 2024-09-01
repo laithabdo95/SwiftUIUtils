@@ -26,15 +26,13 @@ struct ContentView: View {
         rules: []
     )
     
-    var genderSelectorViewModel: FormPickerViewModel<MaritalStatusEnum> {
-        FormPickerViewModel(
-            placeholder: "Please select your gender",
-            selectionViewModel: SelectionViewModel(
-                items: MaritalStatusEnum.allCases,
-                selectionType: .single
-            )
+    var genderSelectorViewModel = FormPickerViewModel(
+        placeholder: "Please select your gender",
+        selectionViewModel: SelectionViewModel(
+            items: MaritalStatusEnum.allCases,
+            selectionType: .single
         )
-    }
+    )
     
     var birthDateViewModel = FormDatePickerViewModel(
         datePickerStyle: .graphical,
@@ -57,7 +55,7 @@ struct ContentView: View {
             ) {
                 showAlert = true
             }
-            .alert(birthDateViewModel.text, isPresented: $showAlert) {
+            .alert(genderSelectorViewModel.text, isPresented: $showAlert) {
                 Text("Close")
             }
         }
