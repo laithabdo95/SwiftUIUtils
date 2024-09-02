@@ -26,7 +26,7 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
     // MARK: - Body
     var body: some View {
         VStack {
-            HeaderView
+            HeaderView()
             FieldView()
                 .padding([.leading, .trailing], 2)
                 .padding(.bottom, 15)
@@ -44,11 +44,11 @@ private extension FormFieldView {
     func FieldView() -> some View {
         ZStack(alignment: isActive ? .topLeading : .center) {
             HStack {
-                InputField
+                InputField()
                 if fieldType == .picker {
                     Image(systemName: "chevron.down")
                 } else if fieldType == .secured {
-                    SecuredToggleButton
+                    SecuredToggleButton()
                 }
             }
         }
@@ -72,7 +72,7 @@ private extension FormFieldView {
         .animation(.linear(duration: 0.2), value: focused)
     }
     
-    var HeaderView: some View {
+    func HeaderView() -> some View {
         HStack {
             Text(viewModel.placeholder)
                 .foregroundStyle(.secondary)
@@ -87,7 +87,7 @@ private extension FormFieldView {
     }
     
     @ViewBuilder
-    var InputField: some View {
+    func InputField() -> some View {
         if fieldType == .secured && isSecured {
             SecureField(
                 placeHolder,
@@ -105,7 +105,7 @@ private extension FormFieldView {
         }
     }
     
-     var SecuredToggleButton: some View {
+     func SecuredToggleButton() -> some View {
         Button(action: {
             isSecured.toggle()
         }) {
