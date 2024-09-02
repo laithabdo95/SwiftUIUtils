@@ -15,6 +15,7 @@ protocol FormFieldConfigurable: ObservableObject {
     var errorMessage: String { get }
     var isDisabled: Bool  { get }
     var isEditingDisabled: Bool { get }
+    var fieldType: FieldType { get }
     
     func validate()
     func getValidationResult() -> [FormFieldViewModel.ValidationResult]
@@ -23,6 +24,7 @@ protocol FormFieldConfigurable: ObservableObject {
 class FormFieldViewModel: FormFieldConfigurable {
     let placeholder: String
     let rules: [ValidationRule]
+    let fieldType: FieldType
     
     @Published var text: String = "" {
         didSet {
@@ -57,11 +59,18 @@ class FormFieldViewModel: FormFieldConfigurable {
         return result
     }
     
-    init(placeHolder: String, isDisabled: Bool = false, isEditingDisabled: Bool = false, rules: [ValidationRule]) {
+    init(
+        placeHolder: String,
+        isDisabled: Bool = false,
+        isEditingDisabled: Bool = false,
+        rules: [ValidationRule],
+        fieldType: FieldType = .field
+    ) {
         self.placeholder = placeHolder
         self.isDisabled = isDisabled
         self.isEditingDisabled = isEditingDisabled
         self.rules = rules
+        self.fieldType = fieldType
     }
 }
 
@@ -70,4 +79,10 @@ extension FormFieldViewModel {
         let isValid: Bool
         let errorMessage: String
     }
+}
+
+enum FieldType {
+    case field
+    case picker
+    case secured
 }

@@ -40,12 +40,19 @@ struct ContentView: View {
         rules: [.required]
     )
     
+    var secureFieldViewModel = FormFieldViewModel(
+            placeHolder: "Password",
+            rules: [.required],
+            fieldType: .secured
+        )
+    
     var body: some View {
         VerticalListView {
             FormFieldView(viewModel: primaryViewModel)
             FormFieldView(viewModel: secondaryViewModel)
             FormPickerView(viewModel: genderSelectorViewModel)
             FormDatePickerView(viewModel: birthDateViewModel)
+            FormFieldView(viewModel: secureFieldViewModel)
             Spacer()
             ButtonView(
                 title: "Confirm",
