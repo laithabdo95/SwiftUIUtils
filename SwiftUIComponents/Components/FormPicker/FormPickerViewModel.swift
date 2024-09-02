@@ -39,7 +39,8 @@ class FormPickerViewModel<SelectionItems: ItemSelectable>: FormFieldViewModel, F
             placeHolder: placeholder,
             isDisabled: isDisabled,
             isEditingDisabled: true,
-            rules: isRequired ? [.required] : []
+            rules: isRequired ? [.required] : [],
+            fieldType: .picker
         )
         bindSelectionViewModel()
     }

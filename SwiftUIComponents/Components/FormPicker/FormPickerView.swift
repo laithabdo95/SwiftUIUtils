@@ -13,9 +13,7 @@ struct FormPickerView<ViewModel: FormPickerAndFieldConfigurable>: View {
     @StateObject var viewModel: ViewModel
     
     var body: some View {
-        FormFieldView(
-            viewModel: viewModel,
-            fieldType: .picker) {
+        FormFieldView(viewModel: viewModel) {
                 isSheetPresented = true
             }
             .fullScreenCover(isPresented: $isSheetPresented) {

@@ -14,7 +14,7 @@ struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View  {
     var body: some View {
         ZStack {
             VStack(alignment: .leading) {
-                FormFieldView(viewModel: viewModel, fieldType: .picker) {
+                FormFieldView(viewModel: viewModel) {
                     showDatePicker = true
                 }
                 Spacer()
