@@ -84,5 +84,5 @@ extension FormFieldViewModel {
 enum FieldType {
     case field
     case picker
-    case password
+    case secured
 }

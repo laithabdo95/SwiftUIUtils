@@ -43,7 +43,7 @@ struct ContentView: View {
     var secureFieldViewModel = FormFieldViewModel(
             placeHolder: "Password",
             rules: [.required],
-            fieldType: .password
+            fieldType: .secured
         )
     
     var body: some View {

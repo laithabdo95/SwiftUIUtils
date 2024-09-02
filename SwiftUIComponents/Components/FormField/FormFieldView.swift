@@ -12,7 +12,7 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
     // MARK: - Properties
     @FocusState private var focused: Bool
     @StateObject var viewModel: ViewModel
-    @State private var isPasswordVisible: Bool = false
+    @State private var isSecured: Bool = false
     
     private var placeHolder: String { isActive ? "" : viewModel.placeholder }
     
@@ -26,7 +26,7 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
     // MARK: - Body
     var body: some View {
         VStack {
-            headerView
+            HeaderView
             FieldView()
                 .padding([.leading, .trailing], 2)
                 .padding(.bottom, 15)
@@ -41,14 +41,14 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
 
 private extension FormFieldView {
     @ViewBuilder
-    private func FieldView() -> some View {
+    func FieldView() -> some View {
         ZStack(alignment: isActive ? .topLeading : .center) {
             HStack {
-                inputField
+                InputField
                 if fieldType == .picker {
                     Image(systemName: "chevron.down")
-                } else if fieldType == .password {
-                    passwordToggleButton
+                } else if fieldType == .secured {
+                    SecuredToggleButton
                 }
             }
         }
@@ -72,7 +72,7 @@ private extension FormFieldView {
         .animation(.linear(duration: 0.2), value: focused)
     }
     
-    private var headerView: some View {
+    var HeaderView: some View {
         HStack {
             Text(viewModel.placeholder)
                 .foregroundStyle(.secondary)
@@ -87,8 +87,8 @@ private extension FormFieldView {
     }
     
     @ViewBuilder
-    private var inputField: some View {
-        if fieldType == .password && !isPasswordVisible {
+    var InputField: some View {
+        if fieldType == .secured && isSecured {
             SecureField(
                 placeHolder,
                 text: $viewModel.text
@@ -105,11 +105,11 @@ private extension FormFieldView {
         }
     }
     
-    private var passwordToggleButton: some View {
+     var SecuredToggleButton: some View {
         Button(action: {
-            isPasswordVisible.toggle()
+            isSecured.toggle()
         }) {
-            Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
+            Image(systemName: !isSecured ? "eye.slash.fill" : "eye.fill")
                 .foregroundColor(.gray)
         }
     }
