@@ -25,6 +25,6 @@ struct SwiftUIComponentsApp: App {
 
 private extension SwiftUIComponentsApp {
     func applyForm() {
-        FormSetting.FormField.cornerRadius = 25.0
+        FormSetting.FormField.cornerRadius = 12.0
     }
 }

@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
- 
+
 struct ContentView: FormListConfigurable {
-    
     @State private var showAlert = false
     
-    let primaryViewModel = FormFieldViewModel(
+    @StateObject var primaryViewModel = FormFieldViewModel(
         placeHolder: "Primary Email",
         isDisabled: false,
         rules: [
@@ -21,12 +20,13 @@ struct ContentView: FormListConfigurable {
             )
         ]
     )
-    let secondaryViewModel = FormFieldViewModel(
+    
+    @StateObject var secondaryViewModel = FormFieldViewModel(
         placeHolder: "Middle Name",
         rules: []
     )
     
-    var genderSelectorViewModel = FormPickerViewModel(
+    @StateObject var genderSelectorViewModel = FormPickerViewModel(
         placeholder: "Please select your gender",
         selectionViewModel: SelectionViewModel(
             items: MaritalStatusEnum.allCases,
@@ -34,17 +34,17 @@ struct ContentView: FormListConfigurable {
         )
     )
     
-    var birthDateViewModel = FormDatePickerViewModel(
+    @StateObject var birthDateViewModel = FormDatePickerViewModel(
         datePickerStyle: .graphical,
         placeHolder: "Select Your Birth Date",
         rules: [.required]
     )
     
-    var secureFieldViewModel = FormFieldViewModel(
-            placeHolder: "Password",
-            rules: [.required],
-            fieldType: .secured
-        )
+    @StateObject var secureFieldViewModel = FormFieldViewModel(
+        placeHolder: "Password",
+        rules: [.required],
+        fieldType: .secured
+    )
     
     var body: some View {
         FormListView(configure: self) {
@@ -53,10 +53,20 @@ struct ContentView: FormListConfigurable {
             FormPickerView(viewModel: genderSelectorViewModel)
             FormDatePickerView(viewModel: birthDateViewModel)
             FormFieldView(viewModel: secureFieldViewModel)
-            .alert(genderSelectorViewModel.text, isPresented: $showAlert) {
-                Text("Close")
-            }
+                .alert(genderSelectorViewModel.text, isPresented: $showAlert) {
+                    Text("Close")
+                }
         }
+    }
+    
+    var validatedItems: [FormFieldViewModel.FieldStatus] {
+        [
+            primaryViewModel.isValid,
+            secondaryViewModel.isValid,
+            genderSelectorViewModel.isValid,
+            birthDateViewModel.isValid,
+            secureFieldViewModel.isValid
+        ]
     }
     
     func onPrimaryButtonTapped() {
@@ -68,15 +78,8 @@ struct ContentView: FormListConfigurable {
         "Submit"
     }
     
-    var secondaryButtonTitle: String {
-        "Re-Submit"
-    }
-    
-    func onSecondaryButtonTapped() {
-        print("Secondary Tapped")
-    }
 }
- 
+
 #Preview {
     ContentView()
 }

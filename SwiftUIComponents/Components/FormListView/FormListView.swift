@@ -14,6 +14,8 @@ protocol FormListConfigurable: View {
     
     func onPrimaryButtonTapped()
     func onSecondaryButtonTapped()
+    
+    var validatedItems: [FormFieldViewModel.FieldStatus] { get }
 }
 
 extension FormListConfigurable {
@@ -24,18 +26,16 @@ extension FormListConfigurable {
 
 struct FormListView<Configure: FormListConfigurable, Content: View>: View {
     let configure: Configure
-    let content: Content
-    private var isValid: Bool { true }
-    
-    init(configure: Configure, @ViewBuilder content: () -> Content) {
-        self.configure = configure
-        self.content = content()
+    private var isValid: Bool {
+        configure.validatedItems.allSatisfy { $0 == .valid }
     }
-
+    
+    @ViewBuilder var content: () -> Content
+    
     var body: some View {
         ScrollView {
             VStack {
-                content
+                content()
                 Spacer(minLength: 45)
                 ButtonView(
                     title: configure.primaryButtonTitle,
