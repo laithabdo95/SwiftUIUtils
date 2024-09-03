@@ -12,6 +12,7 @@ struct ButtonView: View {
     let buttonColor: Color
     let titleColor: Color
     let cornerRadius: Double
+    var isDisabled: Bool = false
     var completion: (() -> Void)?
     
     var body: some View {
@@ -24,5 +25,6 @@ struct ButtonView: View {
                 .background(buttonColor)
                 .cornerRadius(cornerRadius)
         })
+        .disabled(isDisabled)
     }
 }

@@ -21,11 +21,10 @@ enum FormSetting {
         static var cornerRadius = 12.0
         
         static var primaryButtonColor: Color = .primary
-        static var primaryButtonDisabledColor: Color = .gray
+        static var buttonDisabledColor: Color = Color.gray.opacity(0.4)
         static var primaryButtonTitleColor: Color = .white
         
         static var secondaryButtonColor: Color = .secondary
-        static var secondaryButtonDisabledColor: Color = Color.gray.opacity(0.4)
         static var secondaryButtonTitleColor: Color = .white
     }
 }

@@ -11,11 +11,11 @@ protocol FormFieldConfigurable: ObservableObject {
     var placeholder: String { get }
     var rules: [ValidationRule] { get }
     var text: String { get set }
-    var isValid: Bool { get }
+    var isValid: FormFieldViewModel.FieldStatus { get }
     var errorMessage: String { get }
     var isDisabled: Bool  { get }
     var isEditingDisabled: Bool { get }
-    var fieldType: FieldType { get }
+    var fieldType: FormFieldViewModel.FieldType { get }
     
     func validate()
     func getValidationResult() -> [FormFieldViewModel.ValidationResult]
@@ -32,14 +32,14 @@ class FormFieldViewModel: FormFieldConfigurable {
         }
     }
     
-    @Published var isValid: Bool = true
+    @Published var isValid: FieldStatus = .notSet
     @Published var errorMessage: String = ""
     @Published var isDisabled: Bool = false
     @Published var isEditingDisabled: Bool = false
     
     internal func validate() {
        let result = getValidationResult()
-        isValid = result.filter { !$0.isValid }.isEmpty
+        isValid = result.filter { !$0.isValid }.isEmpty ? .valid : .notValid
         errorMessage = result.first(where: { !$0.isValid })?.errorMessage ?? ""
     }
     
@@ -79,10 +79,17 @@ extension FormFieldViewModel {
         let isValid: Bool
         let errorMessage: String
     }
+    
+    enum FieldStatus {
+        case notSet
+        case valid
+        case notValid
+    }
+    
+    enum FieldType {
+        case field
+        case picker
+        case secured
+    }
 }
 
-enum FieldType {
-    case field
-    case picker
-    case secured
-}

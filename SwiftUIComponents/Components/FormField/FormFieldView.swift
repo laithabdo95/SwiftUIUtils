@@ -16,7 +16,7 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
     
     private var placeHolder: String { isActive ? "" : viewModel.placeholder }
     
-    var fieldType: FieldType { viewModel.fieldType }
+    var fieldType: FormFieldViewModel.FieldType { viewModel.fieldType }
     var onTapGesture: (() -> Void)?
     
     private var isActive: Bool {
@@ -58,9 +58,8 @@ private extension FormFieldView {
         .overlay(
             RoundedRectangle(cornerRadius: FormSetting.FormField.cornerRadius)
                 .stroke(
-                    viewModel.isValid ?
-                    FormSetting.FormField.borderColor :
-                        Color.red,
+                    viewModel.isValid == .notValid ?
+                    Color.red : FormSetting.FormField.borderColor,
                     lineWidth: 1
                 )
                 .background(
@@ -82,7 +81,7 @@ private extension FormFieldView {
             Text(viewModel.errorMessage)
                 .foregroundStyle(.red)
                 .font(.subheadline)
-                .opacity(viewModel.isValid ? 0 : 1)
+                .opacity(viewModel.isValid == .notValid ? 1 : 0)
         }
     }
     

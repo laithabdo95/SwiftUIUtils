@@ -7,7 +7,7 @@
 
 import SwiftUI
  
-struct ContentView: View {
+struct ContentView: FormListConfigurable {
     
     @State private var showAlert = false
     
@@ -47,25 +47,33 @@ struct ContentView: View {
         )
     
     var body: some View {
-        VerticalListView {
+        FormListView(configure: self) {
             FormFieldView(viewModel: primaryViewModel)
             FormFieldView(viewModel: secondaryViewModel)
             FormPickerView(viewModel: genderSelectorViewModel)
             FormDatePickerView(viewModel: birthDateViewModel)
             FormFieldView(viewModel: secureFieldViewModel)
-            Spacer()
-            ButtonView(
-                title: "Confirm",
-                buttonColor: FormSetting.VerticalList.primaryButtonColor,
-                titleColor: FormSetting.VerticalList.primaryButtonTitleColor,
-                cornerRadius: FormSetting.VerticalList.cornerRadius
-            ) {
-                showAlert = true
-            }
             .alert(genderSelectorViewModel.text, isPresented: $showAlert) {
                 Text("Close")
             }
         }
+    }
+    
+    func onPrimaryButtonTapped() {
+        showAlert = true
+        print("Primary Tapped")
+    }
+    
+    var primaryButtonTitle: String {
+        "Submit"
+    }
+    
+    var secondaryButtonTitle: String {
+        "Re-Submit"
+    }
+    
+    func onSecondaryButtonTapped() {
+        print("Secondary Tapped")
     }
 }
  
