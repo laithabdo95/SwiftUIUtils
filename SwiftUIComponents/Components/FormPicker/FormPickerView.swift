@@ -32,4 +32,5 @@ struct FormPickerView<ViewModel: FormPickerAndFieldConfigurable>: View {
             )
         )
     )
+    .environmentObject(FormManager())
 }

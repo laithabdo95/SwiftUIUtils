@@ -54,5 +54,6 @@ struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View  {
             rules: []
         )
     )
+    .environmentObject(FormManager())
 }
 

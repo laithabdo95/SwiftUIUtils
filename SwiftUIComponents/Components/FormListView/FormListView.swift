@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol FormListItemValidatable {
+protocol FormListItemValidatable: ObservableObject, Identifiable {
     var isValid: FormFieldViewModel.FieldStatus { get }
 }
 
@@ -18,8 +18,6 @@ protocol FormListConfigurable: View {
     
     func onPrimaryButtonTapped()
     func onSecondaryButtonTapped()
-    
-    var validatableItems: [FormListItemValidatable] { get }
 }
 
 extension FormListConfigurable {
@@ -29,14 +27,11 @@ extension FormListConfigurable {
 }
 
 struct FormListView<Configure: FormListConfigurable, Content: View>: View {
+    @EnvironmentObject var formManager: FormManager
     let configure: Configure
-    
-    private var isValid: Bool {
-        configure.validatableItems.allSatisfy { $0.isValid == .valid }
-    }
-    
+
     @ViewBuilder var content: () -> Content
-    
+
     var body: some View {
         ScrollView {
             VStack {
@@ -47,7 +42,7 @@ struct FormListView<Configure: FormListConfigurable, Content: View>: View {
                     buttonColor: buttonColor,
                     titleColor: FormSetting.VerticalList.primaryButtonTitleColor,
                     cornerRadius: FormSetting.VerticalList.cornerRadius,
-                    isDisabled: !isValid
+                    isDisabled: !formManager.isValid
                 ) {
                     configure.onPrimaryButtonTapped()
                 }
@@ -57,7 +52,7 @@ struct FormListView<Configure: FormListConfigurable, Content: View>: View {
                         buttonColor: secondaryColor,
                         titleColor: FormSetting.VerticalList.secondaryButtonTitleColor,
                         cornerRadius: FormSetting.VerticalList.cornerRadius,
-                        isDisabled: !isValid
+                        isDisabled: !formManager.isValid
                     ) {
                         configure.onSecondaryButtonTapped()
                     }
@@ -66,14 +61,12 @@ struct FormListView<Configure: FormListConfigurable, Content: View>: View {
         }
         .padding(.horizontal, FormSetting.VerticalList.padding)
     }
-}
 
-extension FormListView {
-    var buttonColor: Color {
-        isValid ? FormSetting.VerticalList.primaryButtonColor : FormSetting.VerticalList.buttonDisabledColor
+    private var buttonColor: Color {
+        formManager.isValid ? FormSetting.VerticalList.primaryButtonColor : FormSetting.VerticalList.buttonDisabledColor
     }
-    
-    var secondaryColor: Color {
-        isValid ? FormSetting.VerticalList.secondaryButtonColor : FormSetting.VerticalList.buttonDisabledColor
+
+    private var secondaryColor: Color {
+        formManager.isValid ? FormSetting.VerticalList.secondaryButtonColor : FormSetting.VerticalList.buttonDisabledColor
     }
 }

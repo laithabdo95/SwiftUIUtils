@@ -7,25 +7,21 @@
 
 import SwiftUI
 
-struct ContentView: FormListConfigurable {
+struct ContentView: View, FormListConfigurable {
+    @StateObject private var formManager = FormManager()
     @State private var showAlert = false
-    
+
     @StateObject var primaryViewModel = FormFieldViewModel(
         placeHolder: "Primary Email",
         isDisabled: false,
-        rules: [
-            .required,
-            .regex(
-                .email
-            )
-        ]
+        rules: [.required, .regex(.email)]
     )
-    
+
     @StateObject var secondaryViewModel = FormFieldViewModel(
         placeHolder: "Middle Name",
         rules: []
     )
-    
+
     @StateObject var genderSelectorViewModel = FormPickerViewModel(
         placeholder: "Please select your gender",
         selectionViewModel: SelectionViewModel(
@@ -33,19 +29,19 @@ struct ContentView: FormListConfigurable {
             selectionType: .single
         )
     )
-    
+
     @StateObject var birthDateViewModel = FormDatePickerViewModel(
         datePickerStyle: .graphical,
         placeHolder: "Select Your Birth Date",
         rules: [.required]
     )
-    
+
     @StateObject var secureFieldViewModel = FormFieldViewModel(
         placeHolder: "Password",
         rules: [.required],
         fieldType: .secured
     )
-    
+
     var body: some View {
         FormListView(configure: self) {
             FormFieldView(viewModel: primaryViewModel)
@@ -57,27 +53,23 @@ struct ContentView: FormListConfigurable {
                     Text("Close")
                 }
         }
+        .environmentObject(formManager)
     }
-    
-    var validatableItems: [FormListItemValidatable] {
-        [
-            primaryViewModel,
-            secondaryViewModel,
-            genderSelectorViewModel,
-            birthDateViewModel,
-            secureFieldViewModel
-        ]
+
+    var primaryButtonTitle: String {
+        "Submit"
     }
-    
+
+    var secondaryButtonTitle: String {
+        ""
+    }
+
     func onPrimaryButtonTapped() {
         showAlert = true
         print("Primary Tapped")
     }
-    
-    var primaryButtonTitle: String {
-        "Submit"
-    }
-    
+
+    func onSecondaryButtonTapped() { }
 }
 
 #Preview {

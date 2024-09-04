@@ -24,6 +24,7 @@ class FormFieldViewModel: FormFieldConfigurable {
     let placeholder: String
     let rules: [ValidationRule]
     let fieldType: FieldType
+    var id: UUID { UUID() }
     
     @Published var text: String = "" {
         didSet {
