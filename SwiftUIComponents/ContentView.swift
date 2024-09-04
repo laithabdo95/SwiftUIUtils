@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View, FormListConfigurable {
-    @StateObject private var formManager = FormManager()
+    @StateObject internal var formManager = FormManager()
     @State private var showAlert = false
 
     @StateObject var primaryViewModel = FormFieldViewModel(

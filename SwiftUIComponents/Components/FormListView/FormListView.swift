@@ -15,6 +15,7 @@ protocol FormListConfigurable: View {
     
     var primaryButtonTitle: String { get }
     var secondaryButtonTitle: String { get }
+    var formManager: FormManager { get }
     
     func onPrimaryButtonTapped()
     func onSecondaryButtonTapped()
@@ -27,15 +28,20 @@ extension FormListConfigurable {
 }
 
 struct FormListView<Configure: FormListConfigurable, Content: View>: View {
-    @EnvironmentObject var formManager: FormManager
-    let configure: Configure
-
-    @ViewBuilder var content: () -> Content
+    @EnvironmentObject private  var formManager: FormManager
+    
+    private let configure: Configure
+    private let content: Content
+    
+    init(configure: Configure, @ViewBuilder content: () -> Content) {
+        self.configure = configure
+        self.content = content()
+    }
 
     var body: some View {
         ScrollView {
             VStack {
-                content()
+                content
                 Spacer(minLength: 45)
                 ButtonView(
                     title: configure.primaryButtonTitle,
