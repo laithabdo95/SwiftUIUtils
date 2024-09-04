@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
+    
+    // MARK: Properties
+    
     @FocusState private var focused: Bool
     @StateObject var viewModel: ViewModel
     @State private var isSecured: Bool = false
@@ -33,8 +36,12 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
         }
         .registerView(viewModel)
     }
+}
 
-    private func HeaderView() -> some View {
+// MARK: - SubViews
+
+private extension FormFieldView {
+    func HeaderView() -> some View {
         HStack {
             Text(viewModel.placeholder)
                 .foregroundStyle(.secondary)
@@ -49,7 +56,7 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
     }
 
     @ViewBuilder
-    private func FieldView() -> some View {
+    func FieldView() -> some View {
         ZStack(alignment: isActive ? .topLeading : .center) {
             HStack {
                 InputField()
@@ -80,7 +87,7 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
     }
 
     @ViewBuilder
-    private func InputField() -> some View {
+    func InputField() -> some View {
         if fieldType == .secured && isSecured {
             SecureField(
                 placeHolder,
@@ -98,7 +105,7 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
         }
     }
 
-    private func SecuredToggleButton() -> some View {
+    func SecuredToggleButton() -> some View {
         Button(action: {
             isSecured.toggle()
         }) {
@@ -107,7 +114,7 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
         }
     }
 
-    private func handleTapGesture() {
+    func handleTapGesture() {
         focused = true
         if fieldType == .picker {
             onTapGesture?()
