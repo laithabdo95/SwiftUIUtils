@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-protocol FormFieldConfigurable: ObservableObject {
+protocol FormFieldConfigurable: ObservableObject, FormListItemValidatable {
     var placeholder: String { get }
     var rules: [ValidationRule] { get }
     var text: String { get set }
-    var isValid: FormFieldViewModel.FieldStatus { get }
     var errorMessage: String { get }
     var isDisabled: Bool  { get }
     var isEditingDisabled: Bool { get }

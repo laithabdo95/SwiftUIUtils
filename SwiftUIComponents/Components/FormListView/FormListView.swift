@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+protocol FormListItemValidatable {
+    var isValid: FormFieldViewModel.FieldStatus { get }
+}
+
 protocol FormListConfigurable: View {
     
     var primaryButtonTitle: String { get }
@@ -15,7 +19,7 @@ protocol FormListConfigurable: View {
     func onPrimaryButtonTapped()
     func onSecondaryButtonTapped()
     
-    var validatedItems: [FormFieldViewModel.FieldStatus] { get }
+    var validatableItems: [FormListItemValidatable] { get }
 }
 
 extension FormListConfigurable {
@@ -26,8 +30,9 @@ extension FormListConfigurable {
 
 struct FormListView<Configure: FormListConfigurable, Content: View>: View {
     let configure: Configure
+    
     private var isValid: Bool {
-        configure.validatedItems.allSatisfy { $0 == .valid }
+        configure.validatableItems.allSatisfy { $0.isValid == .valid }
     }
     
     @ViewBuilder var content: () -> Content

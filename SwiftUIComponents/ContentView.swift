@@ -59,13 +59,13 @@ struct ContentView: FormListConfigurable {
         }
     }
     
-    var validatedItems: [FormFieldViewModel.FieldStatus] {
+    var validatableItems: [FormListItemValidatable] {
         [
-            primaryViewModel.isValid,
-            secondaryViewModel.isValid,
-            genderSelectorViewModel.isValid,
-            birthDateViewModel.isValid,
-            secureFieldViewModel.isValid
+            primaryViewModel,
+            secondaryViewModel,
+            genderSelectorViewModel,
+            birthDateViewModel,
+            secureFieldViewModel
         ]
     }
     
