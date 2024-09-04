@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol FormListItemValidatable {
+protocol FormListItemValidatable: ObservableObject, Identifiable {
     var isValid: FormFieldViewModel.FieldStatus { get }
 }
 
@@ -15,11 +15,10 @@ protocol FormListConfigurable: View {
     
     var primaryButtonTitle: String { get }
     var secondaryButtonTitle: String { get }
+    var formManager: FormManager { get }
     
     func onPrimaryButtonTapped()
     func onSecondaryButtonTapped()
-    
-    var validatableItems: [FormListItemValidatable] { get }
 }
 
 extension FormListConfigurable {
@@ -29,25 +28,27 @@ extension FormListConfigurable {
 }
 
 struct FormListView<Configure: FormListConfigurable, Content: View>: View {
-    let configure: Configure
+    @EnvironmentObject private  var formManager: FormManager
     
-    private var isValid: Bool {
-        configure.validatableItems.allSatisfy { $0.isValid == .valid }
+    private let configure: Configure
+    private let content: Content
+    
+    init(configure: Configure, @ViewBuilder content: () -> Content) {
+        self.configure = configure
+        self.content = content()
     }
-    
-    @ViewBuilder var content: () -> Content
-    
+
     var body: some View {
         ScrollView {
             VStack {
-                content()
+                content
                 Spacer(minLength: 45)
                 ButtonView(
                     title: configure.primaryButtonTitle,
                     buttonColor: buttonColor,
                     titleColor: FormSetting.VerticalList.primaryButtonTitleColor,
                     cornerRadius: FormSetting.VerticalList.cornerRadius,
-                    isDisabled: !isValid
+                    isDisabled: !formManager.isValid
                 ) {
                     configure.onPrimaryButtonTapped()
                 }
@@ -57,7 +58,7 @@ struct FormListView<Configure: FormListConfigurable, Content: View>: View {
                         buttonColor: secondaryColor,
                         titleColor: FormSetting.VerticalList.secondaryButtonTitleColor,
                         cornerRadius: FormSetting.VerticalList.cornerRadius,
-                        isDisabled: !isValid
+                        isDisabled: !formManager.isValid
                     ) {
                         configure.onSecondaryButtonTapped()
                     }
@@ -66,14 +67,12 @@ struct FormListView<Configure: FormListConfigurable, Content: View>: View {
         }
         .padding(.horizontal, FormSetting.VerticalList.padding)
     }
-}
 
-extension FormListView {
-    var buttonColor: Color {
-        isValid ? FormSetting.VerticalList.primaryButtonColor : FormSetting.VerticalList.buttonDisabledColor
+    private var buttonColor: Color {
+        formManager.isValid ? FormSetting.VerticalList.primaryButtonColor : FormSetting.VerticalList.buttonDisabledColor
     }
-    
-    var secondaryColor: Color {
-        isValid ? FormSetting.VerticalList.secondaryButtonColor : FormSetting.VerticalList.buttonDisabledColor
+
+    private var secondaryColor: Color {
+        formManager.isValid ? FormSetting.VerticalList.secondaryButtonColor : FormSetting.VerticalList.buttonDisabledColor
     }
 }

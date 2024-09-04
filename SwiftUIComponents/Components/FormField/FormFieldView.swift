@@ -9,21 +9,21 @@ import SwiftUI
 
 struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
     
-    // MARK: - Properties
+    // MARK: Properties
+    
     @FocusState private var focused: Bool
     @StateObject var viewModel: ViewModel
     @State private var isSecured: Bool = false
-    
+    @EnvironmentObject var formManager: FormManager
+
     private var placeHolder: String { isActive ? "" : viewModel.placeholder }
-    
     var fieldType: FormFieldViewModel.FieldType { viewModel.fieldType }
     var onTapGesture: (() -> Void)?
-    
+
     private var isActive: Bool {
         focused || !viewModel.text.isEmpty
     }
-    
-    // MARK: - Body
+
     var body: some View {
         VStack {
             HeaderView()
@@ -34,12 +34,27 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
         .onTapGesture {
             handleTapGesture()
         }
+        .registerView(viewModel)
     }
 }
 
-// MARK: - Subviews
+// MARK: - SubViews
 
 private extension FormFieldView {
+    func HeaderView() -> some View {
+        HStack {
+            Text(viewModel.placeholder)
+                .foregroundStyle(.secondary)
+                .font(.subheadline)
+                .opacity(isActive ? 1 : 0)
+            Spacer()
+            Text(viewModel.errorMessage)
+                .foregroundStyle(.red)
+                .font(.subheadline)
+                .opacity(viewModel.isValid == .notValid ? 1 : 0)
+        }
+    }
+
     @ViewBuilder
     func FieldView() -> some View {
         ZStack(alignment: isActive ? .topLeading : .center) {
@@ -70,21 +85,7 @@ private extension FormFieldView {
         )
         .animation(.linear(duration: 0.2), value: focused)
     }
-    
-    func HeaderView() -> some View {
-        HStack {
-            Text(viewModel.placeholder)
-                .foregroundStyle(.secondary)
-                .font(.subheadline)
-                .opacity(isActive ? 1 : 0)
-            Spacer()
-            Text(viewModel.errorMessage)
-                .foregroundStyle(.red)
-                .font(.subheadline)
-                .opacity(viewModel.isValid == .notValid ? 1 : 0)
-        }
-    }
-    
+
     @ViewBuilder
     func InputField() -> some View {
         if fieldType == .secured && isSecured {
@@ -103,8 +104,8 @@ private extension FormFieldView {
             .focused($focused)
         }
     }
-    
-     func SecuredToggleButton() -> some View {
+
+    func SecuredToggleButton() -> some View {
         Button(action: {
             isSecured.toggle()
         }) {
@@ -112,12 +113,8 @@ private extension FormFieldView {
                 .foregroundColor(.gray)
         }
     }
-}
 
-// MARK: - Actions
-
-private extension FormFieldView {
-    private func handleTapGesture() {
+    func handleTapGesture() {
         focused = true
         if fieldType == .picker {
             onTapGesture?()
@@ -128,4 +125,5 @@ private extension FormFieldView {
 // MARK: - Preview
 #Preview {
     FormFieldView(viewModel: FormFieldViewModel(placeHolder: "Test", rules: []))
+        .environmentObject(FormManager())
 }

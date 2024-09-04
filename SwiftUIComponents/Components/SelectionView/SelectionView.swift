@@ -61,4 +61,5 @@ struct SelectionView<ViewModel: SelectionConfigurable>: View {
             selectionType: .single
         )
     )
+    .environmentObject(FormManager())
 }

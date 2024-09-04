@@ -8,6 +8,7 @@
 import SwiftUI
 
 protocol FormFieldConfigurable: ObservableObject, FormListItemValidatable {
+    var id: UUID { get }
     var placeholder: String { get }
     var rules: [ValidationRule] { get }
     var text: String { get set }
@@ -24,6 +25,7 @@ class FormFieldViewModel: FormFieldConfigurable {
     let placeholder: String
     let rules: [ValidationRule]
     let fieldType: FieldType
+    var id: UUID = UUID()
     
     @Published var text: String = "" {
         didSet {

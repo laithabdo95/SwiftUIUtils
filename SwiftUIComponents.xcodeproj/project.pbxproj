@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11C00C7F2C885E1C006E3BEC /* FormManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C00C7E2C885E1C006E3BEC /* FormManager.swift */; };
+		11C00C822C8869B5006E3BEC /* RegisterViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C00C812C8869B5006E3BEC /* RegisterViewModifier.swift */; };
 		8446BE292C7FCA7400E91A86 /* FormSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BE282C7FCA7400E91A86 /* FormSetting.swift */; };
 		8446BE2C2C7FD30600E91A86 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BE2B2C7FD30600E91A86 /* SelectionView.swift */; };
 		8446BE2F2C7FD53300E91A86 /* SelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BE2E2C7FD53300E91A86 /* SelectionViewModel.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11C00C7E2C885E1C006E3BEC /* FormManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormManager.swift; sourceTree = "<group>"; };
+		11C00C812C8869B5006E3BEC /* RegisterViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModifier.swift; sourceTree = "<group>"; };
 		8446BE282C7FCA7400E91A86 /* FormSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSetting.swift; sourceTree = "<group>"; };
 		8446BE2B2C7FD30600E91A86 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		8446BE2E2C7FD53300E91A86 /* SelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewModel.swift; sourceTree = "<group>"; };
@@ -62,9 +66,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11C00C802C88698B006E3BEC /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				11C00C812C8869B5006E3BEC /* RegisterViewModifier.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		8446BE232C7FCA2500E91A86 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				11C00C802C88698B006E3BEC /* Helper */,
 				847FC33B2C823CEF0066FC9F /* FormDatePicker */,
 				847FC3382C8229EF0066FC9F /* ButtonView */,
 				847FC32C2C80A06B0066FC9F /* FormListView */,
@@ -126,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				847FC32D2C80A07A0066FC9F /* FormListView.swift */,
+				11C00C7E2C885E1C006E3BEC /* FormManager.swift */,
 			);
 			path = FormListView;
 			sourceTree = "<group>";
@@ -260,12 +274,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				847FC32E2C80A07A0066FC9F /* FormListView.swift in Sources */,
+				11C00C7F2C885E1C006E3BEC /* FormManager.swift in Sources */,
 				847FC3432C8242B50066FC9F /* FormDatePickerView.swift in Sources */,
 				84E29D5B2C7902D10003B3C1 /* FormFieldViewModel.swift in Sources */,
 				847FC3352C80A4240066FC9F /* Regex.swift in Sources */,
 				847FC33F2C823D0B0066FC9F /* FormDatePickerViewModel.swift in Sources */,
 				8446BE2C2C7FD30600E91A86 /* SelectionView.swift in Sources */,
 				8446BE292C7FCA7400E91A86 /* FormSetting.swift in Sources */,
+				11C00C822C8869B5006E3BEC /* RegisterViewModifier.swift in Sources */,
 				84E29D4E2C78F8FB0003B3C1 /* ContentView.swift in Sources */,
 				847FC33A2C8229FC0066FC9F /* ButtonView.swift in Sources */,
 				8446BE362C7FE55F00E91A86 /* MaritalStatus.swift in Sources */,
