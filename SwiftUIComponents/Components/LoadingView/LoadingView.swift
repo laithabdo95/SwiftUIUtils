@@ -31,7 +31,7 @@ struct LoadingView: View {
             .onAppear {
                 self.isAnimating = true
             }
-            Text("Loading...")
+            Text(LoaderSetting.loadingTitle)
                 .font(.subheadline)
                 .fontWeight(.bold)
                 .padding(.top, 20)

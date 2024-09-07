@@ -8,5 +8,6 @@
 import SwiftUI
 
 enum LoaderSetting {
-    static var color: Color = .gray
+    static var color: Color = .white
+    static var loadingTitle: String = "Loading..."
 }

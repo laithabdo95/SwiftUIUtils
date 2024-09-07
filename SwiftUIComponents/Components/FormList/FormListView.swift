@@ -34,10 +34,12 @@ struct FormListView<Configure: FormListConfigurable, Content: View>: View {
     
     private let configure: Configure
     private let content: Content
+    @Binding private var isLoading: Bool
     
-    init(configure: Configure, @ViewBuilder content: () -> Content) {
+    init(configure: Configure, isLoading: Binding<Bool>, @ViewBuilder content: () -> Content) {
         self.configure = configure
         self.content = content()
+        self._isLoading = isLoading
     }
 
     var body: some View {
@@ -69,6 +71,12 @@ struct FormListView<Configure: FormListConfigurable, Content: View>: View {
         }
         .environmentObject(formManager)
         .padding(.horizontal, FormSetting.VerticalList.padding)
+        .fullScreenCover(isPresented: $isLoading, content: {
+            LoadingView()
+        })
+        .transaction({ transaction in
+            transaction.disablesAnimations = true
+        })
     }
 
     private var buttonColor: Color {

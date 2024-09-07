@@ -31,6 +31,7 @@ struct ContentView: FormListConfigurable {
 
     @StateObject var birthDateViewModel = FormDatePickerViewModel(
         datePickerStyle: .graphical,
+        dateStyle: .full,
         placeHolder: "Select Your Birth Date",
         rules: [.required]
     )
@@ -44,7 +45,7 @@ struct ContentView: FormListConfigurable {
     var annualToggle = FormToggleViewModel(label: "Annal Promotions")
 
     var body: some View {
-        FormListView(configure: self) {
+        FormListView(configure: self, isLoading: $showLoading) {
             FormFieldView(viewModel: primaryViewModel)
             FormFieldView(viewModel: secondaryViewModel)
             FormPickerView(viewModel: genderSelectorViewModel)
@@ -52,12 +53,6 @@ struct ContentView: FormListConfigurable {
             FormFieldView(viewModel: secureFieldViewModel)
             FormToggleView(viewModel: annualToggle)
         }
-//        .fullScreenCover(isPresented: $showLoading, content: {
-//            LoadingView()
-//        })
-//        .transaction({ transaction in
-//            transaction.disablesAnimations = true
-//        })
     }
     
     var parameter: [String: Any] {
