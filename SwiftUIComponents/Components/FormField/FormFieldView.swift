@@ -28,7 +28,6 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
         VStack {
             HeaderView()
             FieldView()
-                .padding([.leading, .trailing], 2)
                 .padding(.bottom, 15)
         }
         .onTapGesture {

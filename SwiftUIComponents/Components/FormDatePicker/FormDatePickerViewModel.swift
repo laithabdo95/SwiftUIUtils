@@ -18,8 +18,8 @@ protocol FormDatePickerConfigurable: AnyObject {
 }
 
 class FormDatePickerViewModel<PickerStyle: DatePickerStyle>: FormFieldViewModel, FormDatePickerConfigurable {
-    var datePickerStyle:PickerStyle
-    var dateType: DatePickerComponents
+    internal var datePickerStyle:PickerStyle
+    internal var dateType: DatePickerComponents
     
     @Published var date: Date = Date() {
         didSet {

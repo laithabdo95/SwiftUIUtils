@@ -1,5 +1,5 @@
 //
-//  ButtonView.swift
+//  FormButtonView.swift
 //  SwiftUIComponents
 //
 //  Created by Laith Abdo on 30/08/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ButtonView: View {
+struct FormButtonView: View {
     let title: String
     let buttonColor: Color
     let titleColor: Color
@@ -24,6 +24,7 @@ struct ButtonView: View {
                 .foregroundColor(titleColor)
                 .background(buttonColor)
                 .cornerRadius(cornerRadius)
+                .padding(.top, 15)
         })
         .disabled(isDisabled)
     }

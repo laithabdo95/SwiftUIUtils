@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-struct ContentView: View, FormListConfigurable {
-    @StateObject internal var formManager = FormManager()
-    @State private var showAlert = false
+struct ContentView: FormListConfigurable {
+    @State private var showLoading = false
 
     @StateObject var primaryViewModel = FormFieldViewModel(
         placeHolder: "Primary Email",
@@ -41,6 +40,8 @@ struct ContentView: View, FormListConfigurable {
         rules: [.required],
         fieldType: .secured
     )
+    
+    var annualToggle = FormToggleViewModel(label: "Annal Promotions")
 
     var body: some View {
         FormListView(configure: self) {
@@ -49,11 +50,18 @@ struct ContentView: View, FormListConfigurable {
             FormPickerView(viewModel: genderSelectorViewModel)
             FormDatePickerView(viewModel: birthDateViewModel)
             FormFieldView(viewModel: secureFieldViewModel)
-                .alert(genderSelectorViewModel.text, isPresented: $showAlert) {
-                    Text("Close")
-                }
+            FormToggleView(viewModel: annualToggle)
         }
-        .environmentObject(formManager)
+//        .fullScreenCover(isPresented: $showLoading, content: {
+//            LoadingView()
+//        })
+//        .transaction({ transaction in
+//            transaction.disablesAnimations = true
+//        })
+    }
+    
+    var parameter: [String: Any] {
+        [:]
     }
 
     var primaryButtonTitle: String {
@@ -61,12 +69,14 @@ struct ContentView: View, FormListConfigurable {
     }
 
     var secondaryButtonTitle: String {
-        ""
+        "Save"
     }
 
     func onPrimaryButtonTapped() {
-        showAlert = true
-        print("Primary Tapped")
+        showLoading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            showLoading = false
+        }
     }
 
     func onSecondaryButtonTapped() { }

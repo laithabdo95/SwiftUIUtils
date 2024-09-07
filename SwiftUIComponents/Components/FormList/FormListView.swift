@@ -15,10 +15,12 @@ protocol FormListConfigurable: View {
     
     var primaryButtonTitle: String { get }
     var secondaryButtonTitle: String { get }
-    var formManager: FormManager { get }
     
     func onPrimaryButtonTapped()
     func onSecondaryButtonTapped()
+    
+    associatedtype Parameter
+    var parameter: Parameter { get }
 }
 
 extension FormListConfigurable {
@@ -28,7 +30,7 @@ extension FormListConfigurable {
 }
 
 struct FormListView<Configure: FormListConfigurable, Content: View>: View {
-    @EnvironmentObject private  var formManager: FormManager
+    @StateObject private  var formManager: FormManager = FormManager()
     
     private let configure: Configure
     private let content: Content
@@ -43,7 +45,7 @@ struct FormListView<Configure: FormListConfigurable, Content: View>: View {
             VStack {
                 content
                 Spacer(minLength: 45)
-                ButtonView(
+                FormButtonView(
                     title: configure.primaryButtonTitle,
                     buttonColor: buttonColor,
                     titleColor: FormSetting.VerticalList.primaryButtonTitleColor,
@@ -53,7 +55,7 @@ struct FormListView<Configure: FormListConfigurable, Content: View>: View {
                     configure.onPrimaryButtonTapped()
                 }
                 if !configure.secondaryButtonTitle.isEmpty {
-                    ButtonView(
+                    FormButtonView(
                         title: configure.secondaryButtonTitle,
                         buttonColor: secondaryColor,
                         titleColor: FormSetting.VerticalList.secondaryButtonTitleColor,
@@ -65,6 +67,7 @@ struct FormListView<Configure: FormListConfigurable, Content: View>: View {
                 }
             }
         }
+        .environmentObject(formManager)
         .padding(.horizontal, FormSetting.VerticalList.padding)
     }
 
