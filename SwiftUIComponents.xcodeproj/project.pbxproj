@@ -87,17 +87,12 @@
 		8446BE232C7FCA2500E91A86 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				8485FDCE2C8C94C5009B1016 /* LoadingView */,
-				8452AD572C8B9F8A0003843A /* FormToggle */,
+				846FFAF32C8DDFC80067FAFC /* Form */,
+				8485FDCE2C8C94C5009B1016 /* Loader */,
 				11C00C802C88698B006E3BEC /* Helper */,
-				847FC33B2C823CEF0066FC9F /* FormDatePicker */,
-				847FC3382C8229EF0066FC9F /* FormButton */,
-				847FC32C2C80A06B0066FC9F /* FormList */,
 				8446BE342C7FE54F00E91A86 /* Mockups */,
 				8446BE2D2C7FD50500E91A86 /* Selection */,
-				8446BE2A2C7FD2F800E91A86 /* FormPicker */,
 				8446BE272C7FCA6500E91A86 /* Settings */,
-				8446BE242C7FCA2D00E91A86 /* FormField */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -157,6 +152,19 @@
 			path = FormToggle;
 			sourceTree = "<group>";
 		};
+		846FFAF32C8DDFC80067FAFC /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				8452AD572C8B9F8A0003843A /* FormToggle */,
+				847FC33B2C823CEF0066FC9F /* FormDatePicker */,
+				847FC3382C8229EF0066FC9F /* FormButton */,
+				847FC32C2C80A06B0066FC9F /* FormList */,
+				8446BE2A2C7FD2F800E91A86 /* FormPicker */,
+				8446BE242C7FCA2D00E91A86 /* FormField */,
+			);
+			path = Form;
+			sourceTree = "<group>";
+		};
 		847FC32C2C80A06B0066FC9F /* FormList */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,12 +192,12 @@
 			path = FormDatePicker;
 			sourceTree = "<group>";
 		};
-		8485FDCE2C8C94C5009B1016 /* LoadingView */ = {
+		8485FDCE2C8C94C5009B1016 /* Loader */ = {
 			isa = PBXGroup;
 			children = (
 				8485FDCF2C8C94E5009B1016 /* LoadingView.swift */,
 			);
-			path = LoadingView;
+			path = Loader;
 			sourceTree = "<group>";
 		};
 		84E29D3F2C78F8FB0003B3C1 = {
