@@ -20,25 +20,28 @@ struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View  {
                 Spacer()
             }
             .fullScreenCover(isPresented: $showDatePicker, content: {
-                VStack {
-                    DatePicker(
-                        "Select Date",
-                        selection: $viewModel.date,
-                        displayedComponents: viewModel.dateType
-                    )
-                    .datePickerStyle(viewModel.datePickerStyle)
-                    .padding()
-                    .background(Color.white)
-                    
-                    Button("Done") {
-                        showDatePicker = false
+                ZStack {
+                    VStack {
+                        DatePicker(
+                            "Select Date",
+                            selection: $viewModel.date,
+                            displayedComponents: viewModel.dateType
+                        )
+                        .datePickerStyle(viewModel.datePickerStyle)
+                        .padding()
+                        .background(Color.white)
+                        
+                        Button("Done") {
+                            showDatePicker = false
+                        }
+                        .padding(.vertical, 15)
                     }
-                    .padding(.vertical, 15)
+                    .background(Color.white)
+                    .cornerRadius(12)
+                    .frame(maxWidth: 300)
                 }
-                .background(Color.white)
-                .cornerRadius(12)
-                .frame(maxWidth: 300)
-                .presentationBackground(Color.black.opacity(0.8))
+                .background(ClearBackgroundView())
+//                .presentationBackground(Color.black.opacity(0.8))
             })
             .transaction({ transaction in
                 transaction.disablesAnimations = true
@@ -57,3 +60,22 @@ struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View  {
     .environmentObject(FormManager())
 }
 
+
+
+struct ClearBackgroundView: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        return InnerView()
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {
+    }
+    
+    private class InnerView: UIView {
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
+            
+            superview?.superview?.backgroundColor = .black.withAlphaComponent(0.5)
+        }
+        
+    }
+}

@@ -37,7 +37,8 @@ struct LoadingView: View {
                 .padding(.top, 20)
                 .foregroundColor(LoaderSetting.color)
         }
-        .presentationBackground(Color.black.opacity(0.3))
+        .background(ClearBackgroundView())
+//        .presentationBackground(Color.black.opacity(0.3))
     }
 }
 
