@@ -115,7 +115,6 @@
 				847FC3342C80A4240066FC9F /* Regex.swift */,
 				847FC3362C80A4430066FC9F /* ValidationRule.swift */,
 				8485FDD12C8C9616009B1016 /* LoaderSetting.swift */,
-				84A9F1FF2C92E1760007B2CA /* ProgressLoaderView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -224,6 +223,7 @@
 			children = (
 				8446BE232C7FCA2500E91A86 /* Components */,
 				84E29D4B2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift */,
+				84A9F1FF2C92E1760007B2CA /* ProgressLoaderView.swift */,
 				84E29D4D2C78F8FB0003B3C1 /* ContentView.swift */,
 				84E29D4F2C78F8FC0003B3C1 /* Assets.xcassets */,
 				84E29D512C78F8FC0003B3C1 /* Preview Content */,
