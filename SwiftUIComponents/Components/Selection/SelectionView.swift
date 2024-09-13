@@ -14,15 +14,6 @@ struct SelectionView<ViewModel: SelectionConfigurable>: View {
     var body: some View {
         NavigationView {
             VStack {
-                // Search Bar
-                TextField("Search...", text: $viewModel.searchText)
-                    .padding(10)
-                    .padding(.horizontal, 15)
-                    .background(Color(.systemGray6))
-                    .cornerRadius(25)
-                    .padding(.horizontal)
-                
-                // Filtered List
                 List(viewModel.filteredOptions, id: \.self) { option in
                     HStack {
                         Text(option)
@@ -38,10 +29,8 @@ struct SelectionView<ViewModel: SelectionConfigurable>: View {
                     }
                 }
                 .listStyle(InsetGroupedListStyle()) // Style the list
-                
-                Text("Selected: \(viewModel.selectedOptions.joined(separator: ", "))")
-                    .padding()
             }
+            .searchable(text: $viewModel.searchText)
             .navigationTitle("Select an Option")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
