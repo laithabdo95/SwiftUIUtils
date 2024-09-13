@@ -7,9 +7,14 @@
 
 import SwiftUI
 
-struct ContentView: FormListConfigurable {
+struct ContentView: View {
     @State private var showLoading = false
-
+    @State private var showProgress = false
+    
+    @State var currentUploadItem = 0
+    var attachemnts = Array(1...4)
+    @State private var timer: Timer? = nil
+    
     @StateObject var primaryViewModel = FormFieldViewModel(
         placeHolder: "Primary Email",
         isDisabled: false,
@@ -45,6 +50,21 @@ struct ContentView: FormListConfigurable {
     var annualToggle = FormToggleViewModel(label: "Annal Promotions")
 
     var body: some View {
+        formBody
+        .fullScreenCover(isPresented: $showProgress, content: {
+            ProgressLoaderView(total: attachemnts.count, current: $currentUploadItem) {
+                currentUploadItem = 0
+            }
+        })
+        .transaction({ transaction in
+            transaction.disablesAnimations = true
+        })
+    }
+}
+
+extension ContentView: FormListConfigurable {
+    
+    var formBody: FormListView<ContentView, some View> {
         FormListView(configure: self, isLoading: $showLoading) {
             FormFieldView(viewModel: primaryViewModel)
             FormFieldView(viewModel: secondaryViewModel)
@@ -74,7 +94,18 @@ struct ContentView: FormListConfigurable {
         }
     }
 
-    func onSecondaryButtonTapped() { }
+    func onSecondaryButtonTapped() {
+        showProgress = true
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            withAnimation {
+                currentUploadItem += 1
+            }
+            if currentUploadItem == attachemnts.count {
+                timer?.invalidate()
+                timer = nil
+            }
+        }
+    }
 }
 
 #Preview {

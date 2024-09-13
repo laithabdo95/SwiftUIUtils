@@ -26,6 +26,7 @@
 		8485FDD02C8C94E5009B1016 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485FDCF2C8C94E5009B1016 /* LoadingView.swift */; };
 		8485FDD22C8C9616009B1016 /* LoaderSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485FDD12C8C9616009B1016 /* LoaderSetting.swift */; };
 		8485FDD62C8CC987009B1016 /* DateFormatStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485FDD52C8CC987009B1016 /* DateFormatStyle.swift */; };
+		84A9F2002C92E1760007B2CA /* ProgressLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A9F1FF2C92E1760007B2CA /* ProgressLoaderView.swift */; };
 		84D8E00F2C83B91900C8F4F7 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 84D8E00E2C83B91900C8F4F7 /* IQKeyboardManagerSwift */; };
 		84E29D4C2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E29D4B2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift */; };
 		84E29D4E2C78F8FB0003B3C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E29D4D2C78F8FB0003B3C1 /* ContentView.swift */; };
@@ -55,6 +56,7 @@
 		8485FDCF2C8C94E5009B1016 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		8485FDD12C8C9616009B1016 /* LoaderSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderSetting.swift; sourceTree = "<group>"; };
 		8485FDD52C8CC987009B1016 /* DateFormatStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatStyle.swift; sourceTree = "<group>"; };
+		84A9F1FF2C92E1760007B2CA /* ProgressLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressLoaderView.swift; sourceTree = "<group>"; };
 		84E29D482C78F8FB0003B3C1 /* SwiftUIComponents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIComponents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E29D4B2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIComponentsApp.swift; sourceTree = "<group>"; };
 		84E29D4D2C78F8FB0003B3C1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				847FC3342C80A4240066FC9F /* Regex.swift */,
 				847FC3362C80A4430066FC9F /* ValidationRule.swift */,
 				8485FDD12C8C9616009B1016 /* LoaderSetting.swift */,
+				84A9F1FF2C92E1760007B2CA /* ProgressLoaderView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 			files = (
 				847FC32E2C80A07A0066FC9F /* FormListView.swift in Sources */,
 				11C00C7F2C885E1C006E3BEC /* FormManager.swift in Sources */,
+				84A9F2002C92E1760007B2CA /* ProgressLoaderView.swift in Sources */,
 				847FC3432C8242B50066FC9F /* FormDatePickerView.swift in Sources */,
 				8485FDD22C8C9616009B1016 /* LoaderSetting.swift in Sources */,
 				84E29D5B2C7902D10003B3C1 /* FormFieldViewModel.swift in Sources */,

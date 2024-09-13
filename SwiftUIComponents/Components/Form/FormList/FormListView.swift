@@ -11,7 +11,7 @@ protocol FormListItemValidatable: ObservableObject, Identifiable {
     var isValid: FormFieldViewModel.FieldStatus { get }
 }
 
-protocol FormListConfigurable: View {
+protocol FormListConfigurable {
     
     var primaryButtonTitle: String { get }
     var secondaryButtonTitle: String { get }
@@ -21,6 +21,9 @@ protocol FormListConfigurable: View {
     
     associatedtype Parameter
     var parameter: Parameter { get }
+    
+    associatedtype Content: View
+    var formBody: FormListView<Self, Content> { get }
 }
 
 extension FormListConfigurable {

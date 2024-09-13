@@ -47,7 +47,7 @@ class FormDatePickerViewModel<PickerStyle: DatePickerStyle>: FormFieldViewModel,
             isDisabled: isDisabled,
             isEditingDisabled: true,
             rules: rules,
-            fieldType: .picker
+            fieldType: .datePicker
         )
     }
 }

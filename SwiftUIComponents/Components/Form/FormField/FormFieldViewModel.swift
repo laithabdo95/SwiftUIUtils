@@ -16,16 +16,18 @@ protocol FormFieldConfigurable: ObservableObject, FormListItemValidatable {
     var isDisabled: Bool  { get }
     var isEditingDisabled: Bool { get }
     var fieldType: FormFieldViewModel.FieldType { get }
+    var keyboardType: UIKeyboardType { get }
     
     func validate()
     func getValidationResult() -> [FormFieldViewModel.ValidationResult]
 }
 
 class FormFieldViewModel: FormFieldConfigurable {
-    let placeholder: String
+    @FieldPlaceHolder var placeholder: String = ""
     let rules: [ValidationRule]
     let fieldType: FieldType
     var id: UUID = UUID()
+    var keyboardType: UIKeyboardType
     
     @Published var text: String = "" {
         didSet {
@@ -65,13 +67,16 @@ class FormFieldViewModel: FormFieldConfigurable {
         isDisabled: Bool = false,
         isEditingDisabled: Bool = false,
         rules: [ValidationRule],
-        fieldType: FieldType = .field
+        fieldType: FieldType = .field,
+        keyboardType: UIKeyboardType = .default
     ) {
         self.placeholder = placeHolder
         self.isDisabled = isDisabled
         self.isEditingDisabled = isEditingDisabled
         self.rules = rules
         self.fieldType = fieldType
+        self.keyboardType = keyboardType
+        self.$placeholder.update(rules.isEmpty)
     }
 }
 
@@ -91,6 +96,50 @@ extension FormFieldViewModel {
         case field
         case picker
         case secured
+        case datePicker
+        
+        var imageName: String? {
+            switch self {
+            case .picker: return "chevron.down"
+            case .datePicker: return "calendar"
+            default: return nil
+            }
+        }
+        
+        var isPicker: Bool {
+            switch self {
+            case .picker, .datePicker: return true
+            default: return false
+            }
+        }
     }
 }
 
+@propertyWrapper
+class FieldPlaceHolder {
+    private var value: String = ""
+    var isOptional: Bool
+    
+    var wrappedValue: String {
+        get { value }
+        set {
+            if !newValue.isEmpty {
+                value = isOptional ? String(format: "%@ %@", newValue, "(Optional)") : newValue
+            }
+        }
+    }
+    
+    var projectedValue: FieldPlaceHolder {
+        return self
+    }
+    
+    init(wrappedValue: String, isOptional: Bool = false) {
+        self.isOptional = isOptional
+        self.wrappedValue = wrappedValue
+    }
+    
+    func update(_ isOptional: Bool) {
+        self.isOptional = isOptional
+        self.wrappedValue = value
+    }
+}

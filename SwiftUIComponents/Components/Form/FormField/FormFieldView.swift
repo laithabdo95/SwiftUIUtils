@@ -17,7 +17,6 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
     @EnvironmentObject var formManager: FormManager
 
     private var placeHolder: String { isActive ? "" : viewModel.placeholder }
-    var fieldType: FormFieldViewModel.FieldType { viewModel.fieldType }
     var onTapGesture: (() -> Void)?
 
     private var isActive: Bool {
@@ -59,9 +58,9 @@ private extension FormFieldView {
         ZStack(alignment: isActive ? .topLeading : .center) {
             HStack {
                 InputField()
-                if fieldType == .picker {
-                    Image(systemName: "chevron.down")
-                } else if fieldType == .secured {
+                if viewModel.fieldType.isPicker {
+                    Image(systemName: viewModel.fieldType.imageName ?? "")
+                } else if viewModel.fieldType == .secured {
                     SecuredToggleButton()
                 }
             }
@@ -87,12 +86,13 @@ private extension FormFieldView {
 
     @ViewBuilder
     func InputField() -> some View {
-        if fieldType == .secured && isSecured {
+        if viewModel.fieldType == .secured && isSecured {
             SecureField(
                 placeHolder,
                 text: $viewModel.text
             )
             .font(FormSetting.FormField.font)
+            .keyboardType(viewModel.keyboardType)
             .focused($focused)
         } else {
             TextField(
@@ -100,6 +100,7 @@ private extension FormFieldView {
                 text: $viewModel.text
             )
             .font(FormSetting.FormField.font)
+            .keyboardType(viewModel.keyboardType)
             .focused($focused)
         }
     }
@@ -115,7 +116,7 @@ private extension FormFieldView {
 
     func handleTapGesture() {
         focused = true
-        if fieldType == .picker {
+        if viewModel.fieldType.isPicker {
             onTapGesture?()
         }
     }

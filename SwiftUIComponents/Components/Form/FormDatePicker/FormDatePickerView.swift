@@ -40,7 +40,7 @@ struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View  {
                     .cornerRadius(12)
                     .frame(maxWidth: 300)
                 }
-                .background(ClearBackgroundView())
+                .background(ClearBackgroundView(alpha: 0.5))
 //                .presentationBackground(Color.black.opacity(0.8))
             })
             .transaction({ transaction in
@@ -63,8 +63,10 @@ struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View  {
 
 
 struct ClearBackgroundView: UIViewRepresentable {
+    let alpha: CGFloat
+    
     func makeUIView(context: Context) -> UIView {
-        return InnerView()
+        return InnerView(with: alpha)
     }
     
     func updateUIView(_ uiView: UIView, context: Context) {
@@ -74,7 +76,16 @@ struct ClearBackgroundView: UIViewRepresentable {
         override func didMoveToWindow() {
             super.didMoveToWindow()
             
-            superview?.superview?.backgroundColor = .black.withAlphaComponent(0.5)
+            superview?.superview?.backgroundColor = .black.withAlphaComponent(alpha)
+        }
+        
+        required init(with alpha: CGFloat) {
+            super.init(frame: .zero)
+            super.alpha = alpha
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
         }
         
     }
