@@ -8,7 +8,6 @@
 import SwiftUI
 
 class MockupProgressViewModel: ProgressLoaderConfigurable {
-    internal var uploadingTitle: String { "Uploading Attachments.." }
     internal var buttonTitle: String { "Finalize" }
     
     @Published private(set) var message: String

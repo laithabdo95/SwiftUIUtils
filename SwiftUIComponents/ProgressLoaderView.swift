@@ -13,7 +13,6 @@ protocol ProgressLoaderConfigurable: ObservableObject {
     var total: Int { get }
     var hasFinished: Bool { get }
     var progress: Double { get }
-    var uploadingTitle: String { get }
     var buttonTitle: String { get }
     
     associatedtype Item
@@ -57,7 +56,7 @@ struct ProgressLoaderView<ViewModel: ProgressLoaderConfigurable>: View {
                     .foregroundColor(viewModel.color)
                 
                 VStack(spacing: 25) {
-                    Text(viewModel.uploadingTitle)
+                    Text(viewModel.message)
                         .font(.title3)
                         .foregroundColor(viewModel.color)
                     
