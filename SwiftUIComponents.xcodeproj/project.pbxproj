@@ -80,23 +80,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		11C00C802C88698B006E3BEC /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				11C00C812C8869B5006E3BEC /* RegisterViewModifier.swift */,
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
 		8446BE232C7FCA2500E91A86 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				846FFAF32C8DDFC80067FAFC /* Form */,
 				8485FDCE2C8C94C5009B1016 /* Loader */,
-				11C00C802C88698B006E3BEC /* Helper */,
-				8446BE342C7FE54F00E91A86 /* Mockups */,
 				8446BE2D2C7FD50500E91A86 /* Selection */,
-				8446BE272C7FCA6500E91A86 /* Settings */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -113,6 +102,7 @@
 		8446BE272C7FCA6500E91A86 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				11C00C812C8869B5006E3BEC /* RegisterViewModifier.swift */,
 				8446BE282C7FCA7400E91A86 /* FormSetting.swift */,
 				847FC3342C80A4240066FC9F /* Regex.swift */,
 				847FC3362C80A4430066FC9F /* ValidationRule.swift */,
@@ -223,6 +213,7 @@
 		84E29D4A2C78F8FB0003B3C1 /* SwiftUIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				84E4F4B22C9B710000F15236 /* Utilities */,
 				8446BE232C7FCA2500E91A86 /* Components */,
 				84E29D4B2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift */,
 				84A9F1FF2C92E1760007B2CA /* ProgressLoaderView.swift */,
@@ -240,6 +231,15 @@
 				84E29D522C78F8FC0003B3C1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		84E4F4B22C9B710000F15236 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8446BE272C7FCA6500E91A86 /* Settings */,
+				8446BE342C7FE54F00E91A86 /* Mockups */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
