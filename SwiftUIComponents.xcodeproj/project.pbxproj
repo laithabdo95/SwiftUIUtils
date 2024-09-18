@@ -26,6 +26,7 @@
 		8485FDD02C8C94E5009B1016 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485FDCF2C8C94E5009B1016 /* LoadingView.swift */; };
 		8485FDD22C8C9616009B1016 /* LoaderSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485FDD12C8C9616009B1016 /* LoaderSetting.swift */; };
 		8485FDD62C8CC987009B1016 /* DateFormatStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485FDD52C8CC987009B1016 /* DateFormatStyle.swift */; };
+		84A4378D2C9B6ED200881046 /* MockupProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A4378C2C9B6ED200881046 /* MockupProgressViewModel.swift */; };
 		84A9F2002C92E1760007B2CA /* ProgressLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A9F1FF2C92E1760007B2CA /* ProgressLoaderView.swift */; };
 		84D8E00F2C83B91900C8F4F7 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 84D8E00E2C83B91900C8F4F7 /* IQKeyboardManagerSwift */; };
 		84E29D4C2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E29D4B2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift */; };
@@ -56,6 +57,7 @@
 		8485FDCF2C8C94E5009B1016 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		8485FDD12C8C9616009B1016 /* LoaderSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderSetting.swift; sourceTree = "<group>"; };
 		8485FDD52C8CC987009B1016 /* DateFormatStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatStyle.swift; sourceTree = "<group>"; };
+		84A4378C2C9B6ED200881046 /* MockupProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockupProgressViewModel.swift; sourceTree = "<group>"; };
 		84A9F1FF2C92E1760007B2CA /* ProgressLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressLoaderView.swift; sourceTree = "<group>"; };
 		84E29D482C78F8FB0003B3C1 /* SwiftUIComponents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIComponents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E29D4B2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIComponentsApp.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				84E29D4B2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift */,
 				84A9F1FF2C92E1760007B2CA /* ProgressLoaderView.swift */,
 				84E29D4D2C78F8FB0003B3C1 /* ContentView.swift */,
+				84A4378C2C9B6ED200881046 /* MockupProgressViewModel.swift */,
 				84E29D4F2C78F8FC0003B3C1 /* Assets.xcassets */,
 				84E29D512C78F8FC0003B3C1 /* Preview Content */,
 			);
@@ -336,6 +339,7 @@
 				84E29D5C2C7902D10003B3C1 /* FormFieldView.swift in Sources */,
 				8446BE312C7FD72200E91A86 /* FormPickerView.swift in Sources */,
 				8446BE332C7FD80F00E91A86 /* FormPickerViewModel.swift in Sources */,
+				84A4378D2C9B6ED200881046 /* MockupProgressViewModel.swift in Sources */,
 				847FC3372C80A4430066FC9F /* ValidationRule.swift in Sources */,
 				84E29D4C2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift in Sources */,
 				8446BE2F2C7FD53300E91A86 /* SelectionViewModel.swift in Sources */,

@@ -7,20 +7,40 @@
 
 import SwiftUI
 
-struct ProgressLoaderView: View {
-    let total: Int
-    @Binding var current: Int
-    @State private var isLoading = false
-    @Environment(\.dismiss) private var dismiss
-    var handler: (() -> Void)
+protocol ProgressLoaderConfigurable: ObservableObject {
+    var message: String { get }
+    var current: Int { get }
+    var total: Int { get }
+    var hasFinished: Bool { get }
+    var progress: Double { get }
+    var uploadingTitle: String { get }
+    var buttonTitle: String { get }
+    
+    associatedtype Item
+    var items: [Item] { get }
+    var handler: (() -> Void) { get }
+    var color: Color { get }
+    var numberOfSlices: Double { get }
+    
+    func execute()
+    
+    init(items: [Item], handler: @escaping () -> Void)
+}
+
+extension ProgressLoaderConfigurable {
+    var numberOfSlices: Double {
+        (100.0 / Double(total)) / 100
+    }
     
     var progress: Double {
         Double(current) * numberOfSlices
     }
+}
+
+struct ProgressLoaderView<ViewModel: ProgressLoaderConfigurable>: View {
     
-    private var numberOfSlices: Double {
-        (100.0 / Double(total)) / 100
-    }
+    @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var viewModel: ViewModel
     
     var body: some View {
         VStack {
@@ -29,38 +49,41 @@ struct ProgressLoaderView: View {
                 Circle()
                     .stroke(lineWidth: 15)
                     .opacity(0.3)
-                    .foregroundColor(.mint)
+                    .foregroundColor(viewModel.color)
                 
                 Circle()
-                    .trim(from: 0.0, to: progress)
+                    .trim(from: 0.0, to: viewModel.progress)
                     .stroke(style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
-                    .foregroundColor(.mint)
+                    .foregroundColor(viewModel.color)
                 
                 VStack(spacing: 25) {
-                    Text("Uploading Attachments..")
+                    Text(viewModel.uploadingTitle)
                         .font(.title3)
-                        .foregroundColor(.mint)
+                        .foregroundColor(viewModel.color)
                     
-                    Text(String(format: "%@/%@", current.description, total.description))
+                    Text(String(format: "%@/%@", viewModel.current.description, viewModel.total.description))
                         .font(.title3)
                         .foregroundColor(.white)
                 }
             }
             .frame(width: 300, height: 300)
             Spacer()
-            if current == total {
+            if viewModel.hasFinished {
                 Button(action: {
-                    handler()
-                    dismiss()
+                    viewModel.handler()
+                    presentationMode.wrappedValue.dismiss()
                 }) {
-                    Text("Finalize")
+                    Text(viewModel.buttonTitle)
                         .frame(maxWidth: .infinity, minHeight: 50)
                         .foregroundColor(.white)
-                        .background(.mint)
+                        .background(viewModel.color)
                         .cornerRadius(15.0)
                         .padding(.top, 15)
                 }
             }
+        }
+        .onAppear {
+            viewModel.execute()
         }
         .padding()
         .background(ClearBackgroundView(alpha: 0.9))

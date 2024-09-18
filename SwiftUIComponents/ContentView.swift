@@ -47,14 +47,20 @@ struct ContentView: View {
         fieldType: .secured
     )
     
+    @StateObject var progressViewModel = MockupProgressViewModel(items: [
+        Mockup(name: "Lait Abdo", age: 29),
+        Mockup(name: "Majd Dawood", age: 29),
+        Mockup(name: "Mohammad Farhan", age: 30)
+    ]) {
+        
+    }
+    
     var annualToggle = FormToggleViewModel(label: "Annal Promotions")
 
     var body: some View {
         formBody
         .fullScreenCover(isPresented: $showProgress, content: {
-            ProgressLoaderView(total: attachemnts.count, current: $currentUploadItem) {
-                currentUploadItem = 0
-            }
+            ProgressLoaderView(viewModel: progressViewModel)
         })
         .transaction({ transaction in
             transaction.disablesAnimations = true
@@ -110,4 +116,10 @@ extension ContentView: FormListConfigurable {
 
 #Preview {
     ContentView()
+}
+
+
+struct Mockup: Codable {
+    let name: String
+    let age: Int
 }
