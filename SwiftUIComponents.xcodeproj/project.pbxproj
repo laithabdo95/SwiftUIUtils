@@ -17,6 +17,7 @@
 		8446BE362C7FE55F00E91A86 /* MaritalStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446BE352C7FE55F00E91A86 /* MaritalStatus.swift */; };
 		8452AD5A2C8B9FFC0003843A /* FormToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452AD592C8B9FFC0003843A /* FormToggleView.swift */; };
 		8452AD5C2C8BA5A60003843A /* FormToggleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452AD5B2C8BA5A60003843A /* FormToggleViewModel.swift */; };
+		84562A302C9F3586001609B0 /* TemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84562A2F2C9F357D001609B0 /* TemplateView.swift */; };
 		847FC32E2C80A07A0066FC9F /* FormListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC32D2C80A07A0066FC9F /* FormListView.swift */; };
 		847FC3352C80A4240066FC9F /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC3342C80A4240066FC9F /* Regex.swift */; };
 		847FC3372C80A4430066FC9F /* ValidationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC3362C80A4430066FC9F /* ValidationRule.swift */; };
@@ -48,6 +49,7 @@
 		8446BE352C7FE55F00E91A86 /* MaritalStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaritalStatus.swift; sourceTree = "<group>"; };
 		8452AD592C8B9FFC0003843A /* FormToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormToggleView.swift; sourceTree = "<group>"; };
 		8452AD5B2C8BA5A60003843A /* FormToggleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormToggleViewModel.swift; sourceTree = "<group>"; };
+		84562A2F2C9F357D001609B0 /* TemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateView.swift; sourceTree = "<group>"; };
 		847FC32D2C80A07A0066FC9F /* FormListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormListView.swift; sourceTree = "<group>"; };
 		847FC3342C80A4240066FC9F /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		847FC3362C80A4430066FC9F /* ValidationRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationRule.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				8446BE232C7FCA2500E91A86 /* Components */,
 				84E29D4B2C78F8FB0003B3C1 /* SwiftUIComponentsApp.swift */,
 				84A9F1FF2C92E1760007B2CA /* ProgressLoaderView.swift */,
+				84562A2F2C9F357D001609B0 /* TemplateView.swift */,
 				84E29D4D2C78F8FB0003B3C1 /* ContentView.swift */,
 				84A4378C2C9B6ED200881046 /* MockupProgressViewModel.swift */,
 				84E29D4F2C78F8FC0003B3C1 /* Assets.xcassets */,
@@ -322,6 +325,7 @@
 				11C00C7F2C885E1C006E3BEC /* FormManager.swift in Sources */,
 				84A9F2002C92E1760007B2CA /* ProgressLoaderView.swift in Sources */,
 				847FC3432C8242B50066FC9F /* FormDatePickerView.swift in Sources */,
+				84562A302C9F3586001609B0 /* TemplateView.swift in Sources */,
 				8485FDD22C8C9616009B1016 /* LoaderSetting.swift in Sources */,
 				84E29D5B2C7902D10003B3C1 /* FormFieldViewModel.swift in Sources */,
 				847FC3352C80A4240066FC9F /* Regex.swift in Sources */,

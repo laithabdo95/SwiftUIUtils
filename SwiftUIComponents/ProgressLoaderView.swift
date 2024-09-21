@@ -17,13 +17,13 @@ protocol ProgressLoaderConfigurable: ObservableObject {
     
     associatedtype Item
     var items: [Item] { get }
-    var handler: (() -> Void) { get }
+    var onComplete: (() -> Void)? { get }
     var color: Color { get }
     var numberOfSlices: Double { get }
     
     func execute()
     
-    init(items: [Item], handler: @escaping () -> Void)
+    init(items: [Item])
 }
 
 extension ProgressLoaderConfigurable {
@@ -69,7 +69,7 @@ struct ProgressLoaderView<ViewModel: ProgressLoaderConfigurable>: View {
             Spacer()
             if viewModel.hasFinished {
                 Button(action: {
-                    viewModel.handler()
+                    viewModel.onComplete?()
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     Text(viewModel.buttonTitle)

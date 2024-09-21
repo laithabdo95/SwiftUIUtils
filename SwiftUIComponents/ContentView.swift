@@ -51,9 +51,7 @@ struct ContentView: View {
         Mockup(name: "Lait Abdo", age: 29),
         Mockup(name: "Majd Dawood", age: 29),
         Mockup(name: "Mohammad Farhan", age: 30)
-    ]) {
-        
-    }
+    ])
     
     var annualToggle = FormToggleViewModel(label: "Annal Promotions")
 
@@ -65,6 +63,11 @@ struct ContentView: View {
         .transaction({ transaction in
             transaction.disablesAnimations = true
         })
+        .onAppear {
+            progressViewModel.onComplete = {
+                showLoading = true
+            }
+        }
     }
 }
 

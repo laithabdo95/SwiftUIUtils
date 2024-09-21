@@ -17,16 +17,15 @@ class MockupProgressViewModel: ProgressLoaderConfigurable {
     private(set) var total: Int
     var color: Color = .indigo
     internal var items: [Mockup]
-    var handler: () -> Void
+    var onComplete: (() -> Void)? = nil
     var timer: Timer?
     
-    required init(items: [Mockup], handler: @escaping () -> Void) {
+    required init(items: [Mockup]) {
         self.message = "Uploading Attachments.."
         self.hasFinished = false
         self.items = items
         self.current = 0
         self.total = items.count
-        self.handler = handler
     }
     
     func execute() {
