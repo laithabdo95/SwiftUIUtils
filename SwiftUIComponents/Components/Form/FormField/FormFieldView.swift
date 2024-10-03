@@ -28,9 +28,10 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
             HeaderView()
             FieldView()
                 .padding(.bottom, 15)
-        }
-        .onTapGesture {
-            handleTapGesture()
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    handleTapGesture()
+                }
         }
         .registerView(viewModel)
     }

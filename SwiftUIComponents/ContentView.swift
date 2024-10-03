@@ -60,9 +60,6 @@ struct ContentView: View {
         .fullScreenCover(isPresented: $showProgress, content: {
             ProgressLoaderView(viewModel: progressViewModel)
         })
-        .transaction({ transaction in
-            transaction.disablesAnimations = true
-        })
         .onAppear {
             progressViewModel.onComplete = {
                 showLoading = true
@@ -110,6 +107,7 @@ extension ContentView: FormListConfigurable {
                 currentUploadItem += 1
             }
             if currentUploadItem == attachemnts.count {
+                showProgress = false
                 timer?.invalidate()
                 timer = nil
             }

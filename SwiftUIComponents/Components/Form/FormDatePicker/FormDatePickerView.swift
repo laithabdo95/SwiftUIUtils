@@ -43,9 +43,6 @@ struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View  {
                 .background(ClearBackgroundView(alpha: 0.5))
 //                .presentationBackground(Color.black.opacity(0.8))
             })
-            .transaction({ transaction in
-                transaction.disablesAnimations = true
-            })
         }
     }
 }
