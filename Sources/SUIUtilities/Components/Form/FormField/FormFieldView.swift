@@ -22,6 +22,14 @@ public struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
     private var isActive: Bool {
         focused || !viewModel.text.isEmpty
     }
+    
+    public init(
+        viewModel: ViewModel,
+        onTapGesture: (() -> Void)? = nil
+    ) {
+        self.viewModel = viewModel
+        self.onTapGesture = onTapGesture
+    }
 
     public var body: some View {
         VStack {

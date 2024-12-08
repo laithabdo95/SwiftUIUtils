@@ -39,7 +39,11 @@ public struct FormListView<Configure: FormListConfigurable, Content: View>: View
     private let content: Content
     @Binding private var isLoading: Bool
     
-    init(configure: Configure, isLoading: Binding<Bool>, @ViewBuilder content: () -> Content) {
+    public init(
+        configure: Configure,
+        isLoading: Binding<Bool>,
+        @ViewBuilder content: () -> Content
+    ) {
         self.configure = configure
         self.content = content()
         self._isLoading = isLoading
