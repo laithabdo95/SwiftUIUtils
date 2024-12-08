@@ -15,7 +15,7 @@ let package = Package(
         .target(
             name: "SUIUtilities",
             resources: [
-                .process("Colors.xcassets")
+                .process("./Resources/Colors.xcassets")
             ]
         )
     ]
