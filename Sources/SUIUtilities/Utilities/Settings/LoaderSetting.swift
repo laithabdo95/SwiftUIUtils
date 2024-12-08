@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 enum LoaderSetting {
     static var color: Color = .white
     static var loadingTitle: String = "Loading..."

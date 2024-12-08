@@ -8,6 +8,7 @@
 import SwiftUI
 
 enum FormSetting {
+    @MainActor
     enum FormField {
         static var font: Font = .system(size: 16, weight: .regular)
         static var cornerRadius = 12.0
@@ -16,6 +17,7 @@ enum FormSetting {
         static var disabledColor: Color = .gray.opacity(0.2)
     }
     
+    @MainActor
     enum VerticalList {
         static var padding = 25.0
         static var cornerRadius = 12.0

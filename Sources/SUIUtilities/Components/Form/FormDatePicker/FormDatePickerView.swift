@@ -41,7 +41,6 @@ public struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View 
                     .frame(maxWidth: 300)
                 }
                 .background(ClearBackgroundView(alpha: 0.5))
-//                .presentationBackground(Color.black.opacity(0.8))
             })
         }
     }

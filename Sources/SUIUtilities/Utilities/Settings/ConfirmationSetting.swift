@@ -8,10 +8,13 @@
 import SwiftUI
 
 public enum ConfirmationSetting {
+    @MainActor
     enum SectionHeader {
+        
         static var foregroundColor: Color = .gray
     }
     
+    @MainActor
     public enum ListView {
         public static var backgroundColor: Color = .white
         public static var rowsBackgroundColor: Color = Color(.lightGray).opacity(0.4)
@@ -22,6 +25,7 @@ public enum ConfirmationSetting {
         public static var actionButtonCornerRadius: CGFloat = 10
     }
     
+    @MainActor
     public enum RowView {
         public static var keyTextFont: Font = .headline
         public static var keyTextForgroundColor: Color = .black
