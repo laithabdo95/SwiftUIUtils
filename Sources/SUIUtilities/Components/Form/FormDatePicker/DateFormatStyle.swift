@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DateFormatStyle {
+public enum DateFormatStyle {
     // Standard DateFormatter styles
     case full
     case long
@@ -24,7 +24,7 @@ enum DateFormatStyle {
     case custom(String) // Allows a fully custom date format
     
     // Function to format a Date based on the case
-    func format(date: Date) -> String {
+    public func format(date: Date) -> String {
         let formatter = DateFormatter()
         
         switch self {

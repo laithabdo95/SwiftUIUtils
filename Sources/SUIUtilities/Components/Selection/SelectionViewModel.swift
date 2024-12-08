@@ -8,11 +8,11 @@
 import SwiftUI
 import Combine
 
-protocol ItemSelectable {
+public protocol ItemSelectable {
     var title: String { get }
 }
 
-protocol SelectionConfigurable: ObservableObject {
+public protocol SelectionConfigurable: ObservableObject {
     var searchText: String { get set }
     var selectedOptions: Set<String> { get }
     var filteredOptions: [String] { get }
@@ -20,7 +20,7 @@ protocol SelectionConfigurable: ObservableObject {
     func toggleSelection(for option: String)        
 }
 
-class SelectionViewModel<Item: ItemSelectable>: SelectionConfigurable {
+public class SelectionViewModel<Item: ItemSelectable>: SelectionConfigurable {
     var selectedItems: [Item] {
         items.filter { selectedOptions.contains($0.title) }
     }
@@ -31,11 +31,11 @@ class SelectionViewModel<Item: ItemSelectable>: SelectionConfigurable {
         items.map { $0.title }
     }
     
-    @Published var selectionType: SelectionType
-    @Published internal var searchText: String = ""
-    @Published internal var selectedOptions: Set<String> = []
+    @Published public var selectionType: SelectionType
+    @Published public var searchText: String = ""
+    @Published public var selectedOptions: Set<String> = []
     
-    internal var filteredOptions: [String] {
+    public var filteredOptions: [String] {
         if searchText.isEmpty {
             return options
         } else {
@@ -43,7 +43,7 @@ class SelectionViewModel<Item: ItemSelectable>: SelectionConfigurable {
         }
     }
 
-    func toggleSelection(for option: String) {
+    public func toggleSelection(for option: String) {
         switch selectionType {
         case .single:
             selectedOptions = [option]
@@ -56,13 +56,13 @@ class SelectionViewModel<Item: ItemSelectable>: SelectionConfigurable {
         }
     }
     
-    required init(items: [Item], selectionType: SelectionType = .single) {
+    public required init(items: [Item], selectionType: SelectionType = .single) {
         self.items = items
         self.selectionType = selectionType
     }
 }
 
-extension SelectionViewModel {
+public extension SelectionViewModel {
     enum SelectionType {
         case single
         case multiple

@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct SelectionView<ViewModel: SelectionConfigurable>: View {
+public struct SelectionView<ViewModel: SelectionConfigurable>: View {
     @ObservedObject var viewModel: ViewModel
     @Environment(\.dismiss) var dismiss
     
-    var body: some View {
+    public var body: some View {
         NavigationView {
             VStack {
                 List(viewModel.filteredOptions, id: \.self) { option in

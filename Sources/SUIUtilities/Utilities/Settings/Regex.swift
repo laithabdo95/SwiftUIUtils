@@ -7,11 +7,11 @@
 
 import Foundation
 
-class Regex {
+public class Regex {
     let rawValue: String
     let message: String
     
-    init(rawValue: String, message: String) {
+    public init(rawValue: String, message: String) {
         self.rawValue = rawValue
         self.message = message
     }

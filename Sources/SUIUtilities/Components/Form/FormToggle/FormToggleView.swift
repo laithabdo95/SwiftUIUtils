@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct FormToggleView<ViewModel: FormToggleConfigurable>: View {
+public struct FormToggleView<ViewModel: FormToggleConfigurable>: View {
     
     @ObservedObject var viewModel: ViewModel
     
-    var body: some View {
+    public var body: some View {
         Toggle(isOn: $viewModel.isOn) {
             Text(viewModel.label)
                 .foregroundStyle(.secondary)

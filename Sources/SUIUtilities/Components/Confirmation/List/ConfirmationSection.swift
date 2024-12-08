@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct ConfirmationSection: Identifiable {
-    var id = UUID()
-    var title: String
-    var items: [ConfirmationRowViewModel]
+public struct ConfirmationSection: Identifiable {
+    public var id = UUID()
+    public var title: String
+    public var items: [ConfirmationRowViewModel]
     
-    init(
+    public init(
         title: String = "",
         items: [ConfirmationRowViewModel]
     ) {

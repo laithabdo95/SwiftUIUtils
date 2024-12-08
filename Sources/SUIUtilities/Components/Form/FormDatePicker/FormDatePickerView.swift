@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View  {
+public struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View  {
     @State private var showDatePicker = false
     @ObservedObject var viewModel: ViewModel
     
-    var body: some View {
+    public var body: some View {
         ZStack {
             VStack(alignment: .leading) {
                 FormFieldView(viewModel: viewModel) {
@@ -59,14 +59,14 @@ struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View  {
 
 
 
-struct ClearBackgroundView: UIViewRepresentable {
+public struct ClearBackgroundView: UIViewRepresentable {
     let alpha: CGFloat
     
-    func makeUIView(context: Context) -> UIView {
+    public func makeUIView(context: Context) -> UIView {
         return InnerView(with: alpha)
     }
     
-    func updateUIView(_ uiView: UIView, context: Context) {
+    public func updateUIView(_ uiView: UIView, context: Context) {
     }
     
     private class InnerView: UIView {

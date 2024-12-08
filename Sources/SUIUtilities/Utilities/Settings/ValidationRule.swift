@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum ValidationRule {
+public enum ValidationRule {
     case required
     case regex(Regex)
     
-    var errorMessage: String {
+    public var errorMessage: String {
         switch self {
         case .required:
             "This Field is required"

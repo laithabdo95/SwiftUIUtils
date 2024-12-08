@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-typealias FormDateAndFieldConfigurable = FormDatePickerConfigurable & FormFieldConfigurable
+public typealias FormDateAndFieldConfigurable = FormDatePickerConfigurable & FormFieldConfigurable
 
-protocol FormDatePickerConfigurable: AnyObject {
+public protocol FormDatePickerConfigurable: AnyObject {
     associatedtype PickerStyle: DatePickerStyle
     
     var date: Date { get set }
@@ -18,18 +18,18 @@ protocol FormDatePickerConfigurable: AnyObject {
     var dateStyle: DateFormatStyle { get }
 }
 
-class FormDatePickerViewModel<PickerStyle: DatePickerStyle>: FormFieldViewModel, FormDatePickerConfigurable {
-    internal var dateStyle: DateFormatStyle
-    internal var datePickerStyle:PickerStyle
-    internal var dateType: DatePickerComponents
+public class FormDatePickerViewModel<PickerStyle: DatePickerStyle>: FormFieldViewModel, FormDatePickerConfigurable {
+    public var dateStyle: DateFormatStyle
+    public var datePickerStyle:PickerStyle
+    public var dateType: DatePickerComponents
     
-    @Published var date: Date = Date() {
+    @Published public var date: Date = Date() {
         didSet {
             text = dateStyle.format(date: date)
         }
     }
     
-    init(
+    public init(
         date: Date = Date(),
         dateType: DatePickerComponents = .date,
         datePickerStyle: PickerStyle = .graphical,

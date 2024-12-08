@@ -8,11 +8,11 @@
 import SwiftUI
 import UIKit
 
-struct ButtonView: View {
+public struct ButtonView: View {
     @State var image: UIImage
     var onTapHandler: (() -> Void)
     
-    var body: some View {
+    public var body: some View {
         Button(action: {
             onTapHandler()
         }, label: {

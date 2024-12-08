@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-struct ConfirmationRowItem: Identifiable {
-    var id = UUID()
-    var key: String
-    var value: String
+public struct ConfirmationRowItem: Identifiable {
+    public var id = UUID()
+    public var key: String
+    public var value: String
     
-    init(
+    public init(
         id: UUID = UUID(),
         key: String,
         value: String

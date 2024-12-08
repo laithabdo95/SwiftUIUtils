@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol FormFieldConfigurable: ObservableObject, FormListItemValidatable {
+public protocol FormFieldConfigurable: ObservableObject, FormListItemValidatable {
     var id: UUID { get }
     var placeholder: String { get }
     var rules: [ValidationRule] { get }
@@ -22,31 +22,31 @@ protocol FormFieldConfigurable: ObservableObject, FormListItemValidatable {
     func getValidationResult() -> [FormFieldViewModel.ValidationResult]
 }
 
-class FormFieldViewModel: FormFieldConfigurable {
-    @FieldPlaceHolder var placeholder: String = ""
-    let rules: [ValidationRule]
-    let fieldType: FieldType
-    var id: UUID = UUID()
-    var keyboardType: UIKeyboardType
+public class FormFieldViewModel: FormFieldConfigurable {
+    @FieldPlaceHolder public var placeholder: String = ""
+    public let rules: [ValidationRule]
+    public let fieldType: FieldType
+    public var id: UUID = UUID()
+    public var keyboardType: UIKeyboardType
     
-    @Published var text: String = "" {
+    @Published public var text: String = "" {
         didSet {
             validate()
         }
     }
     
-    @Published var isValid: FieldStatus = .notSet
-    @Published var errorMessage: String = ""
-    @Published var isDisabled: Bool = false
-    @Published var isEditingDisabled: Bool = false
+    @Published public var isValid: FieldStatus = .notSet
+    @Published public var errorMessage: String = ""
+    @Published public var isDisabled: Bool = false
+    @Published public var isEditingDisabled: Bool = false
     
-    internal func validate() {
+    public func validate() {
        let result = getValidationResult()
         isValid = result.filter { !$0.isValid }.isEmpty ? .valid : .notValid
         errorMessage = result.first(where: { !$0.isValid })?.errorMessage ?? ""
     }
     
-    internal func getValidationResult() -> [ValidationResult] {
+    public func getValidationResult() -> [ValidationResult] {
         var result: [ValidationResult] = []
         rules.forEach { rule in
             errorMessage = rule.errorMessage
@@ -62,7 +62,7 @@ class FormFieldViewModel: FormFieldConfigurable {
         return result
     }
     
-    init(
+    public init(
         placeHolder: String,
         isDisabled: Bool = false,
         isEditingDisabled: Bool = false,
@@ -80,7 +80,7 @@ class FormFieldViewModel: FormFieldConfigurable {
     }
 }
 
-extension FormFieldViewModel {
+public extension FormFieldViewModel {
     struct ValidationResult {
         let isValid: Bool
         let errorMessage: String
@@ -116,11 +116,11 @@ extension FormFieldViewModel {
 }
 
 @propertyWrapper
-class FieldPlaceHolder {
+public class FieldPlaceHolder {
     private var value: String = ""
     var isOptional: Bool
     
-    var wrappedValue: String {
+    public var wrappedValue: String {
         get { value }
         set {
             if !newValue.isEmpty {
@@ -129,11 +129,11 @@ class FieldPlaceHolder {
         }
     }
     
-    var projectedValue: FieldPlaceHolder {
+    public var projectedValue: FieldPlaceHolder {
         return self
     }
     
-    init(wrappedValue: String, isOptional: Bool = false) {
+    public init(wrappedValue: String, isOptional: Bool = false) {
         self.isOptional = isOptional
         self.wrappedValue = wrappedValue
     }

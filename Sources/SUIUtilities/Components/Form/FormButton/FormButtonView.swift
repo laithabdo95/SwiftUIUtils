@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FormButtonView: View {
+public struct FormButtonView: View {
     let title: String
     let buttonColor: Color
     let titleColor: Color
@@ -15,7 +15,7 @@ struct FormButtonView: View {
     var isDisabled: Bool = false
     var completion: (() -> Void)?
     
-    var body: some View {
+    public var body: some View {
         Button(action: {
             completion?()
         }, label: {

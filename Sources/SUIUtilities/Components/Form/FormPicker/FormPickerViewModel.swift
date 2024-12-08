@@ -8,9 +8,9 @@
 import Combine
 import SwiftUI
 
-typealias FormPickerAndFieldConfigurable = FormPickerConfigurable & FormFieldConfigurable
+public typealias FormPickerAndFieldConfigurable = FormPickerConfigurable & FormFieldConfigurable
 
-protocol FormPickerConfigurable {
+public protocol FormPickerConfigurable {
     associatedtype SelectionItems: ItemSelectable
     
     var isRequired: Bool { get }
@@ -20,14 +20,14 @@ protocol FormPickerConfigurable {
     func bindSelectionViewModel()
 }
 
-class FormPickerViewModel<SelectionItems: ItemSelectable>: FormFieldViewModel, FormPickerConfigurable {
+public class FormPickerViewModel<SelectionItems: ItemSelectable>: FormFieldViewModel, FormPickerConfigurable {
     
-    @Published var isRequired: Bool
-    var selectionViewModel: SelectionViewModel<SelectionItems>
+    @Published public var isRequired: Bool
+    public var selectionViewModel: SelectionViewModel<SelectionItems>
     
-    internal var cancellable = Set<AnyCancellable>()
+    public var cancellable = Set<AnyCancellable>()
     
-    init(
+    public init(
         placeholder: String,
         isDisabled: Bool = false,
         isRequired: Bool = true,
@@ -45,7 +45,7 @@ class FormPickerViewModel<SelectionItems: ItemSelectable>: FormFieldViewModel, F
         bindSelectionViewModel()
     }
     
-    internal func bindSelectionViewModel() {
+    public func bindSelectionViewModel() {
         selectionViewModel.$selectedOptions
             .map { $0.joined(separator: ", ")}
             .sink { [weak self] text in

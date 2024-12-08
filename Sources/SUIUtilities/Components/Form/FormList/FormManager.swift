@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-class FormManager: ObservableObject {
+public class FormManager: ObservableObject {
     @Published private(set) var validatableItems: [any FormListItemValidatable] = []
 
     var isValid: Bool {

@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-struct ConfirmationRowView<ViewModel: ConfirmationRowViewConfigurable>: View {
+public struct ConfirmationRowView<ViewModel: ConfirmationRowViewConfigurable>: View {
     
     // MARK: Properties
     
@@ -16,7 +16,7 @@ struct ConfirmationRowView<ViewModel: ConfirmationRowViewConfigurable>: View {
     
     // MARK: Body
     
-    var body: some View {
+    public var body: some View {
         switch viewModel.orientation {
         case .vertical:
             VerticalView

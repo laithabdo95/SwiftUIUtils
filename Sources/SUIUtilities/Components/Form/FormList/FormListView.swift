@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-protocol FormListItemValidatable: ObservableObject, Identifiable {
+public protocol FormListItemValidatable: ObservableObject, Identifiable {
     var isValid: FormFieldViewModel.FieldStatus { get }
 }
 
-protocol FormListConfigurable {
+public protocol FormListConfigurable {
     
     var primaryButtonTitle: String { get }
     var secondaryButtonTitle: String { get }
@@ -26,13 +26,13 @@ protocol FormListConfigurable {
     var formBody: FormListView<Self, Content> { get }
 }
 
-extension FormListConfigurable {
+public extension FormListConfigurable {
     var secondaryButtonTitle: String { "" }
     
     func onSecondaryButtonTapped() { }
 }
 
-struct FormListView<Configure: FormListConfigurable, Content: View>: View {
+public struct FormListView<Configure: FormListConfigurable, Content: View>: View {
     @StateObject private  var formManager: FormManager = FormManager()
     
     private let configure: Configure
@@ -45,7 +45,7 @@ struct FormListView<Configure: FormListConfigurable, Content: View>: View {
         self._isLoading = isLoading
     }
 
-    var body: some View {
+    public var body: some View {
         ScrollView {
             VStack {
                 content

@@ -7,26 +7,25 @@
 
 import SwiftUI
 
-enum ConfirmationSetting {
+public enum ConfirmationSetting {
     enum SectionHeader {
         static var foregroundColor: Color = .gray
     }
     
-    enum ListView {
-        static var backgroundColor: Color = .white
-        static var rowsBackgroundColor: Color = Color(.lightGray).opacity(0.4)
-        static var lineSeperator: Visibility = .hidden
-        static var actionButtonTitle: String = "Confirm"
-        static var actionButtonColor: Color = .black
-        static var actionButtonTitleColor: Color = .white
-        static var actionButtonCornerRadius: CGFloat = 10
+    public enum ListView {
+        public static var backgroundColor: Color = .white
+        public static var rowsBackgroundColor: Color = Color(.lightGray).opacity(0.4)
+        public static var lineSeperator: Visibility = .hidden
+        public static var actionButtonTitle: String = "Confirm"
+        public static var actionButtonColor: Color = .black
+        public static var actionButtonTitleColor: Color = .white
+        public static var actionButtonCornerRadius: CGFloat = 10
     }
     
-    enum RowView {
-        static var keyTextFont: Font = .headline
-        static var keyTextForgroundColor: Color = .black
-        static var valueTextFont: Font = .subheadline
-        static var valueTextForgroundColor: Color = .gray
-        
+    public enum RowView {
+        public static var keyTextFont: Font = .headline
+        public static var keyTextForgroundColor: Color = .black
+        public static var valueTextFont: Font = .subheadline
+        public static var valueTextForgroundColor: Color = .gray
     }
 }

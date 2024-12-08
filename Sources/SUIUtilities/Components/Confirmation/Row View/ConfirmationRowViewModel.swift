@@ -8,12 +8,12 @@
 import SwiftUI
 import UIKit
 
-enum ConfirmationOrientation {
+public enum ConfirmationOrientation {
     case vertical(UIImage? = nil, (() -> Void)? = nil)
     case horizontal
 }
 
-protocol ConfirmationRowViewConfigurable: ObservableObject, Identifiable {
+public protocol ConfirmationRowViewConfigurable: ObservableObject, Identifiable {
     var id: UUID { get }
     var item: ConfirmationRowItem { get }
     var orientation: ConfirmationOrientation { get }
@@ -21,14 +21,14 @@ protocol ConfirmationRowViewConfigurable: ObservableObject, Identifiable {
     var onTapHandler: (() -> Void)? { get }
 }
 
-final class ConfirmationRowViewModel: ConfirmationRowViewConfigurable {
-    var id: UUID = UUID()
-    var item: ConfirmationRowItem
-    var orientation: ConfirmationOrientation
-    var image: UIImage?
-    var onTapHandler: (() -> Void)?
+public final class ConfirmationRowViewModel: ConfirmationRowViewConfigurable {
+    public var id: UUID = UUID()
+    public var item: ConfirmationRowItem
+    public var orientation: ConfirmationOrientation
+    public var image: UIImage?
+    public var onTapHandler: (() -> Void)?
     
-    init(
+    public init(
         item: ConfirmationRowItem,
         orientation: ConfirmationOrientation = .vertical()
     ) {

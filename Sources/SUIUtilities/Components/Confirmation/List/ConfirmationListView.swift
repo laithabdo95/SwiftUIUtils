@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct ConfirmationListView<ViewModel: ConfirmationListViewModel>: View {
+public struct ConfirmationListView<ViewModel: ConfirmationListViewModel>: View {
     
     @ObservedObject var viewModel: ViewModel
     @Environment(\.dismiss) private var dismiss
     
-    var body: some View {
+    public var body: some View {
         VStack {
             ScrollView {
                 SectionViews

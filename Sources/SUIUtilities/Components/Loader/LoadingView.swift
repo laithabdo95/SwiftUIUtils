@@ -7,12 +7,10 @@
 
 import SwiftUI
 
-import SwiftUI
-
-struct LoadingView: View {
+public struct LoadingView: View {
     @State private var isAnimating = false
     
-    var body: some View {
+    public var body: some View {
         VStack {
             ZStack {
                 Circle()

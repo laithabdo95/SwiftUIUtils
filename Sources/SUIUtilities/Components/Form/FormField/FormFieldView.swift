@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
+public struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
     
     // MARK: Properties
     
@@ -23,7 +23,7 @@ struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
         focused || !viewModel.text.isEmpty
     }
 
-    var body: some View {
+    public var body: some View {
         VStack {
             HeaderView()
             FieldView()

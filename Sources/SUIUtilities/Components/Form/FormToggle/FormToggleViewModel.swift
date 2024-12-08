@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-protocol FormToggleConfigurable: ObservableObject {
+public protocol FormToggleConfigurable: ObservableObject {
     var isOn: Bool { get set }
     var label: String { get }
 }
 
-class FormToggleViewModel: FormToggleConfigurable {
-    @Published var isOn: Bool
-    var label: String
+public class FormToggleViewModel: FormToggleConfigurable {
+    @Published public var isOn: Bool
+    public var label: String
     
-    init(isOn: Bool = false, label: String) {
+    public init(isOn: Bool = false, label: String) {
         self.isOn = isOn
         self.label = label
     }
