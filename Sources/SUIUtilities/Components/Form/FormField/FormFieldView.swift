@@ -51,7 +51,7 @@ private extension FormFieldView {
     func HeaderView() -> some View {
         HStack {
             Text(viewModel.placeholder)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(FormSetting.FormField.headerTitleColor)
                 .font(.subheadline)
                 .opacity(isActive ? 1 : 0)
             Spacer()

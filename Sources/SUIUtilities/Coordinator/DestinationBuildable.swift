@@ -7,25 +7,25 @@
 
 import SwiftUI
 
-protocol DestinationBuildable: Identifiable, Hashable {
+public protocol DestinationBuildable: Identifiable, Hashable {
     associatedtype ViewType: View
     var view: ViewType { get }
 }
 
-struct Destination: DestinationBuildable {
-    let id: AnyHashable
-    let view: AnyView
+public struct Destination: DestinationBuildable {
+    public let id: AnyHashable
+    public let view: AnyView
     
-    init<T: DestinationBuildable>(_ destination: T) {
+    public init<T: DestinationBuildable>(_ destination: T) {
         self.id = destination.id
         self.view = AnyView(destination.view)
     }
     
-    static func == (lhs: Destination, rhs: Destination) -> Bool {
+    public static func == (lhs: Destination, rhs: Destination) -> Bool {
         return lhs.id == rhs.id
     }
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 }

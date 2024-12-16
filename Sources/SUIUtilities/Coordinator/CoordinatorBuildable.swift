@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol CoordinatorBuildable: ObservableObject {
+public protocol CoordinatorBuildable: ObservableObject {
     var path: NavigationPath { get set }
     
     associatedtype DestinationType: DestinationBuildable

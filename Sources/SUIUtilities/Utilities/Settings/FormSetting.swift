@@ -7,26 +7,30 @@
 
 import SwiftUI
 
-enum FormSetting {
+public enum ColorStyle {
+    case normal(Color)
+    case gradient(Gradient, startPoint: UnitPoint, endPoint: UnitPoint)
+}
+
+public enum FormSetting {
     @MainActor
-    enum FormField {
-        static var font: Font = .system(size: 16, weight: .regular)
-        static var cornerRadius = 12.0
-        static var borderColor: Color = .secondary
-        static var backgroundColor: Color = .clear
-        static var disabledColor: Color = .gray.opacity(0.2)
+    public enum FormField {
+        public static var font: Font = .system(size: 16, weight: .regular)
+        public static var cornerRadius = 12.0
+        public static var borderColor: Color = .secondary
+        public static var backgroundColor: Color = .clear
+        public static var disabledColor: Color = .gray.opacity(0.2)
+        public static var headerTitleColor: Color = .secondary
     }
     
     @MainActor
-    enum VerticalList {
-        static var padding = 25.0
-        static var cornerRadius = 12.0
-        
-        static var primaryButtonColor: Color = .primary
-        static var buttonDisabledColor: Color = Color.gray.opacity(0.4)
-        static var primaryButtonTitleColor: Color = .white
-        
-        static var secondaryButtonColor: Color = .secondary
-        static var secondaryButtonTitleColor: Color = .white
+    public enum VerticalList {
+        public static var padding = 25.0
+        public static var cornerRadius = 12.0
+        public static var buttonDisabledColor: Color = Color.gray.opacity(0.4)
+        public static var primaryButtonColor: ColorStyle = .normal(.primary)
+        public static var primaryButtonTitleColor: Color = .white
+        public static var secondaryButtonTitleColor: Color = .white
+        public static var secondaryButtonColor: ColorStyle = .normal(.secondary)
     }
 }

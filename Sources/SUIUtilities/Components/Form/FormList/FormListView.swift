@@ -86,11 +86,15 @@ public struct FormListView<Configure: FormListConfigurable, Content: View>: View
         })
     }
 
-    private var buttonColor: Color {
-        formManager.isValid ? FormSetting.VerticalList.primaryButtonColor : FormSetting.VerticalList.buttonDisabledColor
+    private var buttonColor: ColorStyle {
+        formManager.isValid ?
+        FormSetting.VerticalList.primaryButtonColor :
+        .normal(FormSetting.VerticalList.buttonDisabledColor)
     }
 
-    private var secondaryColor: Color {
-        formManager.isValid ? FormSetting.VerticalList.secondaryButtonColor : FormSetting.VerticalList.buttonDisabledColor
+    private var secondaryColor: ColorStyle {
+        formManager.isValid ?
+        FormSetting.VerticalList.secondaryButtonColor :
+        .normal(FormSetting.VerticalList.buttonDisabledColor)
     }
 }

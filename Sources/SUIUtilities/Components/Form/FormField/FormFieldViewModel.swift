@@ -24,8 +24,8 @@ public protocol FormFieldConfigurable: ObservableObject, FormListItemValidatable
 
 public class FormFieldViewModel: FormFieldConfigurable {
     @FieldPlaceHolder public var placeholder: String = ""
-    public let rules: [ValidationRule]
     public let fieldType: FieldType
+    public var rules: [ValidationRule]
     public var id: UUID = UUID()
     public var keyboardType: UIKeyboardType
     
@@ -57,7 +57,10 @@ public class FormFieldViewModel: FormFieldConfigurable {
                 let predicate = NSPredicate(format: "SELF MATCHES %@", regex.rawValue)
                 let isValid = predicate.evaluate(with: text)
                 result.append(ValidationResult(isValid: isValid, errorMessage: rule.errorMessage))
-            }
+            case .equal(let otherText):
+                       // Compare with the other text that is passed in the rule
+                       result.append(ValidationResult(isValid: text == otherText, errorMessage: rule.errorMessage))
+                   }
         }
         return result
     }

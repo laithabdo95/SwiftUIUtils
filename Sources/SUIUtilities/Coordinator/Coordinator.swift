@@ -7,14 +7,15 @@
 
 import SwiftUI
 
-final class Coordinator: CoordinatorBuildable {
+public final class Coordinator: CoordinatorBuildable {
+    @Published public var path = NavigationPath()
+    @Published public var sheet: Destination?
+    @Published public var fullScreenCover: Destination?
     
-    @Published var path = NavigationPath()
-    @Published var sheet: Destination?
-    @Published var fullScreenCover: Destination?
+    public init() {}
 }
 
-extension Coordinator {
+public extension Coordinator {
     func push<D: DestinationBuildable>(page: D) {
         path.append(Destination(page))
     }
@@ -44,8 +45,7 @@ extension Coordinator {
     }
 }
 
-extension Coordinator {
-    
+public extension Coordinator {
     @ViewBuilder
     func build(page: Destination) -> some View {
         page.view

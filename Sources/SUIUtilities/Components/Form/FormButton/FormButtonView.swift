@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct FormButtonView: View {
     let title: String
-    let buttonColor: Color
+    let buttonColor: ColorStyle
     let titleColor: Color
     let cornerRadius: Double
     var isDisabled: Bool = false
@@ -22,10 +22,24 @@ public struct FormButtonView: View {
             Text(title)
                 .frame(maxWidth: .infinity, minHeight: 50)
                 .foregroundColor(titleColor)
-                .background(buttonColor)
+                .background(backgroundView)
                 .cornerRadius(cornerRadius)
                 .padding(.top, 15)
         })
         .disabled(isDisabled)
+    }
+}
+
+// MARK: - SubViews
+
+private extension FormButtonView {
+    @ViewBuilder
+    var backgroundView: some View {
+        switch buttonColor {
+        case .normal(let color):
+            color
+        case let .gradient(gradient, startPoint, endPoint):
+            LinearGradient(gradient: gradient, startPoint: startPoint, endPoint: endPoint)
+        }
     }
 }

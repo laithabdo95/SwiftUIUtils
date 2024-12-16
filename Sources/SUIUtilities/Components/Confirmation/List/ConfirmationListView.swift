@@ -19,7 +19,7 @@ public struct ConfirmationListView<ViewModel: ConfirmationListViewModel>: View {
             }
             FormButtonView(
                 title: ConfirmationSetting.ListView.actionButtonTitle,
-                buttonColor: ConfirmationSetting.ListView.actionButtonColor,
+                buttonColor: .normal(ConfirmationSetting.ListView.actionButtonColor),
                 titleColor: ConfirmationSetting.ListView.actionButtonTitleColor,
                 cornerRadius: ConfirmationSetting.ListView.actionButtonCornerRadius
             ) {

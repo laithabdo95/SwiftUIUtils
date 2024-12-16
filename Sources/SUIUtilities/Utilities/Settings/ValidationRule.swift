@@ -10,6 +10,7 @@ import Foundation
 public enum ValidationRule {
     case required
     case regex(Regex)
+    case equal(String)
     
     public var errorMessage: String {
         switch self {
@@ -17,6 +18,8 @@ public enum ValidationRule {
             "This Field is required"
         case .regex(let regex):
             regex.message
+        case .equal:
+            "Does not match"
         }
     }
 }
