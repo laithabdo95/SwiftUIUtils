@@ -42,13 +42,3 @@ public struct SelectionView<ViewModel: SelectionConfigurable>: View {
         }
     }
 }
-
-#Preview {
-    SelectionView(
-        viewModel: SelectionViewModel(
-            items: MaritalStatusEnum.allCases,
-            selectionType: .single
-        )
-    )
-    .environmentObject(FormManager())
-}

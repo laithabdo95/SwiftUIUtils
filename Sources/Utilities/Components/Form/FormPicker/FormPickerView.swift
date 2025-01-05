@@ -21,16 +21,3 @@ public struct FormPickerView<ViewModel: FormPickerAndFieldConfigurable>: View {
             }
     }
 }
-
-#Preview {
-    FormPickerView(
-        viewModel: FormPickerViewModel(
-            placeholder: "Marital Status",
-            selectionViewModel: SelectionViewModel(
-                items: MaritalStatusEnum.allCases,
-                selectionType: .single
-            )
-        )
-    )
-    .environmentObject(FormManager())
-}
