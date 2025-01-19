@@ -19,7 +19,7 @@ public protocol FormFieldConfigurable: ObservableObject, FormListItemValidatable
     var keyboardType: UIKeyboardType { get }
     
     func validate()
-    func getValidationResult() -> [FormFieldViewModel.ValidationResult]
+//    func getValidationResult() -> [ValidationResult]
 }
 
 public class FormFieldViewModel: FormFieldConfigurable {
@@ -41,28 +41,9 @@ public class FormFieldViewModel: FormFieldConfigurable {
     @Published public var isEditingDisabled: Bool = false
     
     public func validate() {
-       let result = getValidationResult()
-        isValid = result.filter { !$0.isValid }.isEmpty ? .valid : .notValid
+        let result = rules.map { $0.validate(text: text) }
+        isValid = result.allSatisfy { $0.isValid } ? .valid : .notValid
         errorMessage = result.first(where: { !$0.isValid })?.errorMessage ?? ""
-    }
-    
-    public func getValidationResult() -> [ValidationResult] {
-        var result: [ValidationResult] = []
-        rules.forEach { rule in
-            errorMessage = rule.errorMessage
-            switch rule {
-            case .required:
-                result.append(ValidationResult(isValid: !text.isEmpty, errorMessage: rule.errorMessage))
-            case .regex(let regex):
-                let predicate = NSPredicate(format: "SELF MATCHES %@", regex.rawValue)
-                let isValid = predicate.evaluate(with: text)
-                result.append(ValidationResult(isValid: isValid, errorMessage: rule.errorMessage))
-            case .equal(let otherText):
-                       // Compare with the other text that is passed in the rule
-                       result.append(ValidationResult(isValid: text == otherText, errorMessage: rule.errorMessage))
-                   }
-        }
-        return result
     }
     
     public init(
@@ -83,12 +64,7 @@ public class FormFieldViewModel: FormFieldConfigurable {
     }
 }
 
-public extension FormFieldViewModel {
-    struct ValidationResult {
-        let isValid: Bool
-        let errorMessage: String
-    }
-    
+public extension FormFieldViewModel {    
     enum FieldStatus {
         case notSet
         case valid
