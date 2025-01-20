@@ -10,10 +10,10 @@ import SwiftUI
 public struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
     
     // MARK: Properties
-    
+    @State var settings: FormSetting = .default
     @FocusState private var focused: Bool
     @ObservedObject var viewModel: ViewModel
-    @State private var isSecured: Bool = false
+    @State private var isSecured: Bool = true
     @EnvironmentObject var formManager: FormManager
 
     private var placeHolder: String { isActive ? "" : viewModel.placeholder }
@@ -47,50 +47,50 @@ public struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
 
 // MARK: - SubViews
 
-private extension FormFieldView {
+public extension FormFieldView {
     func HeaderView() -> some View {
         HStack {
             Text(viewModel.placeholder)
-                .foregroundStyle(FormSetting.FormField.headerTitleColor)
-                .font(.subheadline)
-                .opacity(isActive ? 1 : 0)
+                .foregroundStyle(viewModel.isValid == .notValid ? .red : settings.formField.titleColor )
+                .font(settings.formField.titleFont)
             Spacer()
             Text(viewModel.errorMessage)
                 .foregroundStyle(.red)
                 .font(.subheadline)
                 .opacity(viewModel.isValid == .notValid ? 1 : 0)
+                .frame(height: 20)
         }
     }
 
     @ViewBuilder
     func FieldView() -> some View {
-        ZStack(alignment: isActive ? .topLeading : .center) {
-            HStack {
-                InputField()
-                if viewModel.fieldType.isPicker {
-                    Image(systemName: viewModel.fieldType.imageName ?? "")
-                } else if viewModel.fieldType == .secured {
-                    SecuredToggleButton()
-                }
+        HStack {
+            InputField()
+            if viewModel.fieldType.isPicker {
+                Image(systemName: viewModel.fieldType.imageName ?? "")
+            } else if viewModel.fieldType == .secured {
+                SecuredToggleButton()
             }
         }
         .disabled(viewModel.isEditingDisabled)
         .frame(height: 56)
         .padding(.horizontal, 16)
         .overlay(
-            RoundedRectangle(cornerRadius: FormSetting.FormField.cornerRadius)
+            RoundedRectangle(cornerRadius: settings.formField.cornerRadius)
                 .stroke(
                     viewModel.isValid == .notValid ?
-                    Color.red : FormSetting.FormField.borderColor,
+                    Color.red : settings.formField.borderColor,
                     lineWidth: 1
                 )
                 .background(
                     viewModel.isDisabled ?
-                    FormSetting.FormField.disabledColor :
-                        FormSetting.FormField.backgroundColor
+                    settings.formField.disabledColor :
+                        settings.formField.backgroundColor
                 )
         )
         .animation(.linear(duration: 0.2), value: focused)
+        .padding(.leading, 1)
+        .padding(.trailing, 1)
     }
 
     @ViewBuilder
@@ -100,7 +100,7 @@ private extension FormFieldView {
                 placeHolder,
                 text: $viewModel.text
             )
-            .font(FormSetting.FormField.font)
+            .font(settings.formField.font)
             .keyboardType(viewModel.keyboardType)
             .focused($focused)
         } else {
@@ -108,7 +108,7 @@ private extension FormFieldView {
                 placeHolder,
                 text: $viewModel.text
             )
-            .font(FormSetting.FormField.font)
+            .font(settings.formField.font)
             .keyboardType(viewModel.keyboardType)
             .focused($focused)
         }
@@ -118,7 +118,7 @@ private extension FormFieldView {
         Button(action: {
             isSecured.toggle()
         }) {
-            Image(systemName: !isSecured ? "eye.slash.fill" : "eye.fill")
+            Image(systemName: !isSecured ? "eye.fill" : "eye.slash.fill")
                 .foregroundColor(.gray)
         }
     }

@@ -34,7 +34,7 @@ public extension FormListConfigurable {
 
 public struct FormListView<Configure: FormListConfigurable, Content: View>: View {
     @StateObject private  var formManager: FormManager = FormManager()
-    
+    @State var settings: FormSetting = .default
     private let configure: Configure
     private let content: Content
     @Binding private var isLoading: Bool
@@ -56,9 +56,6 @@ public struct FormListView<Configure: FormListConfigurable, Content: View>: View
                 Spacer(minLength: 45)
                 FormButtonView(
                     title: configure.primaryButtonTitle,
-                    buttonColor: buttonColor,
-                    titleColor: FormSetting.VerticalList.primaryButtonTitleColor,
-                    cornerRadius: FormSetting.VerticalList.cornerRadius,
                     isDisabled: !formManager.isValid
                 ) {
                     configure.onPrimaryButtonTapped()
@@ -66,9 +63,6 @@ public struct FormListView<Configure: FormListConfigurable, Content: View>: View
                 if !configure.secondaryButtonTitle.isEmpty {
                     FormButtonView(
                         title: configure.secondaryButtonTitle,
-                        buttonColor: secondaryColor,
-                        titleColor: FormSetting.VerticalList.secondaryButtonTitleColor,
-                        cornerRadius: FormSetting.VerticalList.cornerRadius,
                         isDisabled: !formManager.isValid
                     ) {
                         configure.onSecondaryButtonTapped()
@@ -77,7 +71,7 @@ public struct FormListView<Configure: FormListConfigurable, Content: View>: View
             }
         }
         .environmentObject(formManager)
-        .padding(.horizontal, FormSetting.VerticalList.padding)
+        .padding(.horizontal, settings.verticalList.padding)
         .fullScreenCover(isPresented: $isLoading, content: {
             LoadingView()
         })
@@ -88,13 +82,13 @@ public struct FormListView<Configure: FormListConfigurable, Content: View>: View
 
     private var buttonColor: ColorStyle {
         formManager.isValid ?
-        FormSetting.VerticalList.primaryButtonColor :
-        .normal(FormSetting.VerticalList.buttonDisabledColor)
+        settings.verticalList.primaryButtonColor :
+        .normal(settings.verticalList.buttonDisabledColor)
     }
 
     private var secondaryColor: ColorStyle {
         formManager.isValid ?
-        FormSetting.VerticalList.secondaryButtonColor :
-        .normal(FormSetting.VerticalList.buttonDisabledColor)
+        settings.verticalList.secondaryButtonColor :
+        .normal(settings.verticalList.buttonDisabledColor)
     }
 }

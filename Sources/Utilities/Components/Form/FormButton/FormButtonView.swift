@@ -8,10 +8,8 @@
 import SwiftUI
 
 public struct FormButtonView: View {
+    @State var settings: FormSetting = .default
     let title: String
-    let buttonColor: ColorStyle
-    let titleColor: Color
-    let cornerRadius: Double
     var isDisabled: Bool = false
     var completion: (() -> Void)?
     
@@ -21,12 +19,16 @@ public struct FormButtonView: View {
         }, label: {
             Text(title)
                 .frame(maxWidth: .infinity, minHeight: 50)
-                .foregroundColor(titleColor)
+                .foregroundColor(settings.primaryButton.titleColor)
                 .background(backgroundView)
-                .cornerRadius(cornerRadius)
+                .cornerRadius(settings.primaryButton.cornerRadius)
                 .padding(.top, 15)
         })
         .disabled(isDisabled)
+        .padding(.top, settings.primaryButton.padding.top)
+        .padding(.bottom, settings.primaryButton.padding.bottom)
+        .padding(.leading, settings.primaryButton.padding.leading)
+        .padding(.trailing, settings.primaryButton.padding.trailing)
     }
 }
 
@@ -35,7 +37,7 @@ public struct FormButtonView: View {
 private extension FormButtonView {
     @ViewBuilder
     var backgroundView: some View {
-        switch buttonColor {
+        switch settings.primaryButton.backgroundColor {
         case .normal(let color):
             color
         case let .gradient(gradient, startPoint, endPoint):

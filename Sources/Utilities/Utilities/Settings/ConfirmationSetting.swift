@@ -7,29 +7,38 @@
 
 import SwiftUI
 
-public enum ConfirmationSetting {
+@MainActor
+public struct ConfirmationSetting {
+    
+    @MainActor public var header = SectionHeader()
+    @MainActor public var list = ListView()
+    @MainActor public var row = RowView()
+    
     @MainActor
-    enum SectionHeader {
-        
-        static var foregroundColor: Color = .gray
+    public struct SectionHeader {
+        public var foregroundColor: Color = .gray
     }
     
     @MainActor
-    public enum ListView {
-        public static var backgroundColor: Color = .white
-        public static var rowsBackgroundColor: Color = Color(.lightGray).opacity(0.4)
-        public static var lineSeperator: Visibility = .hidden
-        public static var actionButtonTitle: String = "Confirm"
-        public static var actionButtonColor: Color = .black
-        public static var actionButtonTitleColor: Color = .white
-        public static var actionButtonCornerRadius: CGFloat = 10
+    public struct ListView {
+        public var backgroundColor: Color = .white
+        public var rowsBackgroundColor: Color = Color(.lightGray).opacity(0.4)
+        public var lineSeperator: Visibility = .hidden
+        public var actionButtonTitle: String = "Confirm"
+        public var actionButtonColor: Color = .black
+        public var actionButtonTitleColor: Color = .white
+        public var actionButtonCornerRadius: CGFloat = 10
     }
     
     @MainActor
-    public enum RowView {
-        public static var keyTextFont: Font = .headline
-        public static var keyTextForgroundColor: Color = .black
-        public static var valueTextFont: Font = .subheadline
-        public static var valueTextForgroundColor: Color = .gray
+    public struct RowView {
+        public var keyTextFont: Font = .headline
+        public var keyTextForgroundColor: Color = .black
+        public var valueTextFont: Font = .subheadline
+        public var valueTextForgroundColor: Color = .gray
     }
+}
+
+public extension ConfirmationSetting {
+    @MainActor static var `default` = Self()
 }
