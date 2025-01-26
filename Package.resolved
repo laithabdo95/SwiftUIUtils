@@ -1,13 +1,13 @@
 {
-  "originHash" : "460ed257c4cd01e71f3cf0e6e151fa8fc7cbc1b3719f82c6af9e5b8319062df4",
+  "originHash" : "66d50f213955ef71cb490f9ef316fe275c514929cfc7bc4b87f663bb97c29dce",
   "pins" : [
     {
       "identity" : "otpify",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mehmetfarhan/Otpify",
       "state" : {
-        "revision" : "e5eb75ffe04cef4560d17302a3cea0a751495838",
-        "version" : "1.0.0"
+        "revision" : "e9256a9b8be6341e70516c307f186834706e82cb",
+        "version" : "1.0.1"
       }
     }
   ],

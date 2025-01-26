@@ -14,7 +14,7 @@ let package = Package(
             targets: ["Utilities"]),
     ],
     dependencies: [
-        .package(url: otpify, from: "1.0.0"),
+        .package(url: otpify, from: "1.0.1"),
     ],
     targets: [
         .target(
