@@ -17,12 +17,12 @@ public struct ConfirmationListView<ViewModel: ConfirmationListViewModel>: View {
             ScrollView {
                 SectionViews
             }
-            FormButtonView(title: ConfirmationSetting.default.list.actionButtonTitle) {
+            FormButtonView(title: ConfirmationSetting.ListView.actionButtonTitle) {
                 dismiss()
             }
                 .padding()
         }
-        .background(ConfirmationSetting.default.list.backgroundColor)
+        .background(ConfirmationSetting.ListView.backgroundColor)
         .ignoresSafeArea(.keyboard, edges: .bottom)
     }
 }
@@ -35,7 +35,7 @@ private extension ConfirmationListView {
             ForEach(viewModel.sections) { section in
                 VStack(alignment: .leading, spacing: 0) {
                     Text(section.title)
-                        .foregroundColor(ConfirmationSetting.default.header.foregroundColor)
+                        .foregroundColor(ConfirmationSetting.SectionHeader.foregroundColor)
                         .padding([.leading, .bottom], 10)
                     
                     VStack(spacing: 20){
@@ -44,7 +44,7 @@ private extension ConfirmationListView {
                         }
                     }
                     .padding(25)
-                    .background(ConfirmationSetting.default.list.rowsBackgroundColor)
+                    .background(ConfirmationSetting.ListView.rowsBackgroundColor)
                     .cornerRadius(10)
                     .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 3)
                 }

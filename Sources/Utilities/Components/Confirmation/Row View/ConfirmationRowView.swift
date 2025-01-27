@@ -31,14 +31,14 @@ private extension ConfirmationRowView {
     
     var keyLabel: some View {
         Text(viewModel.item.key)
-            .font(ConfirmationSetting.default.row.keyTextFont)
-            .foregroundStyle(ConfirmationSetting.default.row.keyTextForgroundColor)
+            .font(ConfirmationSetting.RowView.keyTextFont)
+            .foregroundStyle(ConfirmationSetting.RowView.keyTextForgroundColor)
     }
     
     var valueLabel: some View {
         Text(viewModel.item.value)
-            .font(ConfirmationSetting.default.row.valueTextFont)
-            .foregroundStyle(ConfirmationSetting.default.row.valueTextForgroundColor)
+            .font(ConfirmationSetting.RowView.valueTextFont)
+            .foregroundStyle(ConfirmationSetting.RowView.valueTextForgroundColor)
     }
     
     var VerticalView: some View {
