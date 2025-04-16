@@ -12,7 +12,14 @@ public final class Coordinator: CoordinatorBuildable {
     @Published public var sheet: Destination?
     @Published public var fullScreenCover: Destination?
     
+    public var onSheetDismiss: OnDismissHandler?
+    public var onFullScreenDismiss: OnDismissHandler?
+    
     public init() {}
+}
+
+public extension Coordinator {
+    typealias OnDismissHandler = (() -> Void)
 }
 
 public extension Coordinator {
@@ -25,6 +32,8 @@ public extension Coordinator {
     }
     
     func popToRoot() {
+        sheet = nil
+        fullScreenCover = nil
         path.removeLast(path.count)
     }
     

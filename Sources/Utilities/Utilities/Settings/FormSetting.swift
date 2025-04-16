@@ -30,6 +30,7 @@ public struct FormSetting {
         public var headerTitleColor: Color = .secondary
         public var titleColor: Color = .blue
         public var titleFont: Font = .headline
+        public var titleFontWeight: Font.Weight = .regular
     }
     
     @MainActor

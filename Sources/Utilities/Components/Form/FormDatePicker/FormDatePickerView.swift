@@ -11,6 +11,12 @@ public struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View 
     @State private var showDatePicker = false
     @ObservedObject var viewModel: ViewModel
     
+    // MARK: - Init
+    
+    public init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+    }
+    
     public var body: some View {
         ZStack {
             VStack(alignment: .leading) {

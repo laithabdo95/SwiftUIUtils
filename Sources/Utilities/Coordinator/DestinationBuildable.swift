@@ -12,20 +12,10 @@ public protocol DestinationBuildable: Identifiable, Hashable {
     var view: ViewType { get }
 }
 
-public struct Destination: DestinationBuildable {
-    public let id: AnyHashable
-    public let view: AnyView
-    
-    public init<T: DestinationBuildable>(_ destination: T) {
-        self.id = destination.id
-        self.view = AnyView(destination.view)
-    }
-    
-    public static func == (lhs: Destination, rhs: Destination) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    public func hash(into hasher: inout Hasher) {
+public extension DestinationBuildable where Self: Hashable {
+    static func == (lhs: Self, rhs: Self) -> Bool { true }
+
+    func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 }

@@ -22,6 +22,7 @@ public enum DateFormatStyle {
     case yearMonthDay // "yyyy/MM/dd"
     case monthDay // "MM/dd"
     case custom(String) // Allows a fully custom date format
+    case expiryMonthYear
     
     // Function to format a Date based on the case
     public func format(date: Date) -> String {
@@ -50,6 +51,8 @@ public enum DateFormatStyle {
             formatter.dateFormat = "MM/dd"
         case .custom(let format):
             formatter.dateFormat = format
+        case .expiryMonthYear:
+            formatter.dateFormat = "MM/yy"
         }
         
         return formatter.string(from: date)

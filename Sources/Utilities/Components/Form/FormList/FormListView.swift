@@ -55,6 +55,7 @@ public struct FormListView<Configure: FormListConfigurable, Content: View>: View
                 content
                 Spacer(minLength: 45)
                 FormButtonView(
+                    settings: .init(primaryButton: .init(backgroundColor: buttonColor)),
                     title: configure.primaryButtonTitle,
                     isDisabled: !formManager.isValid
                 ) {
@@ -62,6 +63,9 @@ public struct FormListView<Configure: FormListConfigurable, Content: View>: View
                 }
                 if !configure.secondaryButtonTitle.isEmpty {
                     FormButtonView(
+                        settings: .init(
+                            primaryButton: .init(backgroundColor: secondaryColor)
+                        ),
                         title: configure.secondaryButtonTitle,
                         isDisabled: !formManager.isValid
                     ) {

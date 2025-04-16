@@ -95,6 +95,7 @@ public extension FormFieldView {
 
     @ViewBuilder
     func InputField() -> some View {
+        
         if viewModel.fieldType == .secured && isSecured {
             SecureField(
                 placeHolder,
@@ -103,6 +104,17 @@ public extension FormFieldView {
             .font(settings.formField.font)
             .keyboardType(viewModel.keyboardType)
             .focused($focused)
+        } else if viewModel.fieldType == .expiryDate {
+            TextField(
+                    placeHolder,
+                    text: $viewModel.text
+                )
+                .font(settings.formField.font)
+                .keyboardType(.numberPad)
+                .focused($focused)
+                .onChange(of: viewModel.text) {
+                    viewModel.text = $0.formattedAsExpiryDate()
+                }
         } else {
             TextField(
                 placeHolder,

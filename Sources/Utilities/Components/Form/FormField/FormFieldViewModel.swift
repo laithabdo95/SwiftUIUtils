@@ -76,6 +76,7 @@ public extension FormFieldViewModel {
         case picker
         case secured
         case datePicker
+        case expiryDate
         
         var imageName: String? {
             switch self {

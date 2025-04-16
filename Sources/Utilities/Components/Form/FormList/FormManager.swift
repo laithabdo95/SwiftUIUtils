@@ -11,6 +11,8 @@ import Combine
 public class FormManager: ObservableObject {
     @Published private(set) var validatableItems: [any FormListItemValidatable] = []
 
+    public init() { }
+    
     var isValid: Bool {
         validatableItems.allSatisfy { $0.isValid == .valid }
     }

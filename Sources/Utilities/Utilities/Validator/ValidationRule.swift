@@ -13,6 +13,8 @@ public enum ValidationRule {
     case regex(Regex)
     case equal(String)
     case length(min: Int = 1, max: Int? = nil)
+    case exactLength(Int)
+    case lengthBetween(lowerBound: Int, upperBound: Int)
     
     public var errorMessage: String {
         switch self {
@@ -25,6 +27,10 @@ public enum ValidationRule {
         case let .length(min, max):
             guard let max else { return "Minimum length is \(min)" }
             return "Minimum length is \(min), maximum length is \(max)"
+        case .exactLength(let number):
+            return String(format: "Content Length: %d", number)
+        case let .lengthBetween(lowerBound, upperBound):
+            return String(format: "Length between %d and %d", lowerBound, upperBound)
         }
     }
 }
@@ -53,7 +59,23 @@ public extension ValidationRule {
                 errorMessage: errorMessage
             )
         case let .length(min, max):
-            let isValid = lenth(text: text, min: min, max: max)
+            let isValid = length(text: text, min: min, max: max)
+            return .init(
+                isValid: isValid,
+                errorMessage: errorMessage
+            )
+        case .exactLength(let number):
+            let isValid = exactLength(text: text, number: number)
+            return .init(
+                isValid: isValid,
+                errorMessage: errorMessage
+            )
+        case let .lengthBetween(lowerBound, upperBound):
+            let isValid = lengthBetween(
+                text: text,
+                lowerBound: lowerBound,
+                upperBound: upperBound
+            )
             return .init(
                 isValid: isValid,
                 errorMessage: errorMessage
@@ -94,11 +116,26 @@ private extension ValidationRule {
 
 /// - Length
 private extension ValidationRule {
-    func lenth(
+    func length(
         text: String,
         min: Int,
         max: Int?
     ) -> Bool {
         text.count >= min && text.count <= max ?? Int.max
+    }
+    
+    func exactLength(
+        text: String,
+        number: Int
+    ) -> Bool {
+        text.count == number
+    }
+    
+    func lengthBetween(
+        text: String,
+        lowerBound: Int,
+        upperBound: Int
+    ) -> Bool {
+        text.count >= lowerBound && text.count <= upperBound
     }
 }

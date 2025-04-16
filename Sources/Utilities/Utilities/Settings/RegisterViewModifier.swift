@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct RegisterViewModifier<ViewModel: FormFieldConfigurable>: ViewModifier {
+public struct RegisterViewModifier<ViewModel: FormFieldConfigurable>: ViewModifier {
     @EnvironmentObject var formManager: FormManager
     @ObservedObject var viewModel: ViewModel
 
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .onAppear {
                 formManager.register(viewModel)
@@ -22,7 +22,7 @@ struct RegisterViewModifier<ViewModel: FormFieldConfigurable>: ViewModifier {
     }
 }
 
-extension View {
+public extension View {
     func registerView<ViewModel: FormFieldConfigurable>(_ viewModel: ViewModel) -> some View {
         self.modifier(RegisterViewModifier(viewModel: viewModel))
     }
