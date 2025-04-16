@@ -4,16 +4,16 @@
 import PackageDescription
 
 let package = Package(
-    name: "Utilities",
+    name: "SwiftUIUtils",
     platforms: [.iOS(.v16)],
     products: [
         .library(
-            name: "Utilities",
-            targets: ["Utilities"]),
+            name: "SwiftUIUtils",
+            targets: ["SwiftUIUtils"]),
     ],
     targets: [
         .target(
-            name: "Utilities",
+            name: "SwiftUIUtils",
             resources: [
                 .process("./Resources/Colors.xcassets")
             ]
