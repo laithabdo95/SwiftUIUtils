@@ -5,6 +5,8 @@
 //  Created by Mohammad Farhan on 17/04/2025.
 //
 
+import SwiftUI
+
 public extension Color {
     /// Generates a random color with fixed saturation and brightness values for visual consistency.
     ///
