@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreUtils
 
 public struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
     
