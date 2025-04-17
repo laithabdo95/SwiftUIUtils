@@ -7,7 +7,10 @@
 
 import SwiftUI
 import Combine
-import CoreUtils
+
+public protocol ItemSelectable {
+    var title: String { get }
+}
 
 public protocol SelectionConfigurable: ObservableObject {
     var searchText: String { get set }
