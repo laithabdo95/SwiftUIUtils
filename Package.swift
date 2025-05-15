@@ -4,6 +4,7 @@
 import PackageDescription
 
 let coreUtils = "https://Access2ArabiaDevOps@dev.azure.com/Access2ArabiaDevOps/A2AProjects/_git/CoreUtils"
+let swiftUIIntrospect = "https://github.com/siteline/SwiftUI-Introspect"
 
 let package = Package(
     name: "SwiftUIUtils",
@@ -15,12 +16,14 @@ let package = Package(
     ],
     dependencies: [
         .package(url: coreUtils, branch: "main"),
+        .package(url: swiftUIIntrospect, from: "1.0.0")
     ],
     targets: [
         .target(
             name: "SwiftUIUtils",
             dependencies: [
                 .product(name: "CoreUtils", package: "CoreUtils"),
+                .product(name: "SwiftUIIntrospect", package: "swiftui-introspect")
             ],
             resources: [
                 .process("./Resources/Colors.xcassets")
