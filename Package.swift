@@ -14,7 +14,7 @@ let package = Package(
             targets: ["SwiftUIUtils"]),
     ],
     dependencies: [
-        .package(url: coreUtils, branch: "upgrade"),
+        .package(url: coreUtils, branch: "main"),
     ],
     targets: [
         .target(
