@@ -8,7 +8,7 @@ let swiftUIIntrospect = "https://github.com/siteline/SwiftUI-Introspect"
 
 let package = Package(
     name: "SwiftUIUtils",
-    platforms: [.iOS(.v16)],
+    platforms: [.iOS(.v17)],
     products: [
         .library(
             name: "SwiftUIUtils",

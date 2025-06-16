@@ -7,23 +7,52 @@
 
 import SwiftUI
 
-public struct FormToggleView<ViewModel: FormToggleConfigurable>: View {
+public struct FormToggleView<Style: ToggleStyle>: View {
     
-    @ObservedObject var viewModel: ViewModel
-    @State var settings: FormSetting = .default
-
-    /// Public initializer to inject the view model.
-    public init(viewModel: ViewModel) {
-        self._viewModel = ObservedObject(wrappedValue: viewModel)
+    // MARK: Properties
+    @Bindable private var viewModel: FormToggleViewModel
+    var style: Style
+    var settings: FormSetting
+    
+    // MARK: Init
+    public init(
+        viewModel: FormToggleViewModel,
+        settings: FormSetting = .default,
+        style: Style = SwitchToggleStyle()
+    ) {
+        self.viewModel = viewModel
+        self.settings = settings
+        self.style = style
     }
+}
 
-    public var body: some View {
+// MARK: - Body
+public extension FormToggleView {
+    var body: some View {
         Toggle(isOn: $viewModel.isOn) {
             Text(viewModel.label)
                 .foregroundStyle(settings.toggle.titleColor)
-                .font(settings.toggle.titleFont)
+                .font(settings.toggle.font)
         }
-        .padding(.vertical, 16)
+        .toggleStyle(style)
+        .padding(.leading, settings.toggle.padding.leading)
+        .padding(.trailing, settings.toggle.padding.trailing)
+        .padding(.top, settings.toggle.padding.top)
+        .padding(.bottom, settings.toggle.padding.bottom)
+    }
+}
+
+// MARK: - Conditional Init Extenison
+public extension FormToggleView where Style == CompactToggleStyle {
+    init(
+        viewModel: FormToggleViewModel,
+        settings: FormSetting
+    ) {
+        self.init(
+            viewModel: viewModel,
+            settings: settings,
+            style: CompactToggleStyle(settings: settings)
+        )
     }
 }
 
