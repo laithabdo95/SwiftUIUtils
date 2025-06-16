@@ -9,7 +9,8 @@ import SwiftUI
 
 public protocol FormFieldConfigurable: ObservableObject, FormListItemValidatable {
     var id: UUID { get }
-    var placeholder: String { get }
+    var title: String { get }
+    var placeholder: String? { get }
     var rules: [ValidationRule] { get }
     var text: String { get set }
     var errorMessage: String { get }
@@ -23,11 +24,12 @@ public protocol FormFieldConfigurable: ObservableObject, FormListItemValidatable
 }
 
 public class FormFieldViewModel: FormFieldConfigurable {
-    @FieldPlaceHolder public var placeholder: String = ""
+    public var placeholder: String?
     public let fieldType: FieldType
     public var rules: [ValidationRule]
     public var id: UUID = UUID()
     public var keyboardType: UIKeyboardType
+    @FormFieldTitle public var title: String
     
     @Published public var text: String = "" {
         didSet {
@@ -47,20 +49,22 @@ public class FormFieldViewModel: FormFieldConfigurable {
     }
     
     public init(
-        placeHolder: String,
+        title: String = "",
+        placeHolder: String = "",
         isDisabled: Bool = false,
         isEditingDisabled: Bool = false,
         rules: [ValidationRule],
         fieldType: FieldType = .field,
         keyboardType: UIKeyboardType = .default
     ) {
+        self.title = title
         self.placeholder = placeHolder
         self.isDisabled = isDisabled
         self.isEditingDisabled = isEditingDisabled
         self.rules = rules
         self.fieldType = fieldType
         self.keyboardType = keyboardType
-        self.$placeholder.update(rules.isEmpty)
+        self.$title.update(rules.isEmpty)
     }
 }
 
@@ -96,7 +100,7 @@ public extension FormFieldViewModel {
 }
 
 @propertyWrapper
-public class FieldPlaceHolder {
+public class FormFieldTitle {
     private var value: String = ""
     var isOptional: Bool
     
@@ -109,9 +113,7 @@ public class FieldPlaceHolder {
         }
     }
     
-    public var projectedValue: FieldPlaceHolder {
-        return self
-    }
+    public var projectedValue: FormFieldTitle { self }
     
     public init(wrappedValue: String, isOptional: Bool = false) {
         self.isOptional = isOptional

@@ -19,16 +19,17 @@ public struct FormSetting {
     @MainActor public var formField = FormField()
     @MainActor public var verticalList = VerticalList()
     @MainActor public var primaryButton = PrimaryButton()
-    
+    @MainActor public var toggle = Toggle()
+
     @MainActor
     public struct FormField {
         public var font: Font = .system(size: 16, weight: .regular)
         public var cornerRadius = 12.0
         public var borderColor: Color = .secondary
-        public var backgroundColor: Color = .clear
+        public var backgroundColor: Color = .gray.opacity(0.1)
         public var disabledColor: Color = .gray.opacity(0.2)
-        public var headerTitleColor: Color = .secondary
-        public var titleColor: Color = .blue
+        public var titleColor: Color = .secondary
+        public var textColor: Color = .blue
         public var titleFont: Font = .headline
         public var titleFontWeight: Font.Weight = .regular
     }
@@ -54,6 +55,13 @@ public struct FormSetting {
         public var backgroundColor: ColorStyle = .normal(.blue)
         public var disabledColor: Color = .gray.opacity(0.2)
         public var padding: EdgeInsets = .init(top: .zero, leading: 30, bottom: .zero, trailing: 30)
+    }
+    
+    @MainActor
+    public struct Toggle {
+        public var font: Font = .system(size: 16, weight: .regular)
+        public var titleColor: Color = .blue
+        public var titleFont: Font = .headline
     }
 }
 

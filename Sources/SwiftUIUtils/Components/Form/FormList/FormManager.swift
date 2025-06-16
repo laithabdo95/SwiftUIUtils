@@ -13,7 +13,7 @@ public class FormManager: ObservableObject {
 
     public init() { }
     
-    var isValid: Bool {
+    public var isValid: Bool {
         validatableItems.allSatisfy { $0.isValid == .valid }
     }
 

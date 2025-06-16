@@ -10,14 +10,19 @@ import SwiftUI
 public struct FormToggleView<ViewModel: FormToggleConfigurable>: View {
     
     @ObservedObject var viewModel: ViewModel
-    
+    @State var settings: FormSetting = .default
+
+    /// Public initializer to inject the view model.
+    public init(viewModel: ViewModel) {
+        self._viewModel = ObservedObject(wrappedValue: viewModel)
+    }
+
     public var body: some View {
         Toggle(isOn: $viewModel.isOn) {
             Text(viewModel.label)
-                .foregroundStyle(.secondary)
-                .font(.subheadline)
+                .foregroundStyle(settings.toggle.titleColor)
+                .font(settings.toggle.titleFont)
         }
-        .padding(.horizontal, 10)
         .padding(.vertical, 16)
     }
 }

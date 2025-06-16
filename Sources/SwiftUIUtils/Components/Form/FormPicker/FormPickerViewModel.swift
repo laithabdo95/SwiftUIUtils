@@ -28,7 +28,8 @@ public class FormPickerViewModel<SelectionItems: ItemSelectable>: FormFieldViewM
     public var cancellable = Set<AnyCancellable>()
     
     public init(
-        placeholder: String,
+        title: String = "",
+        placeholder: String = "",
         isDisabled: Bool = false,
         isRequired: Bool = true,
         selectionViewModel: SelectionViewModel<SelectionItems>
@@ -36,6 +37,7 @@ public class FormPickerViewModel<SelectionItems: ItemSelectable>: FormFieldViewM
         self.isRequired = isRequired
         self.selectionViewModel = selectionViewModel
         super.init(
+            title: title,
             placeHolder: placeholder,
             isDisabled: isDisabled,
             isEditingDisabled: true,
