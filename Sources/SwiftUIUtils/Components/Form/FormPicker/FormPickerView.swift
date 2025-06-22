@@ -21,8 +21,9 @@ public struct FormPickerView<ViewModel: FormPickerAndFieldConfigurable>: View {
         FormFieldView(viewModel: viewModel) {
                 isSheetPresented = true
             }
-            .fullScreenCover(isPresented: $isSheetPresented) {
+            .sheet(isPresented: $isSheetPresented) {
                 SelectionView(viewModel: viewModel.selectionViewModel)
+                    .presentationDetents([.medium])
             }
     }
 }

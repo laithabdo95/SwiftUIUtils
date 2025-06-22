@@ -7,6 +7,7 @@
 
 import Combine
 import SwiftUI
+import Observation
 
 public typealias FormPickerAndFieldConfigurable = FormPickerConfigurable & FormFieldConfigurable
 
@@ -20,9 +21,10 @@ public protocol FormPickerConfigurable {
     func bindSelectionViewModel()
 }
 
+@Observable
 public class FormPickerViewModel<SelectionItems: ItemSelectable>: FormFieldViewModel, FormPickerConfigurable {
     
-    @Published public var isRequired: Bool
+    public var isRequired: Bool
     public var selectionViewModel: SelectionViewModel<SelectionItems>
     
     public var cancellable = Set<AnyCancellable>()

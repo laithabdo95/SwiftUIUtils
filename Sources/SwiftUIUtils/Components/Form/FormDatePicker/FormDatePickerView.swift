@@ -59,7 +59,7 @@ public struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View 
             rules: []
         )
     )
-    .environmentObject(FormManager())
+    .environment(FormManager())
 }
 
 

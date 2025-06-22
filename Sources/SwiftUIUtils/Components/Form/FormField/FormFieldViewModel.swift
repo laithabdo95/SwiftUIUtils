@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Observation
 
 public protocol FormFieldConfigurable: ObservableObject, FormListItemValidatable {
     var id: UUID { get }
-    var title: String { get }
+    var title: String { get set }
     var placeholder: String? { get }
     var rules: [ValidationRule] { get }
     var text: String { get set }
@@ -23,24 +24,25 @@ public protocol FormFieldConfigurable: ObservableObject, FormListItemValidatable
 //    func getValidationResult() -> [ValidationResult]
 }
 
+@Observable
 public class FormFieldViewModel: FormFieldConfigurable {
     public var placeholder: String?
     public let fieldType: FieldType
     public var rules: [ValidationRule]
     public var id: UUID = UUID()
     public var keyboardType: UIKeyboardType
-    @FormFieldTitle public var title: String
+    @FormFieldTitle @ObservationIgnored public var title: String
     
-    @Published public var text: String = "" {
+    public var text: String = "" {
         didSet {
             validate()
         }
     }
     
-    @Published public var isValid: FieldStatus = .notSet
-    @Published public var errorMessage: String = ""
-    @Published public var isDisabled: Bool = false
-    @Published public var isEditingDisabled: Bool = false
+    public var isValid: FieldStatus = .notSet
+    public var errorMessage: String = ""
+    public var isDisabled: Bool = false
+    public var isEditingDisabled: Bool = false
     
     public func validate() {
         let result = rules.map { $0.validate(text: text) }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct RegisterViewModifier<ViewModel: FormFieldConfigurable>: ViewModifier {
-    @EnvironmentObject var formManager: FormManager
+    @Environment(FormManager.self) private var formManager
     @ObservedObject var viewModel: ViewModel
 
     public func body(content: Content) -> some View {

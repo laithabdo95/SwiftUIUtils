@@ -15,7 +15,7 @@ public struct FormFieldView<ViewModel: FormFieldConfigurable>: View {
     @FocusState private var focused: Bool
     @ObservedObject var viewModel: ViewModel
     @State private var isSecured: Bool = true
-    @EnvironmentObject var formManager: FormManager
+    @Environment(FormManager.self) private var formManager
 
     private var placeHolder: String { isActive ? "" : viewModel.placeholder ?? viewModel.title }
     var onTapGesture: (() -> Void)?
@@ -149,5 +149,5 @@ public extension FormFieldView {
 // MARK: - Preview
 #Preview {
     FormFieldView(viewModel: FormFieldViewModel(title: "Farhan", placeHolder: "Test", rules: []))
-        .environmentObject(FormManager())
+        .environment(FormManager())
 }

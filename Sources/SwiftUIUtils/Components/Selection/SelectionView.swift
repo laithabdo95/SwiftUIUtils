@@ -30,8 +30,14 @@ public struct SelectionView<ViewModel: SelectionConfigurable>: View {
                 }
                 .listStyle(InsetGroupedListStyle()) // Style the list
             }
-            .searchable(text: $viewModel.searchText)
+            .searchable(
+                text: $viewModel.searchText,
+                placement: .navigationBarDrawer(displayMode: .always)
+            )
+            .background(Color(.systemGroupedBackground))
+            .scrollContentBackground(.hidden)
             .navigationTitle("Select an Option")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
@@ -39,6 +45,8 @@ public struct SelectionView<ViewModel: SelectionConfigurable>: View {
                     }
                 }
             }
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarBackground(Color(.systemGroupedBackground), for: .navigationBar)
         }
     }
 }

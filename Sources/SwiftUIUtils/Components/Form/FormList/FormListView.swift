@@ -33,7 +33,7 @@ public extension FormListConfigurable {
 }
 
 public struct FormListView<Configure: FormListConfigurable, Content: View>: View {
-    @StateObject private  var formManager: FormManager = FormManager()
+    @Environment(FormManager.self) private var formManager
     @State var settings: FormSetting = .default
     private let configure: Configure
     private let content: Content
@@ -74,7 +74,7 @@ public struct FormListView<Configure: FormListConfigurable, Content: View>: View
                 }
             }
         }
-        .environmentObject(formManager)
+        .environment(formManager)
         .padding(.horizontal, settings.verticalList.padding)
         .fullScreenCover(isPresented: $isLoading, content: {
             LoadingView()

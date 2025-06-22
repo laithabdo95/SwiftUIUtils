@@ -17,7 +17,7 @@ public struct FormToggleView<Style: ToggleStyle>: View {
     // MARK: Init
     public init(
         viewModel: FormToggleViewModel,
-        settings: FormSetting = .default,
+        settings: FormSetting,
         style: Style = SwitchToggleStyle()
     ) {
         self.viewModel = viewModel
@@ -46,7 +46,7 @@ public extension FormToggleView {
 public extension FormToggleView where Style == CompactToggleStyle {
     init(
         viewModel: FormToggleViewModel,
-        settings: FormSetting
+        settings: FormSetting = .default
     ) {
         self.init(
             viewModel: viewModel,
@@ -54,10 +54,4 @@ public extension FormToggleView where Style == CompactToggleStyle {
             style: CompactToggleStyle(settings: settings)
         )
     }
-}
-
-#Preview {
-    FormToggleView(
-        viewModel: FormToggleViewModel(isOn: true, label: "Any Label")
-    )
 }

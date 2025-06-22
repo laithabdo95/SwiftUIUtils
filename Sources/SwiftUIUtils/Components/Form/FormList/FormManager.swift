@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-import Combine
+import Observation
 
-public class FormManager: ObservableObject {
-    @Published private(set) var validatableItems: [any FormListItemValidatable] = []
+@Observable
+public class FormManager {
+    private(set) var validatableItems: [any FormListItemValidatable] = []
 
     public init() { }
     
@@ -17,13 +18,13 @@ public class FormManager: ObservableObject {
         validatableItems.allSatisfy { $0.isValid == .valid }
     }
 
-    func register(_ item: any FormListItemValidatable) {
+    public func register(_ item: any FormListItemValidatable) {
         if !validatableItems.contains(where: { $0.id == item.id }) {
             validatableItems.append(item)
         }
     }
 
-    func unregister(_ item: any FormListItemValidatable) {
+    public func unregister(_ item: any FormListItemValidatable) {
         validatableItems.removeAll { $0.id == item.id }
     }
 }
