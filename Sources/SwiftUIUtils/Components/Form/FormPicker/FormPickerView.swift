@@ -8,17 +8,17 @@
 import SwiftUI
 
 public struct FormPickerView<ViewModel: FormPickerAndFieldConfigurable>: View {
-    
+
     @State private var isSheetPresented: Bool = false
     @ObservedObject var viewModel: ViewModel
-    
-    /// Public initializer to inject the view model.
+
     public init(viewModel: ViewModel) {
         self._viewModel = ObservedObject(wrappedValue: viewModel)
     }
 
     public var body: some View {
         FormFieldView(viewModel: viewModel) {
+				viewModel.bindSelectionViewModel()
                 isSheetPresented = true
             }
             .sheet(isPresented: $isSheetPresented) {

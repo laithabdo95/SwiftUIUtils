@@ -46,7 +46,6 @@ public class FormPickerViewModel<SelectionItems: ItemSelectable>: FormFieldViewM
             rules: isRequired ? [.required] : [],
             fieldType: .picker
         )
-        bindSelectionViewModel()
     }
     
     public func bindSelectionViewModel() {
