@@ -23,7 +23,6 @@ public struct FormDatePickerView<ViewModel: FormDateAndFieldConfigurable>: View 
                 FormFieldView(viewModel: viewModel) {
                     showDatePicker = true
                 }
-                Spacer()
             }
             .fullScreenCover(isPresented: $showDatePicker, content: {
                 ZStack {

@@ -31,11 +31,12 @@ public class FormDatePickerViewModel<PickerStyle: DatePickerStyle>: FormFieldVie
     }
     
     public init(
+        title: String = "",
+        placeHolder: String = "",
         date: Date = Date(),
         dateType: DatePickerComponents = .date,
         datePickerStyle: PickerStyle = .graphical,
         dateStyle: DateFormatStyle = .medium,
-        placeHolder: String,
         isDisabled: Bool = false,
         rules: [ValidationRule]
     ) {
@@ -44,6 +45,7 @@ public class FormDatePickerViewModel<PickerStyle: DatePickerStyle>: FormFieldVie
         self.datePickerStyle = datePickerStyle
         self.dateStyle = dateStyle
         super.init(
+            title: title,
             placeHolder: placeHolder,
             isDisabled: isDisabled,
             isEditingDisabled: true,
