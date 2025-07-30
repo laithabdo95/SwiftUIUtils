@@ -11,12 +11,13 @@ public protocol CoordinatorBuildable: ObservableObject {
     var path: NavigationPath { get set }
     
     associatedtype DestinationType: DestinationBuildable
-    var sheet: DestinationType? { get set }
-    func presentSheet<D: DestinationBuildable>(_ sheet: D)
-    
+    var sheet: Destination? { get set }
+    var customSheet: SheetDestination? { get set}
     var fullScreenCover: DestinationType? { get set }
-    func presentFullScreenCover<D: DestinationBuildable>(_ fullScreenCover: D)
     
+    func presentSheet<D: DestinationBuildable>(_ sheet: D, size: SheetSize)
+    func presentCustomSheet<D: DestinationBuildable>(_ sheet: D, size: SheetSize)
+    func presentFullScreenCover<D: DestinationBuildable>(_ fullScreenCover: D)
     func push<D: DestinationBuildable>(page: D)
     
     func pop()
@@ -24,13 +25,5 @@ public protocol CoordinatorBuildable: ObservableObject {
     
     func dismissSheet()
     func dismissFullScreenCover()
-    
-    associatedtype PageView: View
-    @ViewBuilder func build(page: DestinationType) -> PageView
-    
-    associatedtype SheetView: View
-    @ViewBuilder func buildSheet(sheet: DestinationType) -> SheetView
-    
-    associatedtype FullCoverView: View
-    @ViewBuilder func buildFullScreenCover(cover: DestinationType) -> FullCoverView
+    var sheetOnDismiss: (() -> Void)? { get set }
 }
