@@ -12,10 +12,12 @@ public protocol CoordinatorBuildable: ObservableObject {
     
     associatedtype DestinationType: DestinationBuildable
     var sheet: DestinationType? { get set }
-    func presentSheet<D: DestinationBuildable>(_ sheet: D, asEntryPoint: Bool)
+    func presentSheet<D: DestinationBuildable>(entryPoint: D)
+    func presentSheet<D: DestinationBuildable>(_ sheet: D)
     
     var fullScreenCover: DestinationType? { get set }
-    func presentFullScreenCover<D: DestinationBuildable>(_ fullScreenCover: D, asEntryPoint: Bool)
+    func presentFullScreenCover<D: DestinationBuildable>(entryPoint: D)
+    func presentFullScreenCover<D: DestinationBuildable>(_ fullScreenCover: D)
     
     func push<D: DestinationBuildable>(page: D)
     

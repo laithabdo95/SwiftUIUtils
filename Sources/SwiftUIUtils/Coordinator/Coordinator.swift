@@ -38,19 +38,20 @@ public extension Coordinator {
         path.removeLast(path.count)
     }
     
-    @MainActor func presentSheet<D: DestinationBuildable>(_ sheet: D, asEntryPoint: Bool = false) {
-        if asEntryPoint {
-            self.sheet = Destination(EntryPointFactoryView(root: sheet))
-        }
+    func presentSheet<D: DestinationBuildable>(_ sheet: D) {
         self.sheet = Destination(sheet)
     }
     
-    @MainActor func presentFullScreenCover<D: DestinationBuildable>(_ fullScreenCover: D, asEntryPoint: Bool = false) {
-        if asEntryPoint {
-            self.fullScreenCover = Destination(EntryPointFactoryView(root: fullScreenCover))
-            return
-        }
+    func presentSheet<D>(entryPoint: D) where D : DestinationBuildable {
+        self.sheet = Destination(EntryPointFactoryView(root: entryPoint))
+    }
+    
+    func presentFullScreenCover<D: DestinationBuildable>(_ fullScreenCover: D) {
         self.fullScreenCover = Destination(fullScreenCover)
+    }
+    
+    func presentFullScreenCover<D>(entryPoint: D) where D : DestinationBuildable {
+        self.fullScreenCover = Destination(EntryPointFactoryView(root: entryPoint))
     }
     
     func dismissSheet() {
@@ -78,4 +79,3 @@ public extension Coordinator {
         cover.view
     }
 }
-
