@@ -13,8 +13,7 @@ public final class Coordinator: @MainActor CoordinatorBuildable {
     @Published public var sheet: Destination?
     @Published public var fullScreenCover: Destination?
     
-    public var onSheetDismiss: OnDismissHandler?
-    public var onFullScreenDismiss: OnDismissHandler?
+    public var onEntryDismissed: OnDismissHandler?
     
     public init() {}
 }
@@ -60,6 +59,10 @@ public extension Coordinator {
     
     func dismissFullScreenCover() {
         self.fullScreenCover = nil
+    }
+    
+    func dismissEntry() {
+        onEntryDismissed?()
     }
 }
 

@@ -9,6 +9,7 @@ import SwiftUI
 
 public struct EntryPointFactoryView<Content: DestinationBuildable>: View, @preconcurrency DestinationBuildable {
     
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var coordinator: Coordinator = .init()
     private let root: Content
     public let id: AnyHashable
@@ -31,6 +32,11 @@ public struct EntryPointFactoryView<Content: DestinationBuildable>: View, @preco
                     coordinator.buildFullScreenCover(cover: destination)
                         .background(Color.white)
                 }
+        }
+        .onAppear {
+            coordinator.onEntryDismissed = {
+                dismiss()
+            }
         }
         .environmentObject(coordinator)
     }

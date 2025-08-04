@@ -27,6 +27,8 @@ public protocol CoordinatorBuildable: ObservableObject {
     func dismissSheet()
     func dismissFullScreenCover()
     
+    func dismissEntry()
+    
     associatedtype PageView: View
     @ViewBuilder func build(page: DestinationType) -> PageView
     
