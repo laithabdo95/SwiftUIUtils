@@ -114,8 +114,8 @@ public extension FormFieldView {
                 .font(settings.formField.font)
                 .keyboardType(.numberPad)
                 .focused($focused)
-                .onChange(of: viewModel.text) {
-                    viewModel.text = $0.formattedAsExpiryDate()
+                .onChange(of: viewModel.text) { oldValue, newValue in
+                    viewModel.text = newValue.formattedAsExpiryDate()
                 }
         } else {
             TextField(
@@ -151,3 +151,4 @@ public extension FormFieldView {
     FormFieldView(viewModel: FormFieldViewModel(title: "Farhan", placeHolder: "Test", rules: []))
         .environment(FormManager())
 }
+

@@ -7,27 +7,15 @@
 
 import SwiftUI
 
-public class Coordinator: CoordinatorBuildable {
-    public typealias DestinationType = Destination
-
+public final class Coordinator: CoordinatorBuildable {
     @Published public var path = NavigationPath()
-    @Published public var rootDestination: Destination?
-    private var destinationStack: [Destination] = []
-
     @Published public var sheet: Destination?
-    @Published public var customSheet: SheetDestination?
     @Published public var fullScreenCover: Destination?
-
+    
     public var onSheetDismiss: OnDismissHandler?
     public var onFullScreenDismiss: OnDismissHandler?
-
-    public var sheetOnDismiss: (() -> Void)?
     
     public init() {}
-    
-    public init(rootDestination: Destination) {
-        self.rootDestination = rootDestination
-    }
 }
 
 public extension Coordinator {
@@ -36,46 +24,21 @@ public extension Coordinator {
 
 public extension Coordinator {
     func push<D: DestinationBuildable>(page: D) {
-        let destination = Destination(page)
-        destinationStack.append(destination)
-        path.append(destination)
+        path.append(Destination(page))
     }
-
+    
     func pop() {
-        guard !destinationStack.isEmpty, !path.isEmpty else { return }
-        destinationStack.removeLast()
         path.removeLast()
     }
-
+    
     func popToRoot() {
-        guard !destinationStack.isEmpty, !path.isEmpty else { return }
-        destinationStack.removeAll()
-        path = NavigationPath()
+        sheet = nil
+        fullScreenCover = nil
+        path.removeLast(path.count)
     }
     
-    func popTo<D: DestinationBuildable>(_ destination: D) {
-        let target = Destination(destination)
-        guard let index = destinationStack.firstIndex(where: { $0 == target }) else {
-            push(page: destination)
-            return
-        }
-
-        let numberToRemove = destinationStack.count - index - 1
-        guard numberToRemove > 0 else { return }
-
-        for _ in 0..<numberToRemove {
-            if !destinationStack.isEmpty { destinationStack.removeLast() }
-            if !path.isEmpty { path.removeLast() }
-        }
-    }
-
-    
-    func presentSheet<D: DestinationBuildable>(_ sheet: D, size: SheetSize = .large) {
+    func presentSheet<D: DestinationBuildable>(_ sheet: D) {
         self.sheet = Destination(sheet)
-    }
-    
-    func presentCustomSheet<D>(_ sheet: D, size: SheetSize) where D : DestinationBuildable {
-        self.customSheet = SheetDestination(destination: Destination(sheet), size: size)
     }
     
     func presentFullScreenCover<D: DestinationBuildable>(_ fullScreenCover: D) {
@@ -83,61 +46,27 @@ public extension Coordinator {
     }
     
     func dismissSheet() {
-        sheet = nil
-        onSheetDismiss = nil
-    }
-    
-    func dismissSheet(onDismiss: (() -> Void)? = nil) {
         self.sheet = nil
-        dismissFullScreenCover()
-        onSheetDismiss = nil
-        if let onDismiss = onDismiss {
-            onDismiss()
-        } else {
-            sheetOnDismiss?()
-            sheetOnDismiss = nil
-        }
     }
     
     func dismissFullScreenCover() {
-        fullScreenCover = nil
+        self.fullScreenCover = nil
     }
-    
-    /// Call this when presenting a sheet if you want to set a default onDismiss
-    func setSheetOnDismiss(_ handler: (() -> Void)?) {
-        sheetOnDismiss = handler
+}
+
+public extension Coordinator {
+    @ViewBuilder
+    func build(page: Destination) -> some View {
+        page.view
     }
 
-    func setRoot<D: DestinationBuildable>(to destination: D, animated: Bool = false) {
-        let newRoot = Destination(destination)
-        
-        // Update the root destination
-        rootDestination = newRoot
+    @ViewBuilder
+    func buildSheet(sheet: Destination) -> some View {
+        sheet.view
+    }
 
-        if animated {
-            withAnimation(.easeInOut(duration: 0.3)) {
-                forceMemoryCleanup()
-            }
-        } else {
-            forceMemoryCleanup()
-        }
-    }
-    
-    func syncStackToMatchPath(count: Int) {
-        while destinationStack.count > count {
-            destinationStack.removeLast()
-        }
-    }
-    
-    /// Force memory cleanup by clearing all retained references
-    func forceMemoryCleanup() {
-        // Clear all retained references
-        destinationStack.removeAll()
-        path = NavigationPath()
-        sheet = nil
-        fullScreenCover = nil
-        onSheetDismiss = nil
-        onFullScreenDismiss = nil
-        sheetOnDismiss = nil
+    @ViewBuilder
+    func buildFullScreenCover(cover: Destination) -> some View {
+        cover.view
     }
 }
