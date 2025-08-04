@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-public final class Coordinator: CoordinatorBuildable {
+@MainActor
+public final class Coordinator: @MainActor CoordinatorBuildable {
     @Published public var path = NavigationPath()
     @Published public var sheet: Destination?
     @Published public var fullScreenCover: Destination?
@@ -37,11 +38,18 @@ public extension Coordinator {
         path.removeLast(path.count)
     }
     
-    func presentSheet<D: DestinationBuildable>(_ sheet: D) {
+    @MainActor func presentSheet<D: DestinationBuildable>(_ sheet: D, asEntryPoint: Bool = false) {
+        if asEntryPoint {
+            self.sheet = Destination(EntryPointFactoryView(root: sheet))
+        }
         self.sheet = Destination(sheet)
     }
     
-    func presentFullScreenCover<D: DestinationBuildable>(_ fullScreenCover: D) {
+    @MainActor func presentFullScreenCover<D: DestinationBuildable>(_ fullScreenCover: D, asEntryPoint: Bool = false) {
+        if asEntryPoint {
+            self.fullScreenCover = Destination(EntryPointFactoryView(root: fullScreenCover))
+            return
+        }
         self.fullScreenCover = Destination(fullScreenCover)
     }
     
@@ -70,3 +78,4 @@ public extension Coordinator {
         cover.view
     }
 }
+

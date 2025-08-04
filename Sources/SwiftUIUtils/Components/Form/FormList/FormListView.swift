@@ -73,6 +73,7 @@ public struct FormListView<Configure: FormListConfigurable, Content: View>: View
                     }
                 }
             }
+            .background(.white)
         }
         .environment(formManager)
         .padding(.horizontal, settings.verticalList.padding)
