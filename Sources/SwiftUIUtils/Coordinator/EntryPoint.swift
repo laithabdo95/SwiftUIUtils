@@ -13,6 +13,7 @@ public struct EntryPointFactoryView<Content: DestinationBuildable>: View, @preco
     @StateObject private var coordinator: Coordinator = .init()
     private let root: Content
     public let id: AnyHashable
+    @EnvironmentObject var tracker: NavigationStackTracker
     
     public init(root: Content) {
         self.root = root
@@ -26,7 +27,7 @@ public struct EntryPointFactoryView<Content: DestinationBuildable>: View, @preco
                     coordinator.build(page: destination)
                 }
                 .sheet(item: $coordinator.sheet) { destination in
-                    coordinator.buildSheet(sheet: destination)
+                                    coordinator.buildSheet(sheet: destination)
                 }
                 .fullScreenCover(item: $coordinator.fullScreenCover) { destination in
                     coordinator.buildFullScreenCover(cover: destination)
@@ -37,8 +38,12 @@ public struct EntryPointFactoryView<Content: DestinationBuildable>: View, @preco
             coordinator.onEntryDismissed = {
                 dismiss()
             }
+            coordinator.onEntriesDismissed = {
+                tracker.dismissAllStacks()
+            }
         }
         .environmentObject(coordinator)
+        .trackStack()
     }
     
     public var view: some View { self }

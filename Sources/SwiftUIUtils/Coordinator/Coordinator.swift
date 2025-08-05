@@ -14,6 +14,7 @@ public final class Coordinator: @MainActor CoordinatorBuildable {
     @Published public var fullScreenCover: Destination?
     
     public var onEntryDismissed: OnDismissHandler?
+    public var onEntriesDismissed: OnDismissHandler?
     
     public init() {}
 }
@@ -23,7 +24,7 @@ public extension Coordinator {
 }
 
 public extension Coordinator {
-    func push<D: DestinationBuildable>(page: D) {
+    func push<D: DestinationBuildable>(_ page: D) {
         path.append(Destination(page))
     }
     
@@ -56,13 +57,17 @@ public extension Coordinator {
     func dismissSheet() {
         self.sheet = nil
     }
-    
+        
     func dismissFullScreenCover() {
         self.fullScreenCover = nil
     }
     
     func dismissEntry() {
         onEntryDismissed?()
+    }
+    
+    func dismissEntries() {
+        onEntriesDismissed?()
     }
 }
 

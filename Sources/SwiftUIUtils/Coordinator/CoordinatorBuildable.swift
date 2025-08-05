@@ -19,7 +19,7 @@ public protocol CoordinatorBuildable: ObservableObject {
     func presentFullScreenCover<D: DestinationBuildable>(entryPoint: D)
     func presentFullScreenCover<D: DestinationBuildable>(_ fullScreenCover: D)
     
-    func push<D: DestinationBuildable>(page: D)
+    func push<D: DestinationBuildable>(_ page: D)
     
     func pop()
     func popToRoot()
@@ -28,6 +28,7 @@ public protocol CoordinatorBuildable: ObservableObject {
     func dismissFullScreenCover()
     
     func dismissEntry()
+    func dismissEntries()
     
     associatedtype PageView: View
     @ViewBuilder func build(page: DestinationType) -> PageView
