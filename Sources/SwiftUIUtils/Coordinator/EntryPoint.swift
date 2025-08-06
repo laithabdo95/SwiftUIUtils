@@ -7,9 +7,37 @@
 
 import SwiftUI
 
+/// A SwiftUI view that serves as the entry point for a navigation stack, coordinating navigation, sheet, and full screen cover presentation.
+/// 
+/// `EntryPointFactoryView` wraps a root destination conforming to `DestinationBuildable`, sets up a `Coordinator` to manage navigation state,
+/// and integrates with a global `NavigationStackTracker`. It provides navigation via `NavigationStack`, as well as presentation of sheets and
+/// full screen covers using a type-erased destination system.
+///
+/// The view automatically handles dismissals through the environment, and exposes identity and hashability for use in navigation collections.
+///
+/// - Parameters:
+///   - Content: The root destination type conforming to `DestinationBuildable`.
+///
+/// Usage:
+/// ```swift
+/// EntryPointFactoryView(root: MyDestination(...))
+/// ```
+///
+/// - Note: This view is usually used to bootstrap a navigation architecture with custom destination and coordinator logic.
+///
+/// - Requires: `Content` must conform to `DestinationBuildable` and provide a stable `id` property.
+///
+/// - Environment:
+///   - `dismiss`: Used to programmatically dismiss the entry stack.
+///   - `tracker`: An environment object tracking all navigation stacks.
+///
+/// - EnvironmentObjects:
+///   - `Coordinator`: Injected for use by descendant views in the navigation stack.
+///
+/// - SeeAlso: `DestinationBuildable`, `Coordinator`, `NavigationStackTracker`
+/// 
 public struct EntryPointFactoryView<Content: DestinationBuildable>: View, @preconcurrency DestinationBuildable {
     
-    @Environment(\.dismiss) private var dismiss
     @StateObject private var coordinator: Coordinator = .init()
     private let root: Content
     public let id: AnyHashable
@@ -36,7 +64,7 @@ public struct EntryPointFactoryView<Content: DestinationBuildable>: View, @preco
         }
         .onAppear {
             coordinator.onEntryDismissed = {
-                dismiss()
+                tracker.dismiss()
             }
             coordinator.onEntriesDismissed = {
                 tracker.dismissAllStacks()

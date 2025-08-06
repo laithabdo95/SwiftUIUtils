@@ -7,6 +7,22 @@
 
 import SwiftUI
 
+/// A `ViewModifier` that tracks the presentation and dismissal of a view within a navigation stack.
+///
+/// `TrackNavigationStack` uses a unique identifier for each instance to notify a shared
+/// `NavigationStackTracker` environment object when the view appears or disappears. This enables
+/// tracking of stack navigation behaviors, such as pushing and popping views, and supports
+/// additional actions when a view disappears (such as dismissing the view).
+///
+/// - Note: Requires a `NavigationStackTracker` to be provided as an environment object.
+///
+/// Usage:
+/// ```swift
+/// MyView().modifier(TrackNavigationStack())
+/// // or, using the provided extension:
+/// MyView().trackStack()
+/// ```
+///
 struct TrackNavigationStack: ViewModifier {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var tracker: NavigationStackTracker

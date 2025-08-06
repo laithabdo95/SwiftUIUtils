@@ -7,6 +7,39 @@
 
 import SwiftUI
 
+/// `Coordinator` is a navigation management class designed for SwiftUI applications.
+/// 
+/// It acts as a central authority for managing navigation paths,
+/// presenting destinations, sheets, and full screen covers, as well as handling dismissal callbacks.
+/// 
+/// - Important: This class is annotated with `@MainActor` and must be used from the main queue.
+/// 
+/// ## Features
+/// - Push and pop navigation destinations
+/// - Present and dismiss sheets and full screen covers
+/// - Dismiss the top entry or all entries, with optional handlers
+/// - View construction helpers for destinations, sheets, and full screen covers
+/// 
+/// ## Properties
+/// - `path`: The current navigation path.
+/// - `destinations`: The stack of pushed destinations.
+/// - `sheet`: The currently presented sheet destination.
+/// - `fullScreenCover`: The currently presented full screen cover destination.
+/// - `onEntryDismissed`: Handler called when the topmost entry is dismissed.
+/// - `onEntriesDismissed`: Handler called when all entries are dismissed.
+/// 
+/// ## Usage
+/// Use `push(_:)` to navigate forward, `pop()` or `popToRoot()` to go back,
+/// `presentSheet(_:)` or `presentFullScreenCover(_:)` for modal presentations,
+/// and the `dismiss...` methods for dismissals.
+/// 
+/// The `build(page:)`, `buildSheet(sheet:)`, and `buildFullScreenCover(cover:)`
+/// helpers construct the appropriate views for UI presentation.
+/// 
+/// ## Conformance
+/// - Conforms to `CoordinatorBuildable` protocol.
+/// - Must interact with `Destination` and `DestinationBuildable` for navigation logic.
+/// 
 @MainActor
 public final class Coordinator: @MainActor CoordinatorBuildable {
     @Published public var path = NavigationPath()
