@@ -22,6 +22,7 @@ public protocol CoordinatorBuildable: ObservableObject {
     func push<D: DestinationBuildable>(_ page: D)
     
     func pop()
+    func popTo<D: DestinationBuildable>(_ destination: D)
     func popToRoot()
     
     func dismissSheet()

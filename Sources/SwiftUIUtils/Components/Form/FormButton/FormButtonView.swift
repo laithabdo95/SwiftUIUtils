@@ -13,6 +13,18 @@ public struct FormButtonView: View {
     var isDisabled: Bool = false
     var completion: (() -> Void)?
     
+    public init(
+        settings: FormSetting = .default,
+        title: String,
+        isDisabled: Bool = false,
+        completion: (() -> Void)? = nil
+    ) {
+        self.settings = settings
+        self.title = title
+        self.isDisabled = isDisabled
+        self.completion = completion
+    }
+    
     public var body: some View {
         Button(action: {
             completion?()

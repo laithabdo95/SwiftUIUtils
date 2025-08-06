@@ -13,8 +13,8 @@ public protocol DestinationBuildable: Identifiable, Hashable {
 }
 
 public extension DestinationBuildable where Self: Hashable {
-    static func == (lhs: Self, rhs: Self) -> Bool { true }
-
+    static func == (lhs: Self, rhs: Self) -> Bool { lhs.id == rhs.id }
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
