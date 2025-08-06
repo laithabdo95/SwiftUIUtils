@@ -55,7 +55,7 @@ public struct EntryPointFactoryView<Content: DestinationBuildable>: View, @preco
                     coordinator.build(page: destination)
                 }
                 .sheet(item: $coordinator.sheet) { destination in
-                                    coordinator.buildSheet(sheet: destination)
+                    coordinator.buildSheet(sheet: destination)
                 }
                 .fullScreenCover(item: $coordinator.fullScreenCover) { destination in
                     coordinator.buildFullScreenCover(cover: destination)
