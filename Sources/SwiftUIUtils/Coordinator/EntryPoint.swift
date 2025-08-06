@@ -53,6 +53,9 @@ public struct EntryPointFactoryView<Content: DestinationBuildable>: View, @preco
             coordinator.build(page: Destination(root))
                 .navigationDestination(for: Destination.self) { destination in
                     coordinator.build(page: destination)
+                        .onDisappear {
+                            coordinator.popDestination()
+                        }
                 }
                 .sheet(item: $coordinator.sheet) { destination in
                     coordinator.buildSheet(sheet: destination)

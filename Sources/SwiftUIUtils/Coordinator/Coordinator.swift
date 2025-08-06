@@ -68,6 +68,11 @@ public extension Coordinator {
         destinations.removeLast()
     }
     
+    func popDestination() {
+        guard destinations.isNotEmpty else { return }
+        destinations.removeLast()
+    }
+    
     func popTo<D>(_ destination: D) where D : DestinationBuildable {
         guard let index = destinations.lastIndex(where: { $0.id == Destination(destination).id }) else { popToRoot(); return }
         
