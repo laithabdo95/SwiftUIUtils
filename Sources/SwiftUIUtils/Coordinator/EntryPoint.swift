@@ -36,7 +36,7 @@ import SwiftUI
 ///
 /// - SeeAlso: `DestinationBuildable`, `Coordinator`, `NavigationStackTracker`
 /// 
-public struct EntryPointFactoryView<Content: DestinationBuildable>: View, @preconcurrency DestinationBuildable {
+public struct EntryPointFactoryView<Content: DestinationBuildable>: View, @MainActor DestinationBuildable {
     
     @StateObject private var coordinator: Coordinator = .init()
     private let root: Content
