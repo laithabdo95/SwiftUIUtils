@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// A SwiftUI view that serves as the entry point for a navigation stack, coordinating navigation, sheet, and full screen cover presentation.
-/// 
+///
 /// `EntryPointFactoryView` wraps a root destination conforming to `DestinationBuildable`, sets up a `Coordinator` to manage navigation state,
 /// and integrates with a global `NavigationStackTracker`. It provides navigation via `NavigationStack`, as well as presentation of sheets and
 /// full screen covers using a type-erased destination system.
@@ -35,20 +35,24 @@ import SwiftUI
 ///   - `Coordinator`: Injected for use by descendant views in the navigation stack.
 ///
 /// - SeeAlso: `DestinationBuildable`, `Coordinator`, `NavigationStackTracker`
-/// 
-public struct EntryPointFactoryView<Content: DestinationBuildable>: View, @MainActor DestinationBuildable {
+///
+public struct EntryPointFactoryView<Content: DestinationBuildable>: View, DestinationBuildable {
     
     @StateObject private var coordinator: Coordinator = .init()
     private let root: Content
-    public let id: AnyHashable
+    private let _stableID: Int
     @EnvironmentObject var tracker: NavigationStackTracker
     
     public init(root: Content) {
         self.root = root
-        self.id = AnyHashable(root.id)
+        var __hasher = Hasher()
+        __hasher.combine(root.id)
+        self._stableID = __hasher.finalize()
     }
+
+    public nonisolated var id: AnyHashable { AnyHashable(_stableID) }
     
-    public var body: some View {
+    @MainActor public var body: some View {
         NavigationStack(path: $coordinator.path) {
             coordinator.build(page: Destination(root))
                 .navigationDestination(for: Destination.self) { destination in
@@ -77,13 +81,13 @@ public struct EntryPointFactoryView<Content: DestinationBuildable>: View, @MainA
         .trackStack()
     }
     
-    public var view: some View { self }
-    
-    public static func == (lhs: EntryPointFactoryView<Content>, rhs: EntryPointFactoryView<Content>) -> Bool {
-        lhs.id == rhs.id
+    public nonisolated var view: some View { self }
+
+    public nonisolated static func == (lhs: EntryPointFactoryView<Content>, rhs: EntryPointFactoryView<Content>) -> Bool {
+        lhs._stableID == rhs._stableID
     }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+
+    public nonisolated func hash(into hasher: inout Hasher) {
+        hasher.combine(_stableID)
     }
 }
