@@ -18,7 +18,6 @@ import SwiftUI
 /// - Requirements:
 ///   - `ViewType`: The type of view to be produced, conforming to `View`.
 ///   - `view`: An instance of the destination `ViewType`.
-///   
 public protocol DestinationBuildable: Identifiable, Hashable {
     associatedtype ViewType: View
     var view: ViewType { get }
