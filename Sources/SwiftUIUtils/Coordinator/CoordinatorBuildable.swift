@@ -25,6 +25,7 @@ import SwiftUI
 ///
 /// ## Typical Usage
 /// Conform a coordinator to this protocol to centralize navigation logic and presentation responsibilities for a flow of views or features.
+@MainActor
 public protocol CoordinatorBuildable: ObservableObject {
     /// The navigation stack path managed by the coordinator.
     /// 

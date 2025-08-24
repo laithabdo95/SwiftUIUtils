@@ -41,7 +41,7 @@ import SwiftUI
 /// - Must interact with `Destination` and `DestinationBuildable` for navigation logic.
 /// 
 @MainActor
-public final class Coordinator: @MainActor CoordinatorBuildable {
+public final class Coordinator: CoordinatorBuildable {
     @Published public var path = NavigationPath()
     @Published public var destinations: [Destination] = []
     @Published public var sheet: Destination?
@@ -65,6 +65,11 @@ public extension Coordinator {
     
     func pop() {
         path.removeLast()
+        destinations.removeLast()
+    }
+    
+    func popDestination() {
+        guard destinations.isNotEmpty else { return }
         destinations.removeLast()
     }
     
