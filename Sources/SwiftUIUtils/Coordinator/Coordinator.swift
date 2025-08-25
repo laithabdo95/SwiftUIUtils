@@ -41,14 +41,15 @@ import SwiftUI
 /// - Must interact with `Destination` and `DestinationBuildable` for navigation logic.
 /// 
 @MainActor
+@Observable
 public final class Coordinator: CoordinatorBuildable {
-    @Published public var path = NavigationPath()
-    @Published public var destinations: [Destination] = []
-    @Published public var sheet: Destination?
-    @Published public var fullScreenCover: Destination?
+    public var path = NavigationPath()
+    public var destinations: [Destination] = []
+    public var sheet: Destination?
+    public var fullScreenCover: Destination?
     
-    public var onEntryDismissed: OnDismissHandler?
-    public var onEntriesDismissed: OnDismissHandler?
+    @ObservationIgnored public var onEntryDismissed: OnDismissHandler?
+    @ObservationIgnored public var onEntriesDismissed: OnDismissHandler?
     
     public init() {}
 }

@@ -32,40 +32,50 @@ import SwiftUI
 /// tracker.dismissAllStacks()
 /// ```
 /// 
-public class NavigationStackTracker: ObservableObject {
-    @Published var activeStacks: Int = 0
+@Observable
+@MainActor
+public class NavigationStackTracker {
+    var activeStacks: Int = 0
     private var dismissActions: [UUID: () -> Void] = [:]
     private var stackOrder: [UUID] = []
     
     func didAppear(id: UUID, dismiss: @escaping () -> Void) {
-        activeStacks += 1
-        dismissActions[id] = dismiss
-        stackOrder.append(id)
+        Task { @MainActor in
+            activeStacks += 1
+            dismissActions[id] = dismiss
+            stackOrder.append(id)
+        }
     }
     
     func didDisappear(id: UUID) {
-        activeStacks = max(activeStacks - 1, 0)
-        dismissActions.removeValue(forKey: id)
-        if let idx = stackOrder.firstIndex(of: id) {
-            stackOrder.remove(at: idx)
+        Task { @MainActor in
+            activeStacks = max(activeStacks - 1, 0)
+            dismissActions.removeValue(forKey: id)
+            if let idx = stackOrder.firstIndex(of: id) {
+                stackOrder.remove(at: idx)
+            }
         }
     }
     
     /// Programmatically dismisses a all navigation stacks by its identifier.
     func dismissAllStacks() {
-        dismissActions.values.forEach { $0() }
-        dismissActions.removeAll()
-        stackOrder.removeAll()
-        activeStacks = 0
+        Task { @MainActor in
+            self.dismissActions.values.forEach { $0() }
+            self.dismissActions.removeAll()
+            self.stackOrder.removeAll()
+            self.activeStacks = 0
+        }
     }
     
     /// Programmatically dismisses the most recently presented navigation stack.
     func dismiss() {
-        guard let last = stackOrder.last, let dismiss = dismissActions[last] else { return }
-        dismiss()
-        dismissActions.removeValue(forKey: last)
-        stackOrder.removeLast()
-        activeStacks = max(activeStacks - 1, 0)
+        Task { @MainActor in
+            guard let last = stackOrder.last, let dismiss = dismissActions[last] else { return }
+            dismiss()
+            dismissActions.removeValue(forKey: last)
+            stackOrder.removeLast()
+            activeStacks = max(activeStacks - 1, 0)
+        }
     }
     
     public init() {}

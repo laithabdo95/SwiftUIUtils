@@ -25,7 +25,7 @@ import SwiftUI
 ///
 struct TrackNavigationStack: ViewModifier {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var tracker: NavigationStackTracker
+    @Environment(NavigationStackTracker.self) private var tracker
     private let id = UUID()
     
     func body(content: Content) -> some View {

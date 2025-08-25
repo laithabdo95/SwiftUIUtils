@@ -38,10 +38,10 @@ import SwiftUI
 ///
 public struct EntryPointFactoryView<Content: DestinationBuildable>: View, DestinationBuildable {
     
-    @StateObject private var coordinator: Coordinator = .init()
     private let root: Content
     private let _stableID: Int
-    @EnvironmentObject var tracker: NavigationStackTracker
+    @State private var coordinator = Coordinator()
+    @Environment(NavigationStackTracker.self) private var tracker
     
     public init(root: Content) {
         self.root = root
@@ -77,7 +77,7 @@ public struct EntryPointFactoryView<Content: DestinationBuildable>: View, Destin
                 tracker.dismissAllStacks()
             }
         }
-        .environmentObject(coordinator)
+        .environment(coordinator)
         .trackStack()
     }
     
